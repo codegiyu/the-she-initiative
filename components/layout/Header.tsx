@@ -21,12 +21,10 @@ export const Header = () => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="relative text-primary">
+            <div className="relative text-primary text-[2rem]">
               <Logo />
             </div>
-            <span className="font-montserrat font-bold text-2xl text-secondary">
-              The SHE Initiative
-            </span>
+            <span className="font-montserrat font-bold text-2xl text-dark">The SHE Initiative</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -35,7 +33,7 @@ export const Header = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="font-montserrat font-medium text-secondary hover:text-primary transition-colors duration-200">
+                className="font-montserrat font-medium text-dark hover:text-primary transition-colors duration-200">
                 {item.name}
               </a>
             ))}
@@ -46,7 +44,7 @@ export const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 rounded-md text-secondary hover:text-primary transition-colors"
+            className="lg:hidden p-2 rounded-md text-dark hover:text-primary transition-colors"
             onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -61,7 +59,7 @@ export const Header = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="block font-montserrat font-medium text-secondary hover:text-primary transition-colors duration-200"
+                className="block font-montserrat font-medium text-dark hover:text-primary transition-colors duration-200"
                 onClick={() => setIsOpen(false)}>
                 {item.name}
               </a>

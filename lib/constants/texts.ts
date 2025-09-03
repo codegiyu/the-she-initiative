@@ -12,10 +12,7 @@ export const SEO_DETAILS = {
     template: '%s | The SHE Initiative',
   },
   description:
-    "We are a creative brand consultancy into design, branding and packaging. \
-    We've been collaborating with leading organizations to solve brand and \
-    business challenges since 2019. Our team across different locations uses \
-    the power of creativity to transform businesses for the better.",
+    'The Initiative provides holistic support, protection and opportunities for girls and young women by responding to gender-based violence and empowering them to thrive.',
   metadataBase: new URL(liveUrl),
   alternates: {
     canonical: liveUrl,

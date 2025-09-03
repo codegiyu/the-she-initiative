@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Button } from '@/components/ui/button';
 
 export const Hero = () => {
@@ -5,12 +6,12 @@ export const Hero = () => {
     <section className="min-h-screen bg-secondary flex items-center justify-center overflow-hidden relative">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        {/* <img
+        <img
           src="https://static.thesolaceinitiative.org/images/home/hero-1.png"
           alt="Empowered young women standing together"
           className="w-full h-full object-cover"
-        /> */}
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary/80 via-secondary/60 to-transparent"></div>
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/80 via-dark/60 to-transparent"></div>
       </div>
 
       {/* Content */}
