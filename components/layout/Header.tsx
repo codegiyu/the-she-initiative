@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Heart } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { Logo } from '../icons';
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,12 +21,11 @@ export const Header = () => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="relative">
-              <Heart className="w-8 h-8 text-primary stroke-2" />
-              <div className="absolute -top-1 -right-1 w-4 h-6 border-r-2 border-t-2 border-primary transform rotate-45"></div>
+            <div className="relative text-primary">
+              <Logo />
             </div>
             <span className="font-montserrat font-bold text-2xl text-secondary">
-              The Initiative
+              The SHE Initiative
             </span>
           </div>
 
