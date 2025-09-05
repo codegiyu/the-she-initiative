@@ -28,7 +28,7 @@ export const Values = () => {
               &quot;When we empower one girl, we empower an entire community. When we transform one
               life, we transform the future.&quot;
             </blockquote>
-            <cite className="font-montserrat font-semibold text-lg">— The Initiative Team</cite>
+            <cite className="font-montserrat font-semibold text-lg">— The SHE Initiative Team</cite>
           </div>
         </div>
       </div>

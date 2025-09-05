@@ -1,17 +1,31 @@
 import { AnimatedCounter } from '@/components/general/AnimatedCounter';
 import { SectionHeading } from '@/components/general/SectionHeading';
-import { OUR_STATS } from '@/lib/constants/texts';
 import { cn } from '@/lib/utils';
 
 export const About = () => {
   return (
     <section id="about" className="section-block-padding bg-white">
       <div className="regular-container">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-[3fr_2fr] gap-12 lg:gap-16 items-center">
           {/* Content */}
-          <div className="space-y-8">
+          <div className="h-full flex flex-col justify-between space-y-12">
             <SectionHeading title="About Us" className="" />
 
+            <div className="w-full h-fit grid sm:grid-cols-[14.5rem_1fr] lg:grid-cols-1 xl:grid-cols-[14.5rem_1fr] gap-10 items-center rounded-2xl border border-border">
+              <div className="w-full h-full min-h-[16.875rem] flex-none bg-[url('https://static.thesolaceinitiative.org/images/founder-lady.webp')] bg-cover bg-center rounded-2xl overflow-hidden"></div>
+              <div className="w-full grid gap-4 px-5 sm:px-0 lg:px-5 xl:px-0 sm:pr-10 xl:pr-10 pb-5 pt-0 sm:pt-5 lg:pt-0 xl:pt-5">
+                <h3 className="text-2xl font-semibold">Founder&apos;s Note</h3>
+                <blockquote className="font-montserrat text-sm leading-relaxed mb-4">
+                  &quot;Starting The Initiative was born from a deep conviction that every girl
+                  deserves the chance to dream, grow, and thrive without fear. We may be young as an
+                  organization, but our commitment to creating lasting change is unwavering.&quot;
+                </blockquote>
+                <cite className="font-roboto font-semibold text-end">— Sarah Johnson, Founder</cite>
+              </div>
+            </div>
+          </div>
+
+          <div className="h-full flex items-end">
             <div className="space-y-6">
               <div className="bg-card p-6 rounded-lg shadow-soft shadow-primary/15 border-l-4 border-primary">
                 <h3 className="font-montserrat font-semibold text-xl text-dark mb-3">
@@ -36,11 +50,11 @@ export const About = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 gap-6">
+          {/* <div className="grid grid-cols-2 gap-6">
             {OUR_STATS.map((item, idx) => (
               <StatsCard key={idx} {...item} />
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

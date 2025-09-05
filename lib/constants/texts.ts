@@ -2,6 +2,7 @@ import { HeaderLinkProps } from '@/components/layout/Header';
 import { StatsCardProps } from '@/components/sections/home/About';
 import { ContactInfoRowProps } from '@/components/sections/home/Contact';
 import { ServiceCardProps } from '@/components/sections/home/Services';
+import { InitiativeCardProps } from '@/components/sections/home/UpcomingInitiatives';
 import { ValuesCardProps } from '@/components/sections/home/Values';
 import {
   CheckCircle,
@@ -223,6 +224,27 @@ export const OUR_VALUES: ValuesCardProps[] = [
     Icon: Users,
     title: 'Collaboration',
     description: 'Working together with communities to create lasting positive change',
+  },
+];
+
+export const UPCOMING_INITIATIVES: InitiativeCardProps[] = [
+  {
+    title: 'Digital Literacy Program',
+    desc: 'Launching Q2 2026',
+    text: 'Empowering young women with essential digital skills, computer literacy, \
+    and online safety knowledge to thrive in our digital world.',
+  },
+  {
+    title: 'Safe Spaces Network',
+    desc: 'Expanding 2026',
+    text: 'Growing our network of community centers and safe spaces to reach more \
+    underserved areas and provide accessible support.',
+  },
+  {
+    title: 'Mentorship Circle',
+    desc: 'Coming Soon',
+    text: 'Connecting girls with professional female mentors in their fields of \
+    interest, fostering career development and personal growth.',
   },
 ];
 
