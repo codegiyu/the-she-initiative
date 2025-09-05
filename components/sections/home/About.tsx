@@ -16,7 +16,7 @@ export const About = () => {
               <div className="w-full grid gap-4 px-5 sm:px-0 lg:px-5 xl:px-0 sm:pr-10 xl:pr-10 pb-5 pt-0 sm:pt-5 lg:pt-0 xl:pt-5">
                 <h3 className="text-2xl font-semibold">Founder&apos;s Note</h3>
                 <blockquote className="font-montserrat text-sm leading-relaxed mb-4">
-                  &quot;Starting The Initiative was born from a deep conviction that every girl
+                  &quot;Starting The SHE Initiative was born from a deep conviction that every girl
                   deserves the chance to dream, grow, and thrive without fear. We may be young as an
                   organization, but our commitment to creating lasting change is unwavering.&quot;
                 </blockquote>

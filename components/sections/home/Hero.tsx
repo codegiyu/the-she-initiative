@@ -1,5 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
+'use client';
+
 import { RegularBtn } from '@/components/atoms/RegularBtn';
+import { useInPageNav } from '@/lib/hooks/use-inpage-nav';
 
 export const Hero = () => {
   return (
@@ -33,12 +36,8 @@ export const Hero = () => {
             </div>
 
             <div className="animate-slide-up flex flex-col sm:flex-row gap-4 sm:gap-6">
-              <RegularBtn className="hover:scale-105" text="Volunteer with us" />
-              <RegularBtn
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-primary hover:scale-105"
-                text="Contact us"
-              />
+              <VolunteerButton />
+              <ContactButton />
             </div>
           </div>
         </div>
@@ -53,5 +52,44 @@ export const Hero = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+const VolunteerButton = () => {
+  const { targetElRef } = useInPageNav({ href: '/#volunteer-with-us' });
+
+  return (
+    <RegularBtn
+      linkProps={{ href: '#', preventdefault: 'true' }}
+      onClick={() => {
+        setTimeout(() => {
+          if (targetElRef.current) {
+            targetElRef.current.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 200);
+      }}
+      text="Volunteer with us"
+      className="hover:scale-105"
+    />
+  );
+};
+
+const ContactButton = () => {
+  const { targetElRef } = useInPageNav({ href: '/#contact' });
+
+  return (
+    <RegularBtn
+      linkProps={{ href: '#', preventdefault: 'true' }}
+      onClick={() => {
+        setTimeout(() => {
+          if (targetElRef.current) {
+            targetElRef.current.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 200);
+      }}
+      variant="outline"
+      className="border-white text-white hover:bg-white hover:text-primary hover:scale-105"
+      text="Contact us"
+    />
   );
 };

@@ -30,10 +30,9 @@ export const Header = ({ className, solidBackground, ...props }: HeaderProps) =>
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 
-      ${hasSolidBg ? 'bg-white/95' : 'bg-gradient-to-b from-white/80 to-white/95'} 
+      className={`fixed top-0 w-full z-50 bg-white/95 
       backdrop-blur-sm border-b border-border transition-colors duration-200 ease-in
-      ${className}`}
+      ${className ?? ''}`}
       {...props}>
       <div className="regular-container">
         <div className="flex justify-between items-center py-4">
@@ -52,7 +51,7 @@ export const Header = ({ className, solidBackground, ...props }: HeaderProps) =>
               {NAV_LINKS.map((item, idx) => (
                 <HeaderLink key={idx} {...item} />
               ))}
-              <RegularBtn text="Get Involved" />
+              <CTAButton />
             </ul>
           </nav>
 
@@ -72,7 +71,7 @@ export const Header = ({ className, solidBackground, ...props }: HeaderProps) =>
             {NAV_LINKS.map((item, idx) => (
               <HeaderLink key={idx} {...item} afterClick={() => setMenuOpen(false)} />
             ))}
-            <RegularBtn size="full" text="Get Involved" />
+            <CTAButton setMenuOpen={setMenuOpen} />
           </ul>
         </nav>
       )}
@@ -111,5 +110,43 @@ const HeaderLink = ({ text, href, afterClick }: HeaderLinkProps) => {
         </div>
       </GhostBtn>
     </li>
+  );
+};
+
+const CTAButton = ({ setMenuOpen }: { setMenuOpen?: (val: boolean) => void }) => {
+  const { targetElRef } = useInPageNav({ href: '/#volunteer-with-us' });
+
+  return (
+    <>
+      <div className="w-full lg:hidden">
+        <RegularBtn
+          linkProps={{ href: '#', preventdefault: 'true' }}
+          onClick={() => {
+            setTimeout(() => {
+              if (targetElRef.current) {
+                targetElRef.current.scrollIntoView({ behavior: 'smooth' });
+              }
+            }, 200);
+
+            setMenuOpen?.(false);
+          }}
+          size="full"
+          text="Get Involved"
+        />
+      </div>
+      <div className="w-fit hidden lg:block">
+        <RegularBtn
+          linkProps={{ href: '#', preventdefault: 'true' }}
+          onClick={() => {
+            setTimeout(() => {
+              if (targetElRef.current) {
+                targetElRef.current.scrollIntoView({ behavior: 'smooth' });
+              }
+            }, 200);
+          }}
+          text="Get Involved"
+        />
+      </div>
+    </>
   );
 };
