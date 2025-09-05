@@ -1,80 +1,29 @@
-import { Shield, Heart, CheckCircle, Home, Scale, Users } from 'lucide-react';
+import { SectionHeading } from '@/components/general/SectionHeading';
+import { OUR_VALUES } from '@/lib/constants/texts';
+import { LucideIconComp } from '@/lib/types/general';
 
 export const Values = () => {
-  const values = [
-    {
-      icon: Shield,
-      title: 'Empowerment',
-      description: 'Building confidence and strength in every girl and young woman we serve',
-    },
-    {
-      icon: Heart,
-      title: 'Compassion',
-      description: 'Approaching every situation with understanding, empathy and care',
-    },
-    {
-      icon: CheckCircle,
-      title: 'Integrity',
-      description: 'Maintaining the highest standards of honesty and ethical conduct',
-    },
-    {
-      icon: Home,
-      title: 'Safety',
-      description: 'Creating secure environments where healing and growth can flourish',
-    },
-    {
-      icon: Scale,
-      title: 'Equality',
-      description: 'Ensuring equal opportunities and treatment for all individuals',
-    },
-    {
-      icon: Users,
-      title: 'Collaboration',
-      description: 'Working together with communities to create lasting positive change',
-    },
-  ];
-
   return (
-    <section id="values" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <section id="values" className="section-block-padding bg-white">
+      <div className="regular-container">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="font-montserrat font-bold text-3xl sm:text-4xl lg:text-5xl text-dark mb-4">
-            Our Values
-          </h2>
-          <div className="w-20 h-1 bg-gradient-primary rounded-full mx-auto mb-6"></div>
-          <p className="font-montserrat text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            These core values guide everything we do and shape how we serve our community with
-            purpose and dedication.
-          </p>
-        </div>
+        <SectionHeading
+          title="Our Values"
+          text="These core values guide everything we do and shape how we serve our community with
+          purpose and dedication."
+          className="text-center mb-16"
+        />
 
         {/* Values Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {values.map((value, index) => (
-            <div
-              key={index}
-              className="group bg-white p-8 rounded-xl shadow-soft hover:shadow-elegant transition-all duration-300 border border-border hover:border-primary/20">
-              <div className="mb-6">
-                <div className="bg-primary-soft p-4 rounded-lg w-fit group-hover:bg-gradient-primary transition-all duration-300">
-                  <value.icon className="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300" />
-                </div>
-              </div>
-
-              <h3 className="font-montserrat font-bold text-xl text-dark mb-3 group-hover:text-primary transition-colors duration-300">
-                {value.title}
-              </h3>
-
-              <p className="font-montserrat text-muted-foreground leading-relaxed">
-                {value.description}
-              </p>
-            </div>
+          {OUR_VALUES.map((value, idx) => (
+            <ValuesCard key={idx} {...value} />
           ))}
         </div>
 
         {/* Quote Section */}
         <div className="mt-20 text-center">
-          <div className="bg-gradient-primary p-12 rounded-2xl text-white shadow-elegant max-w-4xl mx-auto">
+          <div className="bg-gradient-primary p-12 rounded-2xl text-white shadow-elegant shadow-primary/20 max-w-4xl mx-auto">
             <blockquote className="font-montserrat text-2xl lg:text-3xl font-medium leading-relaxed mb-6">
               &quot;When we empower one girl, we empower an entire community. When we transform one
               life, we transform the future.&quot;
@@ -84,5 +33,29 @@ export const Values = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+export interface ValuesCardProps {
+  Icon: LucideIconComp;
+  title: string;
+  description: string;
+}
+
+export const ValuesCard = ({ Icon, title, description }: ValuesCardProps) => {
+  return (
+    <div className="group bg-white p-8 rounded-xl shadow-soft shadow-primary/15 hover:shadow-elegant hover:shadow-primary/20 transition-all duration-300 border border-border hover:border-primary/20">
+      <div className="mb-6">
+        <div className="bg-primary-soft p-4 rounded-lg w-fit group-hover:bg-gradient-primary transition-all duration-300">
+          <Icon className="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300" />
+        </div>
+      </div>
+
+      <h3 className="font-montserrat font-bold text-xl text-dark mb-3 group-hover:text-primary transition-colors duration-300">
+        {title}
+      </h3>
+
+      <p className="font-montserrat text-muted-foreground leading-relaxed">{description}</p>
+    </div>
   );
 };

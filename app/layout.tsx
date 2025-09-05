@@ -1,14 +1,8 @@
 import type { Metadata, Viewport } from 'next';
-import { Montserrat } from 'next/font/google';
 import './globals.css';
 import { SEO_DETAILS } from '@/lib/constants/texts';
 import { Providers } from '@/components/Providers';
 import { ScrollRestorationHandler } from '@/components/general/ScrollRestorationHandler';
-
-const montserrat = Montserrat({
-  variable: '--font-montserrat',
-  subsets: ['latin'],
-});
 
 export const metadata: Metadata = {
   ...SEO_DETAILS,
@@ -42,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} antialiased`}>
+      <body className={`antialiased`}>
         <ScrollRestorationHandler />
         <Providers>{children}</Providers>
       </body>

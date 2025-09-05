@@ -1,8 +1,21 @@
-// import { ReferenceProps } from '@/components/sections/about/References';
-// import { AchievementBlockProps } from '@/components/sections/about/Achievements';
-// import { TeamSlideProps } from '@/components/sections/about/Team';
-// import { SocialBtnProps } from '@/components/general/Socials';
-// import { ContactsGroupProps } from '@/components/general/PinpointContacts';
+import { HeaderLinkProps } from '@/components/layout/Header';
+import { StatsCardProps } from '@/components/sections/home/About';
+import { ContactInfoRowProps } from '@/components/sections/home/Contact';
+import { ServiceCardProps } from '@/components/sections/home/Services';
+import { ValuesCardProps } from '@/components/sections/home/Values';
+import {
+  CheckCircle,
+  Clock,
+  GraduationCap,
+  Heart,
+  Home,
+  Mail,
+  MapPin,
+  Phone,
+  Scale,
+  Shield,
+  Users,
+} from 'lucide-react';
 
 const liveUrl = process.env.live_url || 'https://thesolaceinitiative.org';
 
@@ -49,12 +62,46 @@ export const SEO_DETAILS = {
   classification: 'Complete solution for branding, marketing, packaging and digital products',
 };
 
-// export const contactInformation: ContactsGroupProps = {
-//   location: 'Abuja',
-//   address: 'No. 18 Aba Close, Area 8, Garki, Abuja.',
-//   tel: ['+234 912 323 2389', '+234 912 323 2397'],
-//   email: 'abuja@thesolaceinitiative.org',
-// };
+export const NAV_LINKS: HeaderLinkProps[] = [
+  { text: 'About Us', href: '/#about' },
+  { text: 'Services', href: '/#what-we-do' },
+  { text: 'Values', href: '/#values' },
+  { text: 'Upcoming', href: '/#upcoming-initiatives' },
+  { text: 'Contact', href: '/#contact' },
+];
+
+export const CONTACT_INFORMATION = {
+  address: '123 Hope Street, Community Center',
+  tel: ['+234 703 246 4928'],
+  email: 'thesheinitiative0@gmail.com',
+};
+
+export const CONTACT_INFO_ROWS: ContactInfoRowProps[] = [
+  {
+    Icon: Phone,
+    title: 'Emergency Hotline',
+    texts: CONTACT_INFORMATION.tel.map(phone => ({
+      text: phone,
+      link: `tel:${phone.replaceAll(' ', '')}`,
+    })),
+  },
+  {
+    Icon: Mail,
+    title: 'Email Us',
+    texts: [{ text: CONTACT_INFORMATION.email, link: `mailto:${CONTACT_INFORMATION.email}` }],
+  },
+  {
+    Icon: MapPin,
+    title: 'Visit Us',
+    texts: [{ text: CONTACT_INFORMATION.address }],
+  },
+  {
+    Icon: Clock,
+    title: 'Office Hours',
+    texts: [{ text: 'Mon - Fri: 9AM - 6PM' }, { text: 'Emergency: 24/7' }],
+    hideInFooter: true,
+  },
+];
 
 // export const socials: SocialBtnProps[] = [
 //   {
@@ -92,34 +139,92 @@ export const footerCompanyDescription = `
 
 export const ourStoryTexts: string[] = [];
 
-// export const OUR_ACHIEVEMENTS: AchievementBlockProps[] = [
-//   {
-//     number: 50,
-//     numberSuffix: '+',
-//     desc: 'Awards & Recognitions',
-//     className:
-//       'grid bg-gray-f2 md:col-start-3 md:col-end-4 lg:col-start-4 lg:col-end-5 md:row-start-1 md:row-end-2',
-//   },
-//   {
-//     number: 5,
-//     desc: 'Years of experience',
-//     className:
-//       'grid bg-dark text-white md:col-start-1 md:col-end-2 lg:col-start-2 lg:col-end-3 md:row-start-2 md:row-end-3',
-//   },
-//   {
-//     number: 1000,
-//     numberSuffix: '+',
-//     desc: 'Brands Worked with',
-//     className:
-//       'grid bg-white md:col-start-1 md:col-end-2 lg:col-start-2 lg:col-end-3 md:row-start-3 md:row-end-4',
-//   },
-//   {
-//     number: 10,
-//     numberSuffix: 'K+',
-//     desc: 'Projects completed',
-//     className: 'hidden lg:grid bg-gray-d9 lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4',
-//   },
-// ];
+export const SERVICES: ServiceCardProps[] = [
+  {
+    Icon: Shield,
+    title: 'Gender-Based Violence Response',
+    description:
+      '24/7 response team providing immediate support, protection, and resources for victims of gender-based violence.',
+    features: [
+      'Crisis intervention and emergency support',
+      'Safe shelter and temporary accommodation',
+      'Legal assistance and advocacy',
+      'Counseling and trauma therapy',
+    ],
+  },
+  {
+    Icon: GraduationCap,
+    title: 'Empowerment & Education',
+    description:
+      'Comprehensive programs to improve lives through education, financial literacy, and life skills development.',
+    features: [
+      'School fee assistance and scholarships',
+      'Financial literacy seminars for women',
+      'Life skills and leadership training',
+      'Mentorship and career guidance',
+    ],
+  },
+];
+
+export const OUR_STATS: StatsCardProps[] = [
+  {
+    num: 500,
+    numSuffix: '+',
+    desc: 'Lives Impacted',
+    className: 'bg-gradient-primary text-white shadow-elegant shadow-primary/20',
+  },
+  {
+    num: 24,
+    numSuffix: '/7',
+    desc: 'Support Available',
+    className: 'bg-dark text-white shadow-elegant shadow-primary/20',
+  },
+  {
+    num: 100,
+    numSuffix: '+',
+    desc: 'Scholarships Provided',
+    className: 'bg-secondary text-dark shadow-soft shadow-primary/15',
+  },
+  {
+    num: 50,
+    numSuffix: '+',
+    desc: 'Seminars Hosted',
+    className: 'bg-gradient-primary text-white shadow-elegant shadow-primary/20',
+  },
+];
+
+export const OUR_VALUES: ValuesCardProps[] = [
+  {
+    Icon: Shield,
+    title: 'Empowerment',
+    description: 'Building confidence and strength in every girl and young woman we serve',
+  },
+  {
+    Icon: Heart,
+    title: 'Compassion',
+    description: 'Approaching every situation with understanding, empathy and care',
+  },
+  {
+    Icon: CheckCircle,
+    title: 'Integrity',
+    description: 'Maintaining the highest standards of honesty and ethical conduct',
+  },
+  {
+    Icon: Home,
+    title: 'Safety',
+    description: 'Creating secure environments where healing and growth can flourish',
+  },
+  {
+    Icon: Scale,
+    title: 'Equality',
+    description: 'Ensuring equal opportunities and treatment for all individuals',
+  },
+  {
+    Icon: Users,
+    title: 'Collaboration',
+    description: 'Working together with communities to create lasting positive change',
+  },
+];
 
 // export const OUR_TEAM: TeamSlideProps[] = [
 //   {
