@@ -219,6 +219,7 @@
 }
 
 @theme {
+  --breakpoint-xs: 425px;
   --breakpoint-sm: 500px;
   --breakpoint-600: 600px;
   --breakpoint-md: 768px;

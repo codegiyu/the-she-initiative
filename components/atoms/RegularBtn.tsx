@@ -61,11 +61,7 @@ export const RegularBtn = ({
 }: RegularBtnProps) => {
   const fullWrapClassName = cn(
     `inline-block leading-none ${!!onDisabledClick && disabled ? 'cursor-pointer focus-visible:outline-gray-border focus-visible:outline-1' : 'cursor-default'} focus:outline-none focus-visible:outline-white/60 focus-visible:outline-2 outline-offset-2`,
-    size === 'full' || className.includes('w-full')
-      ? 'w-full'
-      : variant && ['default', 'secondary'].includes(variant)
-        ? 'w-full md:w-fit'
-        : 'w-fit',
+    size === 'full' || className.includes('w-full') ? 'w-full' : 'w-fit',
     wrapClassName
   );
   const wrapProps = {

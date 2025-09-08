@@ -22,7 +22,7 @@ const buttonVariants = cva(
         default: 'w-fit px-6 py-3.5',
         sm: 'w-fit py-2 px-4',
         icon: '',
-        full: 'w-full ',
+        full: 'w-full py-3.5',
       },
       typo: {
         default: 'font-montserrat text-sm font-medium',

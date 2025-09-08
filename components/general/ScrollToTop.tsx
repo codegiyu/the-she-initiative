@@ -44,7 +44,7 @@ export const ScrollToTop = ({
         className
       )}
       wrapClassName={cn(
-        'group fixed bottom-10 right-5 md:right-10 z-[20] transition-all duration-500 ease-out',
+        'fixed bottom-10 right-5 md:right-10 z-[20] transition-all duration-500 ease-out',
         `${isVisible ? 'scale-100 hover:scale-105' : 'scale-0'}`,
         wrapClassName
       )}

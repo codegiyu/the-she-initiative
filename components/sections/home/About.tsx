@@ -11,9 +11,15 @@ export const About = () => {
           <div className="h-full flex flex-col justify-between space-y-12">
             <SectionHeading title="About Us" className="" />
 
-            <div className="w-full h-fit grid sm:grid-cols-[14.5rem_1fr] lg:grid-cols-1 xl:grid-cols-[14.5rem_1fr] gap-10 items-center rounded-2xl border border-border">
-              <div className="w-full h-full min-h-[16.875rem] flex-none bg-[url('https://static.thesolaceinitiative.org/images/founder-lady.webp')] bg-cover bg-center rounded-2xl overflow-hidden"></div>
-              <div className="w-full grid gap-4 px-5 sm:px-0 lg:px-5 xl:px-0 sm:pr-10 xl:pr-10 pb-5 pt-0 sm:pt-5 lg:pt-0 xl:pt-5">
+            <div className="w-full h-fit grid 600:grid-cols-[14.5rem_1fr] gap-10 items-center rounded-2xl border border-border">
+              <div
+                className="w-full aspect-[0.8] xs:aspect-square 600:aspect-auto 
+                600:h-full min-h-[16.875rem] flex-none 
+                bg-[url('https://static.thesolaceinitiative.org/images/founder-lady.webp')] 
+                bg-cover bg-center xs:bg-[top_center] 600:bg-center 
+                rounded-2xl overflow-hidden"
+              />
+              <div className="w-full grid gap-4 px-5 600:pl-0 600:pr-10 pb-5 pt-0 600:pt-5">
                 <h3 className="text-2xl font-semibold">Founder&apos;s Note</h3>
                 <blockquote className="font-montserrat text-sm leading-relaxed mb-4">
                   &quot;Starting The SHE Initiative was born from a deep conviction that every girl

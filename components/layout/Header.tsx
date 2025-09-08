@@ -66,13 +66,15 @@ export const Header = ({ className, solidBackground, ...props }: HeaderProps) =>
 
       {/* Mobile Navigation */}
       {menuOpen && (
-        <nav className="lg:hidden bg-white border-t border-border">
-          <ul className="list-none grid px-6 py-4 space-y-4">
+        <nav className="lg:hidden bg-white border-t border-border py-6">
+          <ul className="list-none grid px-6 pb-6 space-y-0">
             {NAV_LINKS.map((item, idx) => (
               <HeaderLink key={idx} {...item} afterClick={() => setMenuOpen(false)} />
             ))}
-            <CTAButton setMenuOpen={setMenuOpen} />
           </ul>
+          <div className="w-full px-6">
+            <CTAButton setMenuOpen={setMenuOpen} />
+          </div>
         </nav>
       )}
     </header>
@@ -86,12 +88,16 @@ export interface HeaderLinkProps {
 }
 
 const HeaderLink = ({ text, href, afterClick }: HeaderLinkProps) => {
-  const { elementExists, targetElRef, inHomePage } = useInPageNav({ href });
+  const { elementExists, targetElRef, inHomePage, isActive } = useInPageNav({
+    href,
+    trackElement: true,
+  });
 
   return (
     <li className={`${href === '/' && inHomePage ? 'hidden' : ''}`}>
       <GhostBtn
-        className={``}
+        className={`w-full lg:w-fit py-3 lg:py-0 ${isActive ? 'bg-primary-soft lg:bg-transparent' : 'hover:bg-primary-soft lg:hover:bg-transparent'}`}
+        wrapClassName={`w-full lg:w-fit`}
         linkProps={{ href: elementExists ? '#' : href, preventdefault: 'true' }}
         onClick={() => {
           setTimeout(() => {
@@ -102,11 +108,13 @@ const HeaderLink = ({ text, href, afterClick }: HeaderLinkProps) => {
 
           afterClick?.();
         }}>
-        <div className="w-fit px-0 relative">
-          <p className="font-roboto group-hover:font-medium text-dark hover:text-primary text-[0.875rem] transition-colors duration-200">
+        <div className="w-full lg:w-fit px-0 relative">
+          <p
+            className={`font-roboto text-[0.875rem] transition-colors duration-200 
+            ${isActive ? 'text-primary font-medium' : 'text-dark hover:text-primary'}`}>
             {text}
           </p>
-          <div className="w-full max-w-0 group-hover:max-w-full h-[2px] bg-gradient-primary absolute -bottom-1 left-0 transition-all duration-500 ease-in" />
+          <div className="hidden lg:block w-full max-w-0 group-hover:max-w-full h-[2px] bg-gradient-primary absolute -bottom-1 left-0 transition-all duration-500 ease-in" />
         </div>
       </GhostBtn>
     </li>

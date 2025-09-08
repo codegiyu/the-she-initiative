@@ -33,7 +33,7 @@ export const Services = () => {
             <p className="font-montserrat text-lg mb-6">
               Our response team is available 24/7 for emergency situations
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
               <Button className="font-montserrat font-semibold bg-primary hover:bg-primary-glow text-primary-foreground">
                 Call Emergency Line
               </Button>

@@ -68,6 +68,7 @@ export const NAV_LINKS: HeaderLinkProps[] = [
   { text: 'Services', href: '/#what-we-do' },
   { text: 'Values', href: '/#values' },
   { text: 'Upcoming', href: '/#upcoming-initiatives' },
+  { text: 'Volunteer', href: '/#volunteer-with-us' },
   { text: 'Contact', href: '/#contact' },
 ];
 
