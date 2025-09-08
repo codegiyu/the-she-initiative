@@ -1,8 +1,8 @@
 import { Heart, Phone } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { LucideIconComp } from '@/lib/types/general';
-import { SERVICES } from '@/lib/constants/texts';
+import { CONTACT_INFORMATION, SERVICES } from '@/lib/constants/texts';
 import { SectionHeading } from '@/components/general/SectionHeading';
+import { RegularBtn } from '@/components/atoms/RegularBtn';
 
 export const Services = () => {
   return (
@@ -33,15 +33,24 @@ export const Services = () => {
             <p className="font-montserrat text-lg mb-6">
               Our response team is available 24/7 for emergency situations
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
-              <Button className="font-montserrat font-semibold bg-primary hover:bg-primary-glow text-primary-foreground">
-                Call Emergency Line
-              </Button>
-              <Button
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center px-5">
+              <RegularBtn
+                linkProps={{
+                  href: `tel:${CONTACT_INFORMATION.tel[0].replaceAll(' ', '')}`,
+                  target: '_blank',
+                }}
+                text="Call Emergency Line"
+                className="hover:scale-105"
+              />
+              <RegularBtn
+                linkProps={{
+                  href: `https://wa.me/${CONTACT_INFORMATION.whatsapp.slice(1).replaceAll(' ', '')}`,
+                  target: '_blank',
+                }}
                 variant="outline"
-                className="font-montserrat font-semibold border-white text-white hover:bg-white hover:text-dark">
-                Online Support Chat
-              </Button>
+                className="border-white text-white hover:bg-white hover:text-dark hover:scale-105"
+                text="Online Support Chat"
+              />
             </div>
           </div>
         </div>

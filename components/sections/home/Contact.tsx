@@ -1,9 +1,10 @@
 'use client';
 import { RegularBtn } from '@/components/atoms/RegularBtn';
+import { SheiForm } from '@/components/forms/RequestForms';
 import { SectionHeading } from '@/components/general/SectionHeading';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+// import { Button } from '@/components/ui/button';
+// import { Input } from '@/components/ui/input';
+// import { Textarea } from '@/components/ui/textarea';
 import { CONTACT_INFO_ROWS } from '@/lib/constants/texts';
 import { useInPageNav } from '@/lib/hooks/use-inpage-nav';
 import { LucideIconComp } from '@/lib/types/general';
@@ -23,7 +24,8 @@ export const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="bg-white p-8 rounded-xl shadow-elegant shadow-primary/20">
+          <SheiForm slug="contact_us" />
+          {/* <div className="bg-white p-8 rounded-xl shadow-elegant shadow-primary/20">
             <h3 className="font-montserrat font-bold text-2xl text-dark mb-6">Send Us a Message</h3>
 
             <form className="space-y-6">
@@ -66,7 +68,7 @@ export const Contact = () => {
                 Send Message
               </Button>
             </form>
-          </div>
+          </div> */}
 
           {/* Contact Information */}
           <div className="space-y-8">

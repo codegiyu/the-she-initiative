@@ -22,7 +22,7 @@ export const Hero = () => {
         <div className="w-full">
           <div className="max-w-3xl">
             <div className="animate-fade-in">
-              <h1 className="font-montserrat font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight text-white mb-6">
+              <h1 className="md:w-4/5 lg:w-full font-montserrat font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight text-white mb-6">
                 Empowering her today,{' '}
                 <span className="text-primary-glow">transforming tomorrow</span>
               </h1>

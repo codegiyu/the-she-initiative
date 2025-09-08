@@ -26,12 +26,12 @@ export const SEO_DETAILS = {
     template: '%s | The SHE Initiative',
   },
   description:
-    'The Initiative provides holistic support, protection and opportunities for girls and young women by responding to gender-based violence and empowering them to thrive.',
+    'The Solace Healing and Empowerment Initiative provides holistic support, protection and opportunities for girls and young women by responding to gender-based violence, educating and empowering them to thrive.',
   metadataBase: new URL(liveUrl),
   alternates: {
     canonical: liveUrl,
   },
-  image: 'https://static.thesolaceinitiative.org/site-preview.png',
+  image: 'https://static.thesolaceinitiative.org/site-preview.webp',
   icons: 'https://static.thesolaceinitiative.org/favicon.png',
   robots: {
     index: true,
@@ -75,6 +75,7 @@ export const NAV_LINKS: HeaderLinkProps[] = [
 export const CONTACT_INFORMATION = {
   address: '123 Hope Street, Community Center',
   tel: ['+234 703 246 4928'],
+  whatsapp: '+234 814 062 9487',
   email: 'thesheinitiative0@gmail.com',
 };
 

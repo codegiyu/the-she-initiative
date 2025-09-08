@@ -1,32 +1,32 @@
-'use client';
+import { SheiForm } from '@/components/forms/RequestForms';
 import { SectionHeading } from '@/components/general/SectionHeading';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 export const VolunteerWithUs = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    interests: '',
-    availability: '',
-    experience: '',
-    message: '',
-  });
+  // const [formData, setFormData] = useState({
+  //   name: '',
+  //   email: '',
+  //   phone: '',
+  //   interests: '',
+  //   availability: '',
+  //   experience: '',
+  //   message: '',
+  // });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const handleChange = (
+  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  // ) => {
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-  };
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   // Handle form submission here
+  //   console.log('Form submitted:', formData);
+  // };
 
   return (
     <section id="volunteer-with-us" className="section-block-padding bg-white">
@@ -80,7 +80,8 @@ export const VolunteerWithUs = () => {
           </div>
 
           {/* Form */}
-          <div className="bg-card p-8 rounded-xl shadow-soft shadow-primary/15 border border-border">
+          <SheiForm slug="volunteer_with_us" />
+          {/* <div className="bg-card p-8 rounded-xl shadow-soft shadow-primary/15 border border-border">
             <h3 className="font-montserrat font-bold text-2xl text-dark mb-6">
               Get Involved Today
             </h3>
@@ -223,7 +224,7 @@ export const VolunteerWithUs = () => {
                 Submit Application
               </button>
             </form>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
