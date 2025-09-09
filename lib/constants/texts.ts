@@ -26,12 +26,12 @@ export const SEO_DETAILS = {
     template: '%s | The SHE Initiative',
   },
   description:
-    'The Solace Healing and Empowerment Initiative provides holistic support, protection and opportunities for girls and young women by responding to gender-based violence, educating and empowering them to thrive.',
+    'The Solace Healing and Empowerment Initiative provides holistic support, protection and opportunities for girls and young women by providing a response team for victims of gender-based violence, educating and empowering them to thrive.',
   metadataBase: new URL(liveUrl),
   alternates: {
     canonical: liveUrl,
   },
-  image: 'https://static.thesolaceinitiative.org/site-preview.webp',
+  image: 'https://static.thesolaceinitiative.org/images/site-preview.webp',
   icons: 'https://static.thesolaceinitiative.org/favicon.png',
   robots: {
     index: true,
