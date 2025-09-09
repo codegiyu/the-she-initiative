@@ -9,6 +9,7 @@ import { ChangeEvent, Dispatch, memo, SetStateAction, useMemo } from 'react';
 import { output, z, ZodArray, ZodEmail, ZodObject, ZodString } from 'zod';
 import { CheckCheck } from 'lucide-react';
 import { RegularSelect, RegularSelectProps } from '@/components/atoms/RegularSelect';
+import { cn } from '@/lib/utils';
 
 export type StringOrStringArraySchema = ZodString | ZodEmail | ZodArray<ZodString>;
 export interface RequestFormProps<
@@ -150,6 +151,7 @@ export const RequestForm = memo(
       toast({ title: parsedRes.message, variant: parsedRes.success ? 'success' : 'error' });
 
       if (parsedRes.error) {
+        console.error({ error: parsedRes });
         setFormErrors({ root: [String(parsedRes.error)] } as Partial<
           Record<keyof output<TSchema> | 'root', string[] | undefined>
         >);
@@ -165,7 +167,7 @@ export const RequestForm = memo(
     }
 
     return (
-      <section className="bg-card p-8 rounded-xl shadow-soft shadow-primary/15 border border-border">
+      <section className="bg-card px-4 500:px-6 md:px-8 py-8 rounded-xl shadow-soft shadow-primary/15 border border-border">
         <h3 className="font-montserrat font-bold text-2xl text-dark mb-6">{formTitle}</h3>
 
         <form onSubmit={handleSubmit} className="grid gap-6">
@@ -208,6 +210,11 @@ export const RequestForm = memo(
               </div>
             ))}
           </div>
+
+          {formErrors.root && (
+            <p className={cn('text-xs md:text-sm text-red-500 mt-1')}>{formErrors.root[0]}</p>
+          )}
+
           <div className="w-full flex items-center">
             <RegularBtn
               size="full"

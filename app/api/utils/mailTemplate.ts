@@ -271,11 +271,11 @@ export const mailTemplate = ({ title, top, data, end }: MailTemplateProps) => {
                   <table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#FFFFFF">
                     <tr>
                       <td align="center" valign="top" style="padding: 20px 40px;">
-                        <a href="https://www.thesolaceinitiative.org/" target="_blank" style="text-decoration: none;">
+                        <a href="https://www.thesolaceinitiative.org/" target="_blank" rel="noreferrer noopener" style="text-decoration: none;">
                           <div class="logo-container" style="padding: 40px 20px 0px; width: fit-content;">
                             <!-- Light mode logo (default) -->
                             <img 
-                              src="https://static.thesolaceinitiative.org/images/logo-full.png"
+                              src="https://static.thesolaceinitiative.org/images/shei-logo.png"
                               alt="The Solace Healing and Empowerment Initiative"
                               class="logo-light"
                               style="height: 56px; margin: 0; display: block;"
@@ -283,7 +283,7 @@ export const mailTemplate = ({ title, top, data, end }: MailTemplateProps) => {
 
                             <!-- Dark mode logo (hidden by default, shown in dark mode) -->
                             <img 
-                              src="https://static.thesolaceinitiative.org/images/logo-full-dark.png"
+                              src="https://static.thesolaceinitiative.org/images/shei-logo-dark.png"
                               alt="The Solace Healing and Empowerment Initiative"
                               class="logo-dark"
                               style="height: 56px; margin: 0; display: none;"

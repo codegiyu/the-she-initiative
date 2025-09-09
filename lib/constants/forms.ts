@@ -17,7 +17,7 @@ const ALL_FIELDS_SCHEMA: Record<string, StringOrStringArraySchema> = {
   availability: z.string({ error: 'Please enter a value' }),
   subject: z.string({ error: 'Please enter a value' }),
   message: z.string().min(10, { error: 'Message is not long enough' }),
-  relevantExperience: z.string().min(10, { error: 'Relevant experience is not long enough' }),
+  relevantExperience: z.string(),
   additionalMessage: z.string(),
 };
 
@@ -31,8 +31,8 @@ export const ALL_FIELDS_DEFAULT: Record<string, string | string[]> = {
   availability: '',
   subject: '',
   message: '',
-  requestDetails: '',
-  additionalInfo: '',
+  relevantExperience: '',
+  additionalMessage: '',
 };
 
 export const volunteerFormSchema = z.object({
@@ -103,6 +103,7 @@ export const volunteerFormData: RequestFormProps<typeof volunteerFormSchema> = {
       name: 'areasOfInterest',
       kind: 'select',
       selectProps: {
+        label: 'Areas of Interest',
         placeholder: 'Select an area of interest',
         options: generateOptionsFromArray({
           arr: [
@@ -115,6 +116,7 @@ export const volunteerFormData: RequestFormProps<typeof volunteerFormSchema> = {
             'Other',
           ],
         }),
+        required: true,
       },
     },
     {
@@ -122,6 +124,7 @@ export const volunteerFormData: RequestFormProps<typeof volunteerFormSchema> = {
       kind: 'select',
       selectProps: {
         placeholder: 'Select your availability',
+        label: 'Availability',
         options: generateOptionsFromArray({
           arr: [
             'A few hours per week',
@@ -132,6 +135,7 @@ export const volunteerFormData: RequestFormProps<typeof volunteerFormSchema> = {
             'Events and special occasions only',
           ],
         }),
+        required: true,
       },
     },
     {
@@ -141,7 +145,7 @@ export const volunteerFormData: RequestFormProps<typeof volunteerFormSchema> = {
         label: 'Relevant Experience',
         placeholder: 'Tell us about any relevant experience or skills you have',
         rows: 3,
-        required: true,
+        required: false,
       },
     },
     {

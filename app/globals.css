@@ -219,6 +219,7 @@
 }
 
 @theme {
+  --breakpoint-360: 360px;
   --breakpoint-xs: 425px;
   --breakpoint-sm: 500px;
   --breakpoint-600: 600px;
@@ -494,7 +495,7 @@
 
   /* Stop that weird different color of inputs when auto-filled or completed */
   /* Add a transition-delay of 1hr to delay the changing of background by the browser */
-  input:-webkit-autofill,
+  /* input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active,
@@ -503,7 +504,7 @@
   input:-internal-autofill-selected:focus,
   input:-internal-autofill-selected:active {
     transition-delay: 3600s !important;
-  }
+  } */
 
   video {
     overflow-clip-margin: content-box;

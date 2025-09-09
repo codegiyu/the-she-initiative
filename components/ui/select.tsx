@@ -43,7 +43,17 @@ function SelectTrigger({
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        "w-full bg-transparent px-4 py-3 text-sm md:text-xs border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 font-montserrat data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex items-center justify-between gap-2 whitespace-nowrap shadow-xs outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3",
+        "w-full bg-transparent px-4 py-3 text-sm md:text-xs border border-border \
+        rounded-lg focus:ring-2 focus:ring-primary focus-visible:border-primary \
+        focus-visible:ring-primary/50 focus:border-transparent transition-all \
+        duration-200 font-montserrat data-[placeholder]:text-muted-foreground \
+        [&_svg:not([class*='text-'])]:text-muted-foreground \
+        aria-invalid:ring-destructive/20 aria-invalid:border-destructive flex \
+        items-center justify-between gap-2 whitespace-nowrap shadow-xs outline-none \
+        focus-visible:ring-[2px] disabled:cursor-not-allowed disabled:opacity-50 \
+        *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex \
+        *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 \
+        [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3",
         `${hidecaretifdisabled ? 'disabled:cursor-default' : 'disabled:cursor-not-allowed disabled:opacity-50'}`,
         className
       )}

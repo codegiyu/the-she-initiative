@@ -84,6 +84,7 @@ export const Header = ({ className, solidBackground, ...props }: HeaderProps) =>
 export interface HeaderLinkProps {
   text: string;
   href: string;
+  footerOnlySuffix?: string;
   afterClick?: () => void;
 }
 

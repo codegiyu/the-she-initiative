@@ -25,68 +25,24 @@ export const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <SheiForm slug="contact_us" />
-          {/* <div className="bg-white p-8 rounded-xl shadow-elegant shadow-primary/20">
-            <h3 className="font-montserrat font-bold text-2xl text-dark mb-6">Send Us a Message</h3>
-
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="font-montserrat font-medium text-dark block mb-2">
-                    First Name
-                  </label>
-                  <Input placeholder="Enter your first name" className="font-montserrat" />
-                </div>
-                <div>
-                  <label className="font-montserrat font-medium text-dark block mb-2">
-                    Last Name
-                  </label>
-                  <Input placeholder="Enter your last name" className="font-montserrat" />
-                </div>
-              </div>
-
-              <div>
-                <label className="font-montserrat font-medium text-dark block mb-2">
-                  Email Address
-                </label>
-                <Input type="email" placeholder="Enter your email" className="font-montserrat" />
-              </div>
-
-              <div>
-                <label className="font-montserrat font-medium text-dark block mb-2">Subject</label>
-                <Input placeholder="What is this about?" className="font-montserrat" />
-              </div>
-
-              <div>
-                <label className="font-montserrat font-medium text-dark block mb-2">Message</label>
-                <Textarea
-                  placeholder="Tell us how we can help or how you'd like to get involved"
-                  className="font-montserrat min-h-[120px]"
-                />
-              </div>
-
-              <Button className="w-full font-montserrat font-semibold bg-primary hover:bg-primary-glow text-primary-foreground">
-                Send Message
-              </Button>
-            </form>
-          </div> */}
 
           {/* Contact Information */}
           <div className="space-y-8">
             {/* Contact Details */}
-            <div className="bg-white p-8 rounded-xl shadow-elegant shadow-primary/20">
+            <div className="bg-white px-4 500:px-6 md:px-8 py-8 rounded-xl shadow-elegant shadow-primary/20">
               <h3 className="font-montserrat font-bold text-2xl text-dark mb-6">
                 Contact Information
               </h3>
 
               <div className="space-y-6">
-                {CONTACT_INFO_ROWS.map((item, idx) => (
+                {CONTACT_INFO_ROWS.filter(s => !s.showInFooterOnly).map((item, idx) => (
                   <ContactInfoRow key={idx} {...item} />
                 ))}
               </div>
             </div>
 
             {/* Call to Action */}
-            <div className="bg-gradient-primary p-8 rounded-xl text-white shadow-elegant shadow-primary/20">
+            <div className="bg-gradient-primary px-4 500:px-6 md:px-8 py-8 rounded-xl text-white shadow-elegant shadow-primary/20">
               <div className="text-center">
                 <Heart className="w-12 h-12 mx-auto mb-4 text-white" />
                 <h3 className="font-montserrat font-bold text-2xl mb-4">Make a Difference Today</h3>
@@ -112,6 +68,7 @@ export interface ContactInfoRowProps {
   title: string;
   texts: ContactRowTextProps[];
   hideInFooter?: boolean;
+  showInFooterOnly?: boolean;
 }
 
 export const ContactInfoRow = ({ LucideIcon, Icon, title, texts }: ContactInfoRowProps) => {
@@ -149,7 +106,9 @@ export const ContactRowText = ({ text, link, isLast }: ContactRowTextProps) => {
       {link ? (
         <a
           href={link}
-          className="no-underline hover:underline text-current hover:text-primary cursor-pointer">
+          target="_blank"
+          rel="noreferrer noopener"
+          className="no-underline text-current hover:text-primary cursor-pointer">
           <span>{text}</span>
         </a>
       ) : (

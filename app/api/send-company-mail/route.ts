@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
     });
 
     const mailTemplateOptions = {
-      title: fields.formName,
+      title: fields.formName.trim() + ' Form Submission',
       top: [
         [
           `You've received a new submission through the website ${fields.formName} \

@@ -25,7 +25,7 @@ export const SheiForm = ({ slug }: { slug: string }) => {
 
   if (!FormComp)
     return (
-      <div className="bg-card p-8 rounded-xl shadow-soft shadow-primary/15 border border-border" />
+      <div className="bg-card px-4 500:px-6 md:px-8 py-8 rounded-xl shadow-soft shadow-primary/15 border border-border" />
     );
 
   return <FormComp files={files} setFiles={setFiles} />;

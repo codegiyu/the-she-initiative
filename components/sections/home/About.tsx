@@ -11,15 +11,14 @@ export const About = () => {
           <div className="h-full flex flex-col justify-between space-y-12">
             <SectionHeading title="About Us" className="" />
 
-            <div className="w-full h-fit grid 600:grid-cols-[20rem_1fr] gap-10 items-center rounded-2xl border border-border">
+            <div className="w-full h-fit grid md:grid-cols-[20rem_1fr] gap-10 items-center rounded-2xl border border-border">
               <div
-                className="w-full aspect-[0.8] xs:aspect-square 600:aspect-auto 
-                600:h-full min-h-[20rem] flex-none 
-                bg-[url('https://static.thesolaceinitiative.org/images/founder-maryam.webp')] 
-                bg-cover bg-[top_center] 
-                rounded-2xl overflow-hidden"
+                className="w-full aspect-auto md:h-full min-h-[30rem] xs:min-h-[32rem] 600:min-h-[40rem] 
+                md:min-h-[30rem] lg:min-h-[20rem] flex-none bg-cover bg-[top_center] rounded-2xl overflow-hidden
+                bg-[url('https://static.thesolaceinitiative.org/images/founder-maryam-a-gimba-esq.webp')] 
+                "
               />
-              <div className="w-full grid gap-4 px-5 600:pl-0 600:pr-10 pb-5 pt-0 600:pt-5">
+              <div className="w-full grid gap-4 px-5 md:pl-0 md:pr-10 pb-5 pt-0 md:pt-5">
                 <h3 className="text-2xl font-semibold">Founder&apos;s Note</h3>
                 <blockquote className="font-montserrat text-sm leading-relaxed mb-4 grid gap-5">
                   <span>
@@ -50,8 +49,8 @@ export const About = () => {
           </div>
 
           <div className="h-full flex justify-center items-end">
-            <div className="xl:w-4/5 lg:flex justify-center space-x-10 space-y-6">
-              <div className="bg-card p-6 rounded-lg shadow-soft shadow-primary/15 border-l-4 border-primary">
+            <div className="xl:w-4/5 grid lg:grid-cols-2 justify-center gap-x-10 gap-y-6">
+              <div className="flex-shrink-0 bg-card p-6 rounded-lg shadow-soft shadow-primary/15 border-l-4 border-primary">
                 <h3 className="font-montserrat font-semibold text-xl text-dark mb-3">
                   Our Mission
                 </h3>
@@ -63,7 +62,7 @@ export const About = () => {
                 </p>
               </div>
 
-              <div className="bg-primary-soft p-6 rounded-lg border-l-4 border-primary">
+              <div className="flex-shrink-0 bg-primary-soft p-6 rounded-lg border-l-4 border-primary">
                 <h3 className="font-montserrat font-semibold text-xl text-dark mb-3">Our Vision</h3>
                 <p className="font-montserrat text-muted-foreground leading-relaxed">
                   A safe and inclusive society where every girl and young woman is free from

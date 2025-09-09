@@ -1,4 +1,4 @@
-import { Instagram } from '@/components/icons';
+import { Instagram, Whatsapp } from '@/components/icons';
 import { HeaderLinkProps } from '@/components/layout/Header';
 import { StatsCardProps } from '@/components/sections/home/About';
 import { ContactInfoRowProps } from '@/components/sections/home/Contact';
@@ -55,6 +55,7 @@ export const SEO_DETAILS = {
     'girl child',
     'education',
     'support',
+    'Maryam A. Gimba, Esq',
   ],
   generator: 'Next.js',
   // referrer: 'no-referrer',
@@ -67,7 +68,7 @@ export const NAV_LINKS: HeaderLinkProps[] = [
   { text: 'About Us', href: '/#about' },
   { text: 'Services', href: '/#what-we-do' },
   { text: 'Values', href: '/#values' },
-  { text: 'Upcoming', href: '/#upcoming-initiatives' },
+  { text: 'Upcoming', href: '/#upcoming-initiatives', footerOnlySuffix: ' Initiatives' },
   { text: 'Volunteer', href: '/#volunteer-with-us' },
   { text: 'Contact', href: '/#contact' },
 ];
@@ -103,6 +104,17 @@ export const CONTACT_INFO_ROWS: ContactInfoRowProps[] = [
     title: 'Office Hours',
     texts: [{ text: 'Mon - Fri: 9AM - 6PM' }],
     hideInFooter: true,
+  },
+  {
+    Icon: Whatsapp,
+    title: 'Whatsapp',
+    texts: [
+      {
+        text: CONTACT_INFORMATION.whatsapp,
+        link: `https://wa.me/${CONTACT_INFORMATION.whatsapp.slice(1).replaceAll(' ', '')}`,
+      },
+    ],
+    showInFooterOnly: true,
   },
   {
     Icon: Instagram,

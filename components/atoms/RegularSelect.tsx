@@ -76,7 +76,9 @@ export const RegularSelect = ({
             className={cn(``, triggerClassName)}>
             <SelectValue
               className={cn('', valueClassName)}
-              placeholder={<span className="block text-start text-gray-66">{placeholder}</span>}
+              placeholder={
+                <span className="block text-start text-muted-foreground">{placeholder}</span>
+              }
             />
           </SelectTrigger>
           <SelectContent className="bg-white rounded-md border p-2 shadow-md outline-hidden">
