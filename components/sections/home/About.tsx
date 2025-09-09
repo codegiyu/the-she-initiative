@@ -15,7 +15,7 @@ export const About = () => {
               <div
                 className="w-full aspect-[0.8] xs:aspect-square 600:aspect-auto 
                 600:h-full min-h-[20rem] flex-none 
-                bg-[url('/images/founder-maryam.png')] 
+                bg-[url('https://static.thesolaceinitiative.org/images/founder-maryam.webp')] 
                 bg-cover bg-[top_center] 
                 rounded-2xl overflow-hidden"
               />
@@ -43,7 +43,7 @@ export const About = () => {
                   </span>
                 </blockquote>
                 <cite className="font-roboto font-semibold text-end">
-                  — Maryam A. Gimba, Esq., Founder
+                  — Maryam A. Gimba, Esq, Founder
                 </cite>
               </div>
             </div>
