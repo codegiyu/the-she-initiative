@@ -28,9 +28,10 @@ export interface InitiativeCardProps {
   title: string;
   desc: string;
   text: string;
+  suffix?: string;
 }
 
-const InitiativeCard = ({ title, desc, text }: InitiativeCardProps) => {
+const InitiativeCard = ({ title, desc, text, suffix }: InitiativeCardProps) => {
   return (
     <div className="bg-white p-8 rounded-xl shadow-soft shadow-primary/15 border border-border hover:shadow-elegant hover:shadow-primary/20 transition-all duration-300">
       <div className="mb-6">
@@ -41,6 +42,9 @@ const InitiativeCard = ({ title, desc, text }: InitiativeCardProps) => {
         <p className="font-roboto text-sm text-primary font-medium mb-3">{desc}</p>
       </div>
       <p className="font-montserrat text-muted-foreground leading-relaxed">{text}</p>
+      {suffix && (
+        <p className="font-montserrat text-primary leading-relaxed mt-4 italic">{suffix}</p>
+      )}
     </div>
   );
 };

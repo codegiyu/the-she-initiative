@@ -31,7 +31,7 @@ export const Services = () => {
             </div>
             <h3 className="font-montserrat font-bold text-2xl mb-4">Need Immediate Help?</h3>
             <p className="font-montserrat text-lg mb-6">
-              Our response team is available 24/7 for emergency situations
+              Our response team is available for emergency situations
             </p>
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center px-5">
               <RegularBtn

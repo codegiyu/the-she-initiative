@@ -1,3 +1,4 @@
+import { Instagram } from '@/components/icons';
 import { HeaderLinkProps } from '@/components/layout/Header';
 import { StatsCardProps } from '@/components/sections/home/About';
 import { ContactInfoRowProps } from '@/components/sections/home/Contact';
@@ -11,7 +12,6 @@ import {
   Heart,
   Home,
   Mail,
-  MapPin,
   Phone,
   Scale,
   Shield,
@@ -75,13 +75,13 @@ export const NAV_LINKS: HeaderLinkProps[] = [
 export const CONTACT_INFORMATION = {
   address: '123 Hope Street, Community Center',
   tel: ['+234 703 246 4928'],
-  whatsapp: '+234 814 062 9487',
+  whatsapp: '+234 703 246 4928',
   email: 'thesheinitiative0@gmail.com',
 };
 
 export const CONTACT_INFO_ROWS: ContactInfoRowProps[] = [
   {
-    Icon: Phone,
+    LucideIcon: Phone,
     title: 'Emergency Hotline',
     texts: CONTACT_INFORMATION.tel.map(phone => ({
       text: phone,
@@ -89,44 +89,52 @@ export const CONTACT_INFO_ROWS: ContactInfoRowProps[] = [
     })),
   },
   {
-    Icon: Mail,
+    LucideIcon: Mail,
     title: 'Email Us',
     texts: [{ text: CONTACT_INFORMATION.email, link: `mailto:${CONTACT_INFORMATION.email}` }],
   },
+  // {
+  //   LucideIcon: MapPin,
+  //   title: 'Visit Us',
+  //   texts: [{ text: CONTACT_INFORMATION.address }],
+  // },
   {
-    Icon: MapPin,
-    title: 'Visit Us',
-    texts: [{ text: CONTACT_INFORMATION.address }],
+    LucideIcon: Clock,
+    title: 'Office Hours',
+    texts: [{ text: 'Mon - Fri: 9AM - 6PM' }],
+    hideInFooter: true,
   },
   {
-    Icon: Clock,
-    title: 'Office Hours',
-    texts: [{ text: 'Mon - Fri: 9AM - 6PM' }, { text: 'Emergency: 24/7' }],
-    hideInFooter: true,
+    Icon: Instagram,
+    title: 'Social Media',
+    texts: [
+      { text: '@thesheinitiative.ng', link: 'https://www.instagram.com/thesheinitiative.ng' },
+    ],
+    hideInFooter: false,
   },
 ];
 
-// export const socials: SocialBtnProps[] = [
+// export const socials = [
 //   {
 //     title: 'Instagram',
 //     url: 'https://www.instagram.com/pinpointpackaging?igsh=MXNlbTN3MnQ3bzdicg==',
-//     Icon: SvgInstagramIcon,
+//     Icon: InstagramIcon,
 //   },
 //   {
 //     title: 'Facebook',
 //     url: 'https://www.facebook.com/share/19MUWfmSiG/?mibextid=wwXIfr',
-//     Icon: SvgFacebookIcon,
+//     Icon: FacebookIcon,
 //   },
-//   // {
-//   //   title: 'LinkedIn',
-//   //   url: 'https://be.linkedin.com/company/atelier-design',
-//   //   Icon: SvgLinkedin,
-//   // },
-//   // {
-//   //   title: 'X',
-//   //   url: 'https://x.com/atelierdesign',
-//   //   Icon: SvgXIcon,
-//   // },
+//   {
+//     title: 'LinkedIn',
+//     url: 'https://be.linkedin.com/company/atelier-design',
+//     Icon: Linkedin,
+//   },
+//   {
+//     title: 'X',
+//     url: 'https://x.com/atelierdesign',
+//     Icon: XIcon,
+//   },
 //   {
 //     title: 'Tiktok',
 //     url: 'https://www.tiktok.com/@pinpointglobal?_t=ZS-8yRAXCYmRLp&_r=1',
@@ -147,9 +155,9 @@ export const SERVICES: ServiceCardProps[] = [
     Icon: Shield,
     title: 'Gender-Based Violence Response',
     description:
-      '24/7 response team providing immediate support, protection, and resources for victims of gender-based violence.',
+      'Response team providing immediate support, protection, and resources for victims of gender-based violence.',
     features: [
-      'Crisis intervention and emergency support',
+      'Emergency support',
       'Safe shelter and temporary accommodation',
       'Legal assistance and advocacy',
       'Counseling and trauma therapy',
@@ -161,7 +169,7 @@ export const SERVICES: ServiceCardProps[] = [
     description:
       'Comprehensive programs to improve lives through education, financial literacy, and life skills development.',
     features: [
-      'School fee assistance and scholarships',
+      'School fee assistance and provision of educational materials',
       'Financial literacy seminars for women',
       'Life skills and leadership training',
       'Mentorship and career guidance',
@@ -231,16 +239,15 @@ export const OUR_VALUES: ValuesCardProps[] = [
 
 export const UPCOMING_INITIATIVES: InitiativeCardProps[] = [
   {
-    title: 'Digital Literacy Program',
-    desc: 'Launching Q2 2026',
-    text: 'Empowering young women with essential digital skills, computer literacy, \
-    and online safety knowledge to thrive in our digital world.',
+    title: 'Launch Event',
+    desc: 'Launching Q4 2025',
+    text: 'Join us for the official launch of The SHE Initiative. The launch will feature keynote speakers, and a first look at our upcoming programs and partnerships.',
+    suffix: 'Be a part of the beginning. Be a part of the change.',
   },
   {
-    title: 'Safe Spaces Network',
-    desc: 'Expanding 2026',
-    text: 'Growing our network of community centers and safe spaces to reach more \
-    underserved areas and provide accessible support.',
+    title: 'Menstrual Health: From Period Shame to Misinformation',
+    desc: 'At the Q4 Launch Event',
+    text: "This initiative aims to disseminate Nigeria's first menstrual health policy from the Ministry of Women Affairs, the Menstrual Health and Hygiene Management (MHHM) Policy, officially adopted in August 2025",
   },
   {
     title: 'Mentorship Circle',

@@ -7,7 +7,7 @@ import { SectionHeading } from '@/components/general/SectionHeading';
 // import { Textarea } from '@/components/ui/textarea';
 import { CONTACT_INFO_ROWS } from '@/lib/constants/texts';
 import { useInPageNav } from '@/lib/hooks/use-inpage-nav';
-import { LucideIconComp } from '@/lib/types/general';
+import { IconComp, LucideIconComp } from '@/lib/types/general';
 import { Heart } from 'lucide-react';
 
 export const Contact = () => {
@@ -107,17 +107,23 @@ export const Contact = () => {
 };
 
 export interface ContactInfoRowProps {
-  Icon: LucideIconComp;
+  LucideIcon?: LucideIconComp;
+  Icon?: IconComp;
   title: string;
   texts: ContactRowTextProps[];
   hideInFooter?: boolean;
 }
 
-export const ContactInfoRow = ({ Icon, title, texts }: ContactInfoRowProps) => {
+export const ContactInfoRow = ({ LucideIcon, Icon, title, texts }: ContactInfoRowProps) => {
   return (
     <div className="flex items-center">
       <div className="bg-primary-soft p-3 rounded-lg mr-4">
-        <Icon className="w-6 h-6 text-primary" />
+        {LucideIcon && <LucideIcon className="w-6 h-6 text-primary" />}
+        {Icon && (
+          <i className="text-2xl text-primary">
+            <Icon />
+          </i>
+        )}
       </div>
       <div>
         <div className="font-montserrat font-semibold text-dark">{title}</div>

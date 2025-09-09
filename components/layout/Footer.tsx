@@ -2,7 +2,7 @@
 import { Phone, Heart } from 'lucide-react';
 import { LogoFull } from '../icons';
 import { ContactInfoRowProps, ContactRowText } from '../sections/home/Contact';
-import { CONTACT_INFO_ROWS, NAV_LINKS } from '@/lib/constants/texts';
+import { CONTACT_INFO_ROWS, CONTACT_INFORMATION, NAV_LINKS } from '@/lib/constants/texts';
 import { GhostBtn } from '../atoms/GhostBtn';
 import { HeaderLinkProps } from './Header';
 import { useInPageNav } from '@/lib/hooks/use-inpage-nav';
@@ -29,7 +29,7 @@ export const Footer = () => {
               </div>
               <div>
                 <div className="font-montserrat font-semibold">Emergency Support</div>
-                <div className="font-montserrat text-white/80">Available 24/7</div>
+                <div className="font-montserrat text-white/80">{CONTACT_INFORMATION.tel}</div>
               </div>
             </div>
           </div>
@@ -76,10 +76,15 @@ export const Footer = () => {
   );
 };
 
-const FooterContactRow = ({ Icon, texts }: Omit<ContactInfoRowProps, 'title'>) => {
+const FooterContactRow = ({ LucideIcon, Icon, texts }: Omit<ContactInfoRowProps, 'title'>) => {
   return (
     <div className="flex items-center">
-      <Icon className="w-5 h-5 text-primary mr-3 flex-shrink-0 mt-0.5" />
+      {LucideIcon && <LucideIcon className="w-5 h-5 text-primary mr-3 flex-shrink-0 mt-0.5" />}
+      {Icon && (
+        <i className="text-xl text-primary mr-3 flex-none mt-0.5">
+          <Icon />
+        </i>
+      )}
       <div className="font-montserrat text-white/80">
         {texts.map((item, idx, arr) => (
           <ContactRowText key={idx} {...item} isLast={idx === arr.length - 1} />

@@ -121,12 +121,12 @@ export async function POST(req: NextRequest) {
       fields.company ||
       fields.contactPerson ||
       `${fields.firstName || ''} ${fields.lastName || ''}`.trim() ||
-      'Pinpoint Website';
-    const replyName = senderName === 'Pinpoint Website' ? '' : senderName;
+      'The SHE Initiative Website';
+    const replyName = senderName === 'The SHE Initiative Website' ? '' : senderName;
 
     const mailOptions = {
-      from: `${senderName} (From Pinpoint Website) <${process.env.fromEmail}>`,
-      to: `Pinpoint Global <${process.env.toEmail}>`,
+      from: `${senderName} (From The SHE Initiative Website) <${process.env.fromEmail}>`,
+      to: `The SHE Initiative <${process.env.toEmail}>`,
       ...(fields.email && { replyTo: `${replyName || fields.email} <${fields.email}>` }),
       subject: `${fields.formName.trim()} Form Submission`,
       html,

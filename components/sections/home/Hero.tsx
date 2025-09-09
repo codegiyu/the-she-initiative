@@ -30,8 +30,9 @@ export const Hero = () => {
 
             <div className="animate-slide-up">
               <p className="font-montserrat text-base sm:text-lg lg:text-xl text-white/90 mb-8 leading-relaxed max-w-2xl">
-                The Initiative provides holistic support, protection and opportunities for girls and
-                young women by responding to gender-based violence and empowering them to thrive.
+                The SHE Initiative provides holistic support, protection and opportunities for girls
+                and young women by providing a response team for victims of gender-based violence
+                and empowering them to thrive.
               </p>
             </div>
 
