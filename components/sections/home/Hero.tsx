@@ -25,7 +25,7 @@ export const Hero = () => {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}
             variants={{
               visible: {
                 transition: {
@@ -69,10 +69,18 @@ export const Hero = () => {
               {/* Contact button zoom-in AFTER buttons appear */}
               <motion.div
                 className="w-fit"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.7, duration: 0.5, ease: 'easeOut' }}>
+                // initial={{ opacity: 0, scale: 0.8 }}
+                // whileInView={{ opacity: 1, scale: 1 }}
+                // viewport={{ once: true }}
+                // transition={{ delay: 0.7, duration: 0.5, ease: 'easeOut' }}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.75 },
+                  visible: {
+                    opacity: 1,
+                    scale: 1,
+                    transition: { delay: 0.7, duration: 0.6, ease: 'easeOut' },
+                  },
+                }}>
                 <ContactButton />
               </motion.div>
             </motion.div>

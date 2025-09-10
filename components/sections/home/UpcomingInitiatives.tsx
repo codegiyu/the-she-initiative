@@ -1,11 +1,14 @@
+'use client';
+
 import { SectionHeading } from '@/components/general/SectionHeading';
 import { UPCOMING_INITIATIVES } from '@/lib/constants/texts';
+import { staggerParent, ZOOM_IN } from '@/lib/constants/motion';
+import { motion } from 'motion/react';
 
 export const UpcomingInitiatives = () => {
   return (
     <section id="upcoming-initiatives" className="section-block-padding bg-primary-soft">
-      <div className="regular-container">
-        {/* Header */}
+      <motion.div {...staggerParent({})} className="regular-container">
         <SectionHeading
           title="Upcoming Initiatives"
           text="Exciting programs and projects we're launching to expand our impact 
@@ -14,12 +17,14 @@ export const UpcomingInitiatives = () => {
         />
 
         {/* Initiatives Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          {...staggerParent({ stagger: 0.5 })}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {UPCOMING_INITIATIVES.map((item, idx) => (
             <InitiativeCard key={idx} {...item} />
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
@@ -33,7 +38,9 @@ export interface InitiativeCardProps {
 
 const InitiativeCard = ({ title, desc, text, suffix }: InitiativeCardProps) => {
   return (
-    <div className="bg-white p-8 rounded-xl shadow-soft shadow-primary/15 border border-border hover:shadow-elegant hover:shadow-primary/20 transition-all duration-300">
+    <motion.div
+      variants={ZOOM_IN}
+      className="bg-white p-8 rounded-xl shadow-soft shadow-primary/15 border border-border hover:shadow-elegant hover:shadow-primary/20 transition-all duration-300">
       <div className="mb-6">
         <div className="bg-gradient-primary p-3 rounded-lg w-fit mb-4">
           <div className="w-6 h-6 bg-white rounded"></div>
@@ -45,6 +52,6 @@ const InitiativeCard = ({ title, desc, text, suffix }: InitiativeCardProps) => {
       {suffix && (
         <p className="font-montserrat text-primary leading-relaxed mt-4 italic">{suffix}</p>
       )}
-    </div>
+    </motion.div>
   );
 };

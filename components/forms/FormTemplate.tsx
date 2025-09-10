@@ -10,6 +10,8 @@ import { output, z, ZodArray, ZodEmail, ZodObject, ZodString } from 'zod';
 import { CheckCheck } from 'lucide-react';
 import { RegularSelect, RegularSelectProps } from '@/components/atoms/RegularSelect';
 import { cn } from '@/lib/utils';
+import { motion } from 'motion/react';
+import { FADE_UP, staggerParent } from '@/lib/constants/motion';
 
 export type StringOrStringArraySchema = ZodString | ZodEmail | ZodArray<ZodString>;
 export interface RequestFormProps<
@@ -167,67 +169,77 @@ export const RequestForm = memo(
     }
 
     return (
-      <section className="bg-card px-4 500:px-6 md:px-8 py-8 rounded-xl shadow-soft shadow-primary/15 border border-border">
-        <h3 className="font-montserrat font-bold text-2xl text-dark mb-6">{formTitle}</h3>
+      <motion.section
+        variants={FADE_UP}
+        className="bg-card px-4 500:px-6 md:px-8 py-8 rounded-xl shadow-soft shadow-primary/15 border border-border">
+        <motion.div {...staggerParent({})} className="">
+          <motion.h3
+            variants={FADE_UP}
+            className="font-montserrat font-bold text-2xl text-dark mb-6">
+            {formTitle}
+          </motion.h3>
 
-        <form onSubmit={handleSubmit} className="grid gap-6">
-          <div className="inputs-wrap grid gap-6">
-            {inputsArr.map((item, idx) => (
-              <div key={idx} className="w-full">
-                {Array.isArray(item) ? (
-                  <div className="w-full grid items-end gap-x-4 gap-y-6 md:grid-cols-2">
-                    {item.map((input, index) => (
-                      <FormInputItem
-                        key={index}
-                        {...input}
-                        {...{
-                          files,
-                          setFiles,
-                          formValues,
-                          formErrors,
-                          handleInputChange,
-                          onChange,
-                          errorsVisible,
-                        }}
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <FormInputItem
-                    key={idx}
-                    {...item}
-                    {...{
-                      files,
-                      setFiles,
-                      formValues,
-                      formErrors,
-                      handleInputChange,
-                      onChange,
-                      errorsVisible,
-                    }}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
+          <motion.form variants={FADE_UP} onSubmit={handleSubmit} className="grid gap-6">
+            <motion.div variants={FADE_UP} className="inputs-wrap grid gap-6">
+              {inputsArr.map((item, idx) => (
+                <div key={idx} className="w-full">
+                  {Array.isArray(item) ? (
+                    <div className="w-full grid items-end gap-x-4 gap-y-6 md:grid-cols-2">
+                      {item.map((input, index) => (
+                        <FormInputItem
+                          key={index}
+                          {...input}
+                          {...{
+                            files,
+                            setFiles,
+                            formValues,
+                            formErrors,
+                            handleInputChange,
+                            onChange,
+                            errorsVisible,
+                          }}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <FormInputItem
+                      key={idx}
+                      {...item}
+                      {...{
+                        files,
+                        setFiles,
+                        formValues,
+                        formErrors,
+                        handleInputChange,
+                        onChange,
+                        errorsVisible,
+                      }}
+                    />
+                  )}
+                </div>
+              ))}
+            </motion.div>
 
-          {formErrors.root && (
-            <p className={cn('text-xs md:text-sm text-red-500 mt-1')}>{formErrors.root[0]}</p>
-          )}
+            {formErrors.root && (
+              <motion.p variants={FADE_UP} className={cn('text-xs md:text-sm text-red-500 mt-1')}>
+                {formErrors.root[0]}
+              </motion.p>
+            )}
 
-          <div className="w-full flex items-center">
-            <RegularBtn
-              size="full"
-              text={btnText || 'Submit'}
-              loading={loading}
-              disabled={!formValid}
-              onDisabledClick={generalValidation}
-              RightIcon={submitted ? CheckCheck : undefined}
-              rightIconProps={{ className: 'size-4 text-white' }}
-            />
-          </div>
-        </form>
-      </section>
+            <motion.div variants={FADE_UP} className="w-full flex items-center">
+              <RegularBtn
+                size="full"
+                text={btnText || 'Submit'}
+                loading={loading}
+                disabled={!formValid}
+                onDisabledClick={generalValidation}
+                RightIcon={submitted ? CheckCheck : undefined}
+                rightIconProps={{ className: 'size-4 text-white' }}
+              />
+            </motion.div>
+          </motion.form>
+        </motion.div>
+      </motion.section>
     );
   }
 );

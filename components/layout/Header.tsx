@@ -1,18 +1,20 @@
 'use client';
 
-import { ComponentProps, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { LogoFull } from '../icons';
 import { RegularBtn } from '../atoms/RegularBtn';
 import { GhostBtn } from '../atoms/GhostBtn';
 import { useInPageNav } from '@/lib/hooks/use-inpage-nav';
 import { NAV_LINKS } from '@/lib/constants/texts';
+import { motion } from 'motion/react';
 
-export type HeaderProps = ComponentProps<'header'> & {
+export type HeaderProps = {
+  className?: string;
   solidBackground?: boolean;
 };
 
-export const Header = ({ className, solidBackground, ...props }: HeaderProps) => {
+export const Header = ({ className, solidBackground }: HeaderProps) => {
   const [hasSolidBg, setHasSolidBg] = useState(!!solidBackground);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -29,11 +31,13 @@ export const Header = ({ className, solidBackground, ...props }: HeaderProps) =>
   }, [solidBackground]);
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`fixed top-0 w-full z-50 bg-white/95 
       backdrop-blur-sm border-b border-border transition-colors duration-200 ease-in
-      ${className ?? ''}`}
-      {...props}>
+      ${className ?? ''}`}>
       <div className="regular-container">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
@@ -77,7 +81,7 @@ export const Header = ({ className, solidBackground, ...props }: HeaderProps) =>
           </div>
         </nav>
       )}
-    </header>
+    </motion.header>
   );
 };
 
