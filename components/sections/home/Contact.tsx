@@ -15,12 +15,7 @@ export const Contact = () => {
     <section id="contact" className="section-block-padding bg-gradient-secondary">
       <div className="regular-container">
         {/* Header */}
-        <SectionHeading
-          title="Contact Us"
-          // text="Join us in our mission to empower girls and young women. Whether you need support or
-          //   want to help, we're here for you."
-          className="text-center mb-16"
-        />
+        <SectionHeading title="Contact Us" className="text-center mb-16" />
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
