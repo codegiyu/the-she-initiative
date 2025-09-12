@@ -135,51 +135,34 @@ export async function POST(req: NextRequest) {
 
     const data = await transporter.sendMail(mailOptions);
 
-    // const formattedMailDetails = mailTemplateOptions.data
-    //   .map(item => `${item.property}: ${item.value}`)
-    //   .join('\n');
-
-    // const logEntry = `
-    // ============================
-    // Date: ${new Date().toISOString()}
-    // To: ${mailOptions.to}
-    // Subject: ${mailOptions.subject}
-    // Message ID: ${data.messageId}
-    // Preview URL: ${nodemailer.getTestMessageUrl(data) || 'N/A'}
-    // ----------------------------
-    // ${formattedMailDetails}
-    // ============================\n`;
-
-    // logMailToFile(logEntry);
-
-    if (fields.email) {
-      const html = mailTemplate({
-        title: `Your Form Submission Has Been Received`,
-        top: [
-          [
-            'Thank you for reaching out to us via our website. We have successfully received \
-            your submission and our team is currently reviewing the details.',
-          ],
-          [
-            'A member of our team will be in touch with you shortly to provide further \
-            assistance and address your request.',
-          ],
-          [
-            'We appreciate your interest in Pinpoint Global and look forward to \
-            connecting with you soon.',
-          ],
-          ['Warm regards', 'Adepoju Olayode', 'CEO', 'Pinpoint Global'],
-        ],
-        data: [],
-        end: '',
-      });
-      transporter.sendMail({
-        from: `Pinpoint (no-reply) <${process.env.fromEmail}>`,
-        to: `${replyName || fields.email} <${fields.email}>`,
-        subject: `${fields.formName.trim()} Form Submission Received`,
-        html,
-      });
-    }
+    // if (fields.email) {
+    //   const html = mailTemplate({
+    //     title: `Your Form Submission Has Been Received`,
+    //     top: [
+    //       [
+    //         'Thank you for reaching out to us via our website. We have successfully received \
+    //         your submission and our team is currently reviewing the details.',
+    //       ],
+    //       [
+    //         'A member of our team will be in touch with you shortly to provide further \
+    //         assistance and address your request.',
+    //       ],
+    //       [
+    //         'We appreciate your interest in Pinpoint Global and look forward to \
+    //         connecting with you soon.',
+    //       ],
+    //       ['Warm regards', 'Adepoju Olayode', 'CEO', 'Pinpoint Global'],
+    //     ],
+    //     data: [],
+    //     end: '',
+    //   });
+    //   transporter.sendMail({
+    //     from: `Pinpoint (no-reply) <${process.env.fromEmail}>`,
+    //     to: `${replyName || fields.email} <${fields.email}>`,
+    //     subject: `${fields.formName.trim()} Form Submission Received`,
+    //     html,
+    //   });
+    // }
 
     return NextResponse.json(
       { success: true, data, message: 'Mail sent successfully' },
