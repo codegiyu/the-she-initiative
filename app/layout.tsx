@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description: SEO_DETAILS.description,
     type: 'website',
     url: SEO_DETAILS.metadataBase.toString(),
-    siteName: 'Pinpoint Global',
+    siteName: 'The Solace Healing and Empowerment Initiative',
     images: [{ url: SEO_DETAILS.image }],
   },
   twitter: {
