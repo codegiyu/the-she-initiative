@@ -2,12 +2,19 @@ import type { Metadata } from 'next';
 import { z } from 'zod';
 import { ORGANIZATION_INFORMATION } from '@/lib/constants/organization';
 
-const PRODUCTION_SITE_URL = 'https://thesolaceinitiative.org';
+export const PRODUCTION_SITE_URL = 'https://thesolaceinitiative.org';
 
-const configuredSiteUrl = z.string().url().safeParse(process.env.SITE_URL);
-export const SITE_URL = (
-  configuredSiteUrl.success ? configuredSiteUrl.data : PRODUCTION_SITE_URL
-).replace(/\/+$/, '');
+export function resolveSiteUrl(value: unknown): string {
+  const configuredSiteUrl = z.string().trim().url().safeParse(value);
+
+  return (configuredSiteUrl.success ? configuredSiteUrl.data : PRODUCTION_SITE_URL).replace(
+    /\/+$/,
+    ''
+  );
+}
+
+export const SITE_URL = resolveSiteUrl(process.env.SITE_URL);
+export const SITE_ORIGIN = new URL(SITE_URL).origin;
 
 export const SEO_DETAILS: Metadata = {
   title: {

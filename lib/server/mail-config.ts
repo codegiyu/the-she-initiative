@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const booleanEnvironmentValue = z.preprocess(value => {
-  if (value === undefined) return undefined;
+  if (value === undefined || (typeof value === 'string' && value.trim() === '')) return true;
   if (value === 'true') return true;
   if (value === 'false') return false;
   return value;
@@ -17,7 +17,7 @@ const mailConfigSchema = z
       return value;
     }, z.number().int().min(1).max(65_535)),
     toEmail: z.string().trim().email(),
-    secureMail: booleanEnvironmentValue.default(true),
+    secureMail: booleanEnvironmentValue,
   })
   .strict();
 
@@ -34,14 +34,4 @@ export function getMailConfig(): MailConfig | null {
   });
 
   return result.success ? result.data : null;
-}
-
-export function getSiteOrigin(): string {
-  const configuredSiteUrl = process.env.SITE_URL?.trim() || 'https://thesolaceinitiative.org';
-
-  try {
-    return new URL(configuredSiteUrl).origin;
-  } catch {
-    return 'https://thesolaceinitiative.org';
-  }
 }

@@ -1,4 +1,4 @@
-import { getSiteOrigin } from './mail-config';
+import { SITE_ORIGIN } from './site-config';
 
 const localhostOriginPattern = /^http:\/\/(?:localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/i;
 
@@ -16,7 +16,7 @@ export function isAllowedFormRequest(request: Request): boolean {
     return false;
   }
 
-  if (normalizedOrigin === getSiteOrigin()) return true;
+  if (normalizedOrigin === SITE_ORIGIN) return true;
   return process.env.NODE_ENV !== 'production' && localhostOriginPattern.test(normalizedOrigin);
 }
 

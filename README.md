@@ -15,7 +15,7 @@ Open [http://localhost:3000](http://localhost:3000). The development server uses
 
 ## Environment and SMTP
 
-Copy `.env.example` to `.env.local` and replace every placeholder. `SITE_URL` is server-only and controls canonical metadata, the sitemap, and organization structured data. Never commit `.env.local` or SMTP credentials.
+Copy `.env.example` to `.env.local` when configuring local SMTP delivery. `SITE_URL` is optional and server-only; it controls canonical metadata, the sitemap, and organization structured data, and falls back to `https://thesolaceinitiative.org` when unset or invalid. `secureMail` is also optional and defaults to `true`. Never commit `.env.local` or SMTP credentials.
 
 The contact and volunteer forms send through SMTP. The route validates the JSON contract, rejects cross-site browser requests and honeypot submissions, limits request size and rate, and returns sanitized typed errors. User values are escaped in HTML mail and are also sent as plain text. The in-memory limiter is suitable for the single-replica deployment; use a shared Redis-backed adapter before scaling horizontally.
 
@@ -38,7 +38,7 @@ The browser smoke suite starts an isolated development server on port `3100` and
 
 The Dockerfile builds Next.js in standalone mode and copies only `.next/standalone`, `.next/static`, and `public` into the runtime image. The runtime runs as the non-root `nextjs` user, listens on `0.0.0.0:3003`, and does not install packages at startup.
 
-In Coolify, configure the application to build from this directory, expose port `3003`, and set the SMTP variables plus `SITE_URL` as runtime environment variables. Configure the health check as:
+In Coolify, configure the application to build from this directory and expose port `3003`. Set the SMTP variables as runtime environment variables; `SITE_URL` may be omitted when deploying the canonical site because the app has a production fallback. Configure the health check as:
 
 ```text
 /api/health
