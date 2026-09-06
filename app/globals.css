@@ -159,6 +159,7 @@
   }
   html {
     @apply text-[16px] scroll-smooth;
+    overflow-x: clip;
   }
   section[id] {
     scroll-margin-top: 6rem;
@@ -179,6 +180,10 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+    .motion-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
   body {
     @apply min-h-screen w-full bg-white font-roboto text-[0.75rem] leading-[1.4] tracking-[0.05em] break-words text-wrap text-dark;
@@ -188,6 +193,20 @@
   }
   .section-block-padding {
     @apply py-20 md:py-24 lg:py-[6.5rem];
+  }
+
+  /* Scroll reveals use compositor-friendly opacity/transform transitions. */
+  .motion-reveal {
+    opacity: 0;
+    transform: translate3d(var(--reveal-x, 0px), var(--reveal-y, 32px), 0);
+    transition-delay: var(--reveal-delay, 0s);
+    transition-duration: var(--reveal-duration, 0.65s);
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .motion-reveal[data-reveal-visible='true'] {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 
   /* Typography */

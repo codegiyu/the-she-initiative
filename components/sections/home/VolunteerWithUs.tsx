@@ -1,5 +1,6 @@
 import { SheiForm } from '@/components/forms/RequestForms';
 import { SectionHeading } from '@/components/general/SectionHeading';
+import { ScrollReveal } from '@/components/general/ScrollReveal';
 // import { useState } from 'react';
 
 export const VolunteerWithUs = () => {
@@ -33,7 +34,7 @@ export const VolunteerWithUs = () => {
       <div className="regular-container">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Content */}
-          <div className="space-y-8">
+          <ScrollReveal className="space-y-8" direction="left">
             <SectionHeading title="Volunteer With Us" className="mb-16" />
 
             <p className="font-montserrat text-lg text-muted-foreground leading-relaxed">
@@ -77,10 +78,12 @@ export const VolunteerWithUs = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Form */}
-          <SheiForm slug="volunteer_with_us" />
+          <ScrollReveal className="w-full" direction="right" delay={0.1}>
+            <SheiForm slug="volunteer_with_us" />
+          </ScrollReveal>
         </div>
       </div>
     </section>

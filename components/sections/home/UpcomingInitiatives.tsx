@@ -1,4 +1,5 @@
 import { SectionHeading } from '@/components/general/SectionHeading';
+import { ScrollReveal } from '@/components/general/ScrollReveal';
 import { UPCOMING_INITIATIVES } from '@/lib/constants/texts';
 
 export const UpcomingInitiatives = () => {
@@ -16,7 +17,7 @@ export const UpcomingInitiatives = () => {
         {/* Initiatives Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {UPCOMING_INITIATIVES.map((item, idx) => (
-            <InitiativeCard key={idx} {...item} />
+            <InitiativeCard key={idx} {...item} index={idx} />
           ))}
         </div>
       </div>
@@ -31,20 +32,28 @@ export interface InitiativeCardProps {
   suffix?: string;
 }
 
-const InitiativeCard = ({ title, desc, text, suffix }: InitiativeCardProps) => {
+const InitiativeCard = ({
+  title,
+  desc,
+  text,
+  suffix,
+  index = 0,
+}: InitiativeCardProps & { index?: number }) => {
   return (
-    <div className="bg-white p-8 rounded-xl shadow-soft shadow-primary/15 border border-border hover:shadow-elegant hover:shadow-primary/20 transition-all duration-300">
-      <div className="mb-6">
-        <div className="bg-gradient-primary p-3 rounded-lg w-fit mb-4">
-          <div className="w-6 h-6 bg-white rounded"></div>
+    <ScrollReveal className="h-full" delay={index * 0.1}>
+      <div className="h-full bg-white p-8 rounded-xl shadow-soft shadow-primary/15 border border-border hover:shadow-elegant hover:shadow-primary/20 transition-all duration-300">
+        <div className="mb-6">
+          <div className="bg-gradient-primary p-3 rounded-lg w-fit mb-4">
+            <div className="w-6 h-6 bg-white rounded"></div>
+          </div>
+          <h3 className="font-montserrat font-bold text-xl text-dark mb-2">{title}</h3>
+          <p className="font-roboto text-sm text-primary font-medium mb-3">{desc}</p>
         </div>
-        <h3 className="font-montserrat font-bold text-xl text-dark mb-2">{title}</h3>
-        <p className="font-roboto text-sm text-primary font-medium mb-3">{desc}</p>
+        <p className="font-montserrat text-muted-foreground leading-relaxed">{text}</p>
+        {suffix && (
+          <p className="font-montserrat text-primary leading-relaxed mt-4 italic">{suffix}</p>
+        )}
       </div>
-      <p className="font-montserrat text-muted-foreground leading-relaxed">{text}</p>
-      {suffix && (
-        <p className="font-montserrat text-primary leading-relaxed mt-4 italic">{suffix}</p>
-      )}
-    </div>
+    </ScrollReveal>
   );
 };

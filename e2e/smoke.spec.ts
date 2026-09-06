@@ -17,9 +17,15 @@ test.describe('website smoke flows', () => {
       page.getByText(/Please avoid sharing highly sensitive or graphic details here/)
     ).toHaveCount(2);
 
-    await page.locator('header a[href="/#contact"]').first().click();
+    const contactLink = page.locator('header a[href="/#contact"]').first();
+    await expect(contactLink).toBeVisible();
+    await contactLink.click();
     await expect(page).toHaveURL(/#contact$/);
     await expect(page.locator('#contact')).toBeInViewport();
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)
+    ).toBe(true);
   });
 
   test('supports keyboard-accessible mobile navigation', async ({ page }) => {
@@ -43,6 +49,15 @@ test.describe('website smoke flows', () => {
     await page.locator('#mobile-navigation a[href="/#contact"]').click();
     await expect(page).toHaveURL(/#contact$/);
     await expect(page.locator('#mobile-navigation')).toHaveCount(0);
+  });
+
+  test('shows scroll reveals immediately when reduced motion is requested', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.locator('#values').scrollIntoViewIfNeeded();
+
+    await expect(page.locator('#values .motion-reveal').first()).toHaveCSS('opacity', '1');
+    await expect(page.locator('#values .motion-reveal').first()).toHaveCSS('transform', 'none');
   });
 
   test('submits both forms through a mocked transport without sending email', async ({ page }) => {

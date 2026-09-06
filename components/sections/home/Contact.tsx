@@ -2,6 +2,7 @@
 import { RegularBtn } from '@/components/atoms/RegularBtn';
 import { SheiForm } from '@/components/forms/RequestForms';
 import { SectionHeading } from '@/components/general/SectionHeading';
+import { ScrollReveal } from '@/components/general/ScrollReveal';
 import { CONTACT_INFO_ROWS } from '@/lib/constants/texts';
 import { IconComp, LucideIconComp } from '@/lib/types/general';
 import { Heart } from 'lucide-react';
@@ -15,37 +16,45 @@ export const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <SheiForm slug="contact_us" />
+          <ScrollReveal direction="left">
+            <SheiForm slug="contact_us" />
+          </ScrollReveal>
 
           {/* Contact Information */}
           <div className="space-y-8">
             {/* Contact Details */}
-            <div className="bg-white px-4 500:px-6 md:px-8 py-8 rounded-xl shadow-elegant shadow-primary/20">
-              <h3 className="font-montserrat font-bold text-2xl text-dark mb-6">
-                Contact Information
-              </h3>
+            <ScrollReveal direction="right">
+              <div className="bg-white px-4 500:px-6 md:px-8 py-8 rounded-xl shadow-elegant shadow-primary/20">
+                <h3 className="font-montserrat font-bold text-2xl text-dark mb-6">
+                  Contact Information
+                </h3>
 
-              <div className="space-y-6">
-                {CONTACT_INFO_ROWS.filter(s => !s.showInFooterOnly).map((item, idx) => (
-                  <ContactInfoRow key={idx} {...item} />
-                ))}
-              </div>
-            </div>
-
-            {/* Call to Action */}
-            <div className="bg-gradient-primary px-4 500:px-6 md:px-8 py-8 rounded-xl text-white shadow-elegant shadow-primary/20">
-              <div className="text-center">
-                <Heart className="w-12 h-12 mx-auto mb-4 text-white" />
-                <h3 className="font-montserrat font-bold text-2xl mb-4">Make a Difference Today</h3>
-                <p className="font-montserrat mb-6 leading-relaxed">
-                  Your support can change lives. Join our community of supporters and help us build
-                  a safer, more empowered future for girls and young women.
-                </p>
-                <div className="flex justify-center">
-                  <VolunteerButton />
+                <div className="space-y-6">
+                  {CONTACT_INFO_ROWS.filter(s => !s.showInFooterOnly).map((item, idx) => (
+                    <ContactInfoRow key={idx} {...item} />
+                  ))}
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
+
+            {/* Call to Action */}
+            <ScrollReveal direction="right" delay={0.1}>
+              <div className="bg-gradient-primary px-4 500:px-6 md:px-8 py-8 rounded-xl text-white shadow-elegant shadow-primary/20">
+                <div className="text-center">
+                  <Heart className="w-12 h-12 mx-auto mb-4 text-white" />
+                  <h3 className="font-montserrat font-bold text-2xl mb-4">
+                    Make a Difference Today
+                  </h3>
+                  <p className="font-montserrat mb-6 leading-relaxed">
+                    Your support can change lives. Join our community of supporters and help us
+                    build a safer, more empowered future for girls and young women.
+                  </p>
+                  <div className="flex justify-center">
+                    <VolunteerButton />
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>
