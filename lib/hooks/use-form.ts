@@ -180,12 +180,19 @@ export const useForm = <TSchema extends ZodType<any>>({
 
     if (!formValid.success) {
       setErrorsVisible(true);
+      window.setTimeout(() => {
+        document.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+      }, 0);
       return;
     }
 
     setLoading(true);
-    const wasSubmittedSuccessfully = await onSubmit(formValues);
-    setLoading(false);
+    let wasSubmittedSuccessfully = false;
+    try {
+      wasSubmittedSuccessfully = await onSubmit(formValues);
+    } finally {
+      setLoading(false);
+    }
     setSubmitted(wasSubmittedSuccessfully);
     setErrorsVisible(true);
   };

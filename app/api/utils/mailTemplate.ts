@@ -10,11 +10,24 @@ export interface MailTemplateProps {
   end: string;
 }
 
+export const escapeHtml = (value: string) =>
+  value.replace(
+    /[&<>"']/g,
+    character =>
+      ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+      })[character] ?? character
+  );
+
 export const mailTemplate = ({ title, top, data, end }: MailTemplateProps) => {
   const titleEl = `
     <tr>
       <td width="100%" class="mobile" align="center" valign="middle" style="padding: 0px 40px;">
-        <h1>${title}</h1>
+        <h1>${escapeHtml(title)}</h1>
       </td>
     </tr>
     <!--== Start Separator ==-->
@@ -28,7 +41,7 @@ export const mailTemplate = ({ title, top, data, end }: MailTemplateProps) => {
     let itemEl = `
       <tr>
         <td width="100%" class="mobile" align="left" valign="middle">
-          ${curr.map(str => `<p>${str}</p>`).join('')}
+          ${curr.map(str => `<p>${escapeHtml(str)}</p>`).join('')}
         </td>
       </tr>
     `;
@@ -53,9 +66,9 @@ export const mailTemplate = ({ title, top, data, end }: MailTemplateProps) => {
       <!--== Start ${curr.property} Field Item ==-->
       <tr>
         <td width="100%" class="mobile" align="left" valign="middle">
-          <h3>${curr.property}: </h3>
+          <h3>${escapeHtml(curr.property)}: </h3>
           <hr />
-          <p>${curr.value}</p>
+          <p>${escapeHtml(curr.value)}</p>
         </td>
       </tr>
       <!--== End ${curr.property} Field Item ==-->
@@ -79,7 +92,7 @@ export const mailTemplate = ({ title, top, data, end }: MailTemplateProps) => {
   const endEl = `
     <tr>
       <td width="100%" class="mobile" align="left" valign="middle" style="padding: 0px 40px 30px;">
-        <i style="padding: 0px 0px;">${end}</i>
+        <i style="padding: 0px 0px;">${escapeHtml(end)}</i>
       </td>
     </tr>
   `;

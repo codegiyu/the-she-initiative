@@ -20,6 +20,7 @@ export const ALL_FIELDS_DEFAULT = {
 
 export const volunteerFormData: RequestFormProps<typeof volunteerFormSchema> = {
   formName: 'Volunteer',
+  formType: 'volunteer',
   formTitle: 'Get Involved Today',
   btnText: 'Submit Application',
   formSchema: volunteerFormSchema,
@@ -129,6 +130,7 @@ export const volunteerFormData: RequestFormProps<typeof volunteerFormSchema> = {
 
 export const contactFormData: RequestFormProps<typeof contactFormSchema> = {
   formName: 'Contact',
+  formType: 'contact',
   formTitle: 'Send Us a Message',
   btnText: 'Send Message',
   formSchema: contactFormSchema,

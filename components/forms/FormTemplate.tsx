@@ -1,36 +1,39 @@
 'use client';
-import { FileUploadInput, FileUploadInputProps } from '@/components/atoms/FileUploadInput';
+
 import { RegularBtn } from '@/components/atoms/RegularBtn';
 import { RegularInput, RegularInputProps } from '@/components/atoms/RegularInput';
 import { RegularTextarea, RegularTextareaProps } from '@/components/atoms/RegularTextarea';
 import { toast } from '@/components/atoms/Toast';
-import { useForm } from '@/lib/hooks/use-form';
-import { ChangeEvent, Dispatch, memo, SetStateAction, useMemo } from 'react';
-import { output, z, ZodArray, ZodEmail, ZodObject, ZodString } from 'zod';
-import { CheckCheck } from 'lucide-react';
 import { RegularSelect, RegularSelectProps } from '@/components/atoms/RegularSelect';
+import { useForm } from '@/lib/hooks/use-form';
+import type { FormType } from '@/lib/forms/contracts';
 import { cn } from '@/lib/utils';
+import { ChangeEvent, memo, useMemo } from 'react';
+import { z, ZodArray, ZodEmail, ZodObject, ZodString } from 'zod';
+import { CheckCheck } from 'lucide-react';
 
 export type StringOrStringArraySchema = ZodString | ZodEmail | ZodArray<ZodString>;
+
 export interface RequestFormProps<
   TSchema extends ZodObject<Record<string, StringOrStringArraySchema>>,
 > {
   formName: string;
+  formType: FormType;
   formTitle: string;
   btnText?: string;
   formSchema: TSchema;
   defaultFormValues: z.infer<TSchema>;
   inputsArr: (FormArrayItem<TSchema> | [FormArrayItem<TSchema>, FormArrayItem<TSchema>])[];
-  filesRequired?: boolean;
 }
+
 interface BaseFormArrayItem<TSchema extends ZodObject<Record<string, StringOrStringArraySchema>>> {
   name?: keyof z.TypeOf<TSchema>;
-  kind: 'input' | 'textarea' | 'select' | 'multiselect' | 'file';
+  kind: 'input' | 'textarea' | 'select';
   inputProps?: Omit<RegularInputProps, 'name' | 'value' | 'onChange' | 'errors'>;
   textareaProps?: Omit<RegularTextareaProps, 'name' | 'value' | 'onChange' | 'errors'>;
   selectProps?: Omit<RegularSelectProps, 'name' | 'value' | 'onSelectChange' | 'errors'>;
-  fileProps?: Omit<FileUploadInputProps, 'files' | 'setFiles'>;
 }
+
 interface FormInputItem<TSchema extends ZodObject<Record<string, StringOrStringArraySchema>>>
   extends BaseFormArrayItem<TSchema> {
   name: keyof z.TypeOf<TSchema>;
@@ -38,8 +41,8 @@ interface FormInputItem<TSchema extends ZodObject<Record<string, StringOrStringA
   inputProps: Omit<RegularInputProps, 'name' | 'value' | 'onChange' | 'errors'>;
   textareaProps?: never;
   selectProps?: never;
-  fileProps?: never;
 }
+
 interface FormTextareaItem<TSchema extends ZodObject<Record<string, StringOrStringArraySchema>>>
   extends BaseFormArrayItem<TSchema> {
   name: keyof z.TypeOf<TSchema>;
@@ -47,8 +50,8 @@ interface FormTextareaItem<TSchema extends ZodObject<Record<string, StringOrStri
   textareaProps: Omit<RegularTextareaProps, 'name' | 'value' | 'onChange' | 'errors'>;
   inputProps?: never;
   selectProps?: never;
-  fileProps?: never;
 }
+
 interface FormSelectItem<TSchema extends ZodObject<Record<string, StringOrStringArraySchema>>>
   extends BaseFormArrayItem<TSchema> {
   name: keyof z.TypeOf<TSchema>;
@@ -56,41 +59,23 @@ interface FormSelectItem<TSchema extends ZodObject<Record<string, StringOrString
   selectProps: Omit<RegularSelectProps, 'name' | 'value' | 'onSelectChange' | 'errors'>;
   inputProps?: never;
   textareaProps?: never;
-  fileProps?: never;
-}
-interface FormFileItem<TSchema extends ZodObject<Record<string, StringOrStringArraySchema>>>
-  extends BaseFormArrayItem<TSchema> {
-  name?: never;
-  kind: 'file';
-  fileProps: Omit<FileUploadInputProps, 'files' | 'setFiles'>;
-  inputProps?: never;
-  textareaProps?: never;
-  selectProps?: never;
 }
 
 export type FormArrayItem<TSchema extends ZodObject<Record<string, StringOrStringArraySchema>>> =
   | FormInputItem<TSchema>
   | FormTextareaItem<TSchema>
-  | FormSelectItem<TSchema>
-  | FormFileItem<TSchema>;
-
-export interface RequestFormFileProps {
-  files: File[];
-  setFiles: Dispatch<SetStateAction<File[]>>;
-}
+  | FormSelectItem<TSchema>;
 
 export const RequestForm = memo(
   <TSchema extends ZodObject<Record<string, StringOrStringArraySchema>>>({
     formName,
+    formType,
     formTitle,
     btnText,
     formSchema,
     defaultFormValues,
-    files,
-    setFiles,
     inputsArr,
-    filesRequired,
-  }: RequestFormProps<TSchema> & RequestFormFileProps) => {
+  }: RequestFormProps<TSchema>) => {
     const {
       formValues,
       formErrors,
@@ -111,66 +96,75 @@ export const RequestForm = memo(
       validateOnChange: true,
     });
 
-    const formValid = useMemo(
-      () => (isValid && filesRequired ? !!files.length : true),
-      [isValid, files, filesRequired]
-    );
+    const formValid = useMemo(() => isValid, [isValid]);
 
-    const generalValidation = () => {
-      if (filesRequired && !files.length) {
-        toast({ title: 'Please upload at least one file', variant: 'error' });
-      }
+    const generalValidation = () => validateForm();
 
-      return validateForm() && filesRequired ? !!files.length : true;
-    };
-
-    async function onSubmit(values: z.infer<typeof formSchema>): Promise<boolean> {
+    async function onSubmit(values: z.infer<TSchema>): Promise<boolean> {
       if (!generalValidation()) return false;
 
-      const formData = new FormData();
+      try {
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 15_000);
 
-      formData.append('formName', formName);
-      Object.entries(values).forEach(([key, value]) => {
-        if (Array.isArray(value)) {
-          value.forEach(val => formData.append(key, val));
-        } else {
-          formData.append(key, value);
+        let res: Response;
+        try {
+          res = await fetch('/api/send-company-mail', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ formType, fields: values, website: '' }),
+            signal: controller.signal,
+          });
+        } finally {
+          window.clearTimeout(timeout);
         }
-      });
-      files.forEach(file => {
-        formData.append('files', file);
-      });
 
-      const res = await fetch('/api/send-company-mail', {
-        method: 'POST',
-        body: formData,
-      });
+        const parsedRes: {
+          success: boolean;
+          message?: string;
+          fieldErrors?: Record<string, string[] | undefined>;
+        } = await res.json();
 
-      const parsedRes = await res.json();
+        if (parsedRes.fieldErrors) {
+          setFormErrors({
+            ...parsedRes.fieldErrors,
+            root: [parsedRes.message || 'Please check the form and try again.'],
+          } as Partial<Record<keyof z.infer<TSchema> | 'root', string[] | undefined>>);
+        } else if (!parsedRes.success) {
+          setFormErrors({
+            root: [parsedRes.message || 'We could not send your message. Please try again.'],
+          } as Partial<Record<keyof z.infer<TSchema> | 'root', string[] | undefined>>);
+        }
 
-      toast({ title: parsedRes.message, variant: parsedRes.success ? 'success' : 'error' });
+        toast({
+          title: parsedRes.message || 'We could not send your message. Please try again.',
+          variant: parsedRes.success ? 'success' : 'error',
+        });
 
-      if (parsedRes.error) {
-        console.error({ error: parsedRes });
-        setFormErrors({ root: [String(parsedRes.error)] } as Partial<
-          Record<keyof output<TSchema> | 'root', string[] | undefined>
+        if (parsedRes.success) {
+          resetForm();
+          return true;
+        }
+
+        return false;
+      } catch (error) {
+        const message =
+          error instanceof DOMException && error.name === 'AbortError'
+            ? 'The request timed out. Please try again.'
+            : 'We could not send your message. Please check your connection and try again.';
+        setFormErrors({ root: [message] } as Partial<
+          Record<keyof z.infer<TSchema> | 'root', string[] | undefined>
         >);
+        toast({ title: message, variant: 'error' });
+        return false;
       }
-
-      if (parsedRes.success) {
-        resetForm();
-        setFiles([]);
-        return true;
-      }
-
-      return false;
     }
 
     return (
       <section className="bg-card px-4 500:px-6 md:px-8 py-8 rounded-xl shadow-soft shadow-primary/15 border border-border">
         <h3 className="font-montserrat font-bold text-2xl text-dark mb-6">{formTitle}</h3>
 
-        <form onSubmit={handleSubmit} className="grid gap-6">
+        <form onSubmit={handleSubmit} aria-label={`${formName} form`} className="grid gap-6">
           <div className="inputs-wrap grid gap-6">
             {inputsArr.map((item, idx) => (
               <div key={idx} className="w-full">
@@ -181,8 +175,6 @@ export const RequestForm = memo(
                         key={index}
                         {...input}
                         {...{
-                          files,
-                          setFiles,
                           formValues,
                           formErrors,
                           handleInputChange,
@@ -197,8 +189,6 @@ export const RequestForm = memo(
                     key={idx}
                     {...item}
                     {...{
-                      files,
-                      setFiles,
                       formValues,
                       formErrors,
                       handleInputChange,
@@ -210,6 +200,11 @@ export const RequestForm = memo(
               </div>
             ))}
           </div>
+
+          <p className="text-xs md:text-sm text-muted-foreground">
+            Please avoid sharing highly sensitive or graphic details here. If you need immediate
+            help, use the emergency phone or WhatsApp options.
+          </p>
 
           {formErrors.root && (
             <p className={cn('text-xs md:text-sm text-red-500 mt-1')}>{formErrors.root[0]}</p>
@@ -235,22 +230,16 @@ RequestForm.displayName = 'RequestForm';
 
 interface BaseInputItemProps<TSchema extends ZodObject<Record<string, StringOrStringArraySchema>>>
   extends BaseFormArrayItem<TSchema> {
-  files: File[];
-  setFiles: Dispatch<SetStateAction<File[]>>;
   formValues: z.TypeOf<TSchema>;
   formErrors: Partial<Record<keyof z.TypeOf<TSchema>, string[] | undefined>>;
   handleInputChange: (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    options?: {
-      clearFields?: (keyof z.TypeOf<TSchema>)[];
-    }
+    options?: { clearFields?: (keyof z.TypeOf<TSchema>)[] }
   ) => void;
   onChange: (
     name: keyof z.TypeOf<TSchema>,
     value: string | string[] | number | boolean,
-    options?: {
-      clearFields?: (keyof z.TypeOf<TSchema>)[];
-    }
+    options?: { clearFields?: (keyof z.TypeOf<TSchema>)[] }
   ) => void;
   errorsVisible?: boolean;
 }
@@ -261,9 +250,6 @@ const FormInputItem = <TSchema extends ZodObject<Record<string, StringOrStringAr
   inputProps,
   textareaProps,
   selectProps,
-  fileProps,
-  files,
-  setFiles,
   formValues,
   formErrors,
   handleInputChange,
@@ -295,21 +281,14 @@ const FormInputItem = <TSchema extends ZodObject<Record<string, StringOrStringAr
   }
 
   if (kind === 'select' && name && selectProps) {
-    // if (name === 'package') {
-    //   console.log({ value: formValues[name], loc: 'form input and kind is select' });
-    // }
     return (
       <RegularSelect
         value={formValues[name] as string}
-        onSelectChange={val => onChange(name, val)}
+        onSelectChange={value => onChange(name, value)}
         errors={errorsVisible ? formErrors[name] : undefined}
         {...selectProps}
       />
     );
-  }
-
-  if (kind === 'file') {
-    return <FileUploadInput files={files} setFiles={setFiles} {...fileProps} />;
   }
 
   return null;
