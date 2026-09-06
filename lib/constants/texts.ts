@@ -1,10 +1,10 @@
 import { Instagram, Whatsapp } from '@/components/icons';
 import { HeaderLinkProps } from '@/components/layout/Header';
-import { StatsCardProps } from '@/components/sections/home/About';
 import { ContactInfoRowProps } from '@/components/sections/home/Contact';
 import { ServiceCardProps } from '@/components/sections/home/Services';
 import { InitiativeCardProps } from '@/components/sections/home/UpcomingInitiatives';
 import { ValuesCardProps } from '@/components/sections/home/Values';
+import { ORGANIZATION_INFORMATION } from '@/lib/constants/organization';
 import {
   CheckCircle,
   Clock,
@@ -18,52 +18,6 @@ import {
   Users,
 } from 'lucide-react';
 
-const liveUrl = process.env.live_url || 'https://thesolaceinitiative.org';
-
-export const SEO_DETAILS = {
-  title: {
-    default: 'The Solace Healing and Empowerment Initiative',
-    template: '%s | The SHE Initiative',
-  },
-  description:
-    'The Solace Healing and Empowerment Initiative provides holistic support, protection and opportunities for girls and young women by providing a response team for victims of gender-based violence, educating and empowering them to thrive.',
-  metadataBase: new URL(liveUrl),
-  alternates: {
-    canonical: liveUrl,
-  },
-  image: 'https://static.thesolaceinitiative.org/images/site-preview.webp',
-  icons: 'https://static.thesolaceinitiative.org/favicon.png',
-  robots: {
-    index: true,
-    follow: true,
-    nocache: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-    },
-  },
-  authors: [{ name: 'Edward-Precious Omegbu', url: 'https://portfolio-codegiyu.vercel.app' }],
-  keywords: [
-    'solace healing and empowerment initiative',
-    'the she initiative',
-    'shei',
-    'women',
-    'empowerment',
-    'gender-based violence',
-    'financial literacy',
-    'girl child',
-    'education',
-    'support',
-    'Maryam A. Gimba, Esq',
-  ],
-  generator: 'Next.js',
-  // referrer: 'no-referrer',
-  publisher: 'Pinpoint Global Limited',
-  category: 'Creative Agency',
-  classification: 'Complete solution for branding, marketing, packaging and digital products',
-};
-
 export const NAV_LINKS: HeaderLinkProps[] = [
   { text: 'About Us', href: '/#about' },
   { text: 'Services', href: '/#what-we-do' },
@@ -75,9 +29,9 @@ export const NAV_LINKS: HeaderLinkProps[] = [
 
 export const CONTACT_INFORMATION = {
   address: '123 Hope Street, Community Center',
-  tel: ['+234 703 246 4928'],
-  whatsapp: '+234 703 246 4928',
-  email: 'thesheinitiative0@gmail.com',
+  tel: [ORGANIZATION_INFORMATION.telephone],
+  whatsapp: ORGANIZATION_INFORMATION.telephone,
+  email: ORGANIZATION_INFORMATION.email,
 };
 
 export const CONTACT_INFO_ROWS: ContactInfoRowProps[] = [
@@ -126,42 +80,6 @@ export const CONTACT_INFO_ROWS: ContactInfoRowProps[] = [
   },
 ];
 
-// export const socials = [
-//   {
-//     title: 'Instagram',
-//     url: 'https://www.instagram.com/pinpointpackaging?igsh=MXNlbTN3MnQ3bzdicg==',
-//     Icon: InstagramIcon,
-//   },
-//   {
-//     title: 'Facebook',
-//     url: 'https://www.facebook.com/share/19MUWfmSiG/?mibextid=wwXIfr',
-//     Icon: FacebookIcon,
-//   },
-//   {
-//     title: 'LinkedIn',
-//     url: 'https://be.linkedin.com/company/atelier-design',
-//     Icon: Linkedin,
-//   },
-//   {
-//     title: 'X',
-//     url: 'https://x.com/atelierdesign',
-//     Icon: XIcon,
-//   },
-//   {
-//     title: 'Tiktok',
-//     url: 'https://www.tiktok.com/@pinpointglobal?_t=ZS-8yRAXCYmRLp&_r=1',
-//     Icon: TiktokIcon,
-//   },
-// ];
-
-export const footerCompanyDescription = `
-  We are a creative brand consultancy specializing in design, branding and packaging. 
-  Since 2020, we've partnered with leading organizations to solve brand and business challenges. 
-  With a diverse team across multiple locations, we harness the power of creativity to help businesses grow, stand out, and connect better with their audiences.
-`;
-
-export const ourStoryTexts: string[] = [];
-
 export const SERVICES: ServiceCardProps[] = [
   {
     Icon: Shield,
@@ -186,33 +104,6 @@ export const SERVICES: ServiceCardProps[] = [
       'Life skills and leadership training',
       'Mentorship and career guidance',
     ],
-  },
-];
-
-export const OUR_STATS: StatsCardProps[] = [
-  {
-    num: 500,
-    numSuffix: '+',
-    desc: 'Lives Impacted',
-    className: 'bg-gradient-primary text-white shadow-elegant shadow-primary/20',
-  },
-  {
-    num: 24,
-    numSuffix: '/7',
-    desc: 'Support Available',
-    className: 'bg-dark text-white shadow-elegant shadow-primary/20',
-  },
-  {
-    num: 100,
-    numSuffix: '+',
-    desc: 'Scholarships Provided',
-    className: 'bg-secondary text-dark shadow-soft shadow-primary/15',
-  },
-  {
-    num: 50,
-    numSuffix: '+',
-    desc: 'Seminars Hosted',
-    className: 'bg-gradient-primary text-white shadow-elegant shadow-primary/20',
   },
 ];
 
@@ -268,127 +159,3 @@ export const UPCOMING_INITIATIVES: InitiativeCardProps[] = [
     interest, fostering career development and personal growth.',
   },
 ];
-
-// export const OUR_TEAM: TeamSlideProps[] = [
-//   {
-//     name: 'Adepoju Olayode',
-//     title: 'CEO',
-//     mainImage: 'https://static.thesolaceinitiative.org/images/team/klef-main.webp',
-//     subImage: 'https://static.thesolaceinitiative.org/images/team/klef-sub.webp',
-//   },
-//   {
-//     name: 'Onoja Enemona Isaac',
-//     title: 'Head of Design',
-//     mainImage: 'https://static.thesolaceinitiative.org/images/team/isaac.jpg',
-//     subImage: 'https://static.thesolaceinitiative.org/images/team/isaac.jpg',
-//   },
-//   {
-//     name: "Fahad Ya'u Deba",
-//     title: 'Animator',
-//     mainImage: 'https://static.thesolaceinitiative.org/images/team/fahad.jpg',
-//     subImage: 'https://static.thesolaceinitiative.org/images/team/fahad.jpg',
-//   },
-//   {
-//     name: 'Gaba Mary',
-//     title: 'Head of Marketing',
-//     mainImage: 'https://static.thesolaceinitiative.org/images/team/mary.jpg',
-//     subImage: 'https://static.thesolaceinitiative.org/images/team/mary.jpg',
-//   },
-//   {
-//     name: 'Nansel Dauda Joseph',
-//     title: 'Project Manager',
-//     mainImage: 'https://static.thesolaceinitiative.org/images/team/dauda.jpg',
-//     subImage: 'https://static.thesolaceinitiative.org/images/team/dauda.jpg',
-//   },
-//   // {
-//   //   name: 'Akeem Ayoola Aremu',
-//   //   title: 'Logistics Manager',
-//   //   mainImage: 'https://static.thesolaceinitiative.org/images/team/akeem.jpg',
-//   //   subImage: 'https://static.thesolaceinitiative.org/images/team/akeem.jpg',
-//   // },
-//   {
-//     name: 'Olivia U. Onyeagoro',
-//     title: 'HR Manager',
-//     mainImage: 'https://static.thesolaceinitiative.org/images/team/olivia.jpg',
-//     subImage: 'https://static.thesolaceinitiative.org/images/team/olivia.jpg',
-//   },
-//   {
-//     name: 'Chidi Collins',
-//     title: 'Accountant',
-//     mainImage: 'https://static.thesolaceinitiative.org/images/team/chidi.jpg',
-//     subImage: 'https://static.thesolaceinitiative.org/images/team/chidi.jpg',
-//   },
-//   {
-//     name: 'Panam Mbamo',
-//     title: 'Social Media Manager',
-//     mainImage: 'https://static.thesolaceinitiative.org/images/team/panam.jpg',
-//     subImage: 'https://static.thesolaceinitiative.org/images/team/panam.jpg',
-//   },
-//   {
-//     name: 'Bilqis Abdurrahman',
-//     title: 'Front Desk',
-//     mainImage: 'https://static.thesolaceinitiative.org/images/team/bili.jpg',
-//     subImage: 'https://static.thesolaceinitiative.org/images/team/bili.jpg',
-//   },
-//   {
-//     name: 'Simon Holiness',
-//     title: 'Production Manager',
-//     mainImage: 'https://static.thesolaceinitiative.org/images/team/holiness.jpg',
-//     subImage: 'https://static.thesolaceinitiative.org/images/team/holiness.jpg',
-//   },
-//   {
-//     name: 'Collins Bassey',
-//     title: 'Quality Control Manager',
-//     mainImage: 'https://static.thesolaceinitiative.org/images/team/collins.jpg',
-//     subImage: 'https://static.thesolaceinitiative.org/images/team/collins.jpg',
-//   },
-// ];
-
-export const DEFAULT_WORKS_DISPLAYED = 10;
-
-// export const OUR_REFERENCES: ReferenceProps[] = [
-//   {
-//     logo: 'https://static.thesolaceinitiative.org/images/references/dangote.png',
-//     link: 'https://www.dangote.com',
-//   },
-//   {
-//     logo: 'https://static.thesolaceinitiative.org/images/references/gtco.png',
-//     link: 'https://www.gtcoplc.com',
-//   },
-//   { logo: 'https://static.thesolaceinitiative.org/images/references/bolt.png', link: 'https://bolt.eu/en-ng' },
-//   {
-//     logo: 'https://static.pinpoint.ng/images/references/airtel.png',
-//     link: 'https://www.airtel.com.ng',
-//   },
-//   {
-//     logo: 'https://static.pinpoint.ng/images/references/uba.png',
-//     link: 'https://www.ubagroup.com',
-//   },
-//   { logo: 'https://static.pinpoint.ng/images/references/ik-pen.png', link: 'https://ikpen.com' },
-//   {
-//     logo: 'https://static.pinpoint.ng/images/references/ayce.png',
-//     link: 'https://www.instagram.com/ayce_cafe',
-//   },
-//   {
-//     logo: 'https://static.pinpoint.ng/images/references/burgundy.png',
-//     link: 'https://www.theburgundyrestaurant.com',
-//   },
-//   {
-//     logo: 'https://static.pinpoint.ng/images/references/goalcash.png',
-//     link: 'https://www.goalcash.com/en/',
-//   },
-//   {
-//     logo: 'https://static.pinpoint.ng/images/references/maubbys.png',
-//     link: 'https://www.ordermaubbys.com/',
-//   },
-//   {
-//     logo: 'https://static.pinpoint.ng/images/references/eagle-watch.png',
-//     link: 'https://www.sulfman.com/eaglewatch',
-//   },
-//   {
-//     logo: 'https://static.pinpoint.ng/images/references/kamshi.png',
-//     link: 'https://www.instagram.com/kamshi_kamshi_bakhoor',
-//   },
-// ];
-
-export const PRIVACY_POLICY: string[][] = [];

@@ -2,9 +2,6 @@
 import { RegularBtn } from '@/components/atoms/RegularBtn';
 import { SheiForm } from '@/components/forms/RequestForms';
 import { SectionHeading } from '@/components/general/SectionHeading';
-// import { Button } from '@/components/ui/button';
-// import { Input } from '@/components/ui/input';
-// import { Textarea } from '@/components/ui/textarea';
 import { CONTACT_INFO_ROWS } from '@/lib/constants/texts';
 import { IconComp, LucideIconComp } from '@/lib/types/general';
 import { Heart } from 'lucide-react';

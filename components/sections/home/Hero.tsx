@@ -1,18 +1,21 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import { GhostBtn } from '@/components/atoms/GhostBtn';
 import { RegularBtn } from '@/components/atoms/RegularBtn';
+import Image from 'next/image';
 
 export const Hero = () => {
   return (
     <section className="min-h-screen bg-secondary flex items-center justify-center overflow-hidden relative">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <img
+        <Image
           src="https://static.thesolaceinitiative.org/images/home/hero-1.webp"
           alt="Empowered young women standing together"
-          className="w-full h-full object-cover"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/80 via-dark/60 to-transparent"></div>
       </div>

@@ -1,6 +1,4 @@
-import { AnimatedCounter } from '@/components/general/AnimatedCounter';
 import { SectionHeading } from '@/components/general/SectionHeading';
-import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
 export const About = () => {
@@ -79,34 +77,8 @@ export const About = () => {
               </div>
             </div>
           </div>
-
-          {/* Stats */}
-          {/* <div className="grid grid-cols-2 gap-6">
-            {OUR_STATS.map((item, idx) => (
-              <StatsCard key={idx} {...item} />
-            ))}
-          </div> */}
         </div>
       </div>
     </section>
-  );
-};
-
-export interface StatsCardProps {
-  num: number;
-  numSuffix: string;
-  desc: string;
-  className?: string;
-}
-
-export const StatsCard = ({ num, numSuffix, desc, className }: StatsCardProps) => {
-  return (
-    <div className={cn('p-6 rounded-lg text-center', className)}>
-      <div className="font-montserrat font-bold text-3xl lg:text-4xl mb-2">
-        <AnimatedCounter to={num} />
-        {numSuffix}
-      </div>
-      <div className="font-montserrat font-medium">{desc}</div>
-    </div>
   );
 };
