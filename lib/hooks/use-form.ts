@@ -176,9 +176,9 @@ export const useForm = <TSchema extends ZodType<any>>({
   const handleSubmit = async (e?: FormEvent) => {
     e?.preventDefault();
 
-    const formValid = formSchema.safeParse(formValues);
+    const formValid = validateForm();
 
-    if (!formValid.success) {
+    if (!formValid) {
       setErrorsVisible(true);
       window.setTimeout(() => {
         document.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();

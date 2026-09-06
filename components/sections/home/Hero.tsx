@@ -3,7 +3,6 @@
 
 import { GhostBtn } from '@/components/atoms/GhostBtn';
 import { RegularBtn } from '@/components/atoms/RegularBtn';
-import { useInPageNav } from '@/lib/hooks/use-inpage-nav';
 
 export const Hero = () => {
   return (
@@ -56,18 +55,9 @@ export const Hero = () => {
 };
 
 const VolunteerButton = () => {
-  const { targetElRef } = useInPageNav({ href: '/#volunteer-with-us' });
-
   return (
     <RegularBtn
-      linkProps={{ href: '#', preventdefault: 'true' }}
-      onClick={() => {
-        setTimeout(() => {
-          if (targetElRef.current) {
-            targetElRef.current.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 200);
-      }}
+      linkProps={{ href: '/#volunteer-with-us' }}
       text="Volunteer with us"
       className="hover:scale-105"
     />
@@ -75,18 +65,9 @@ const VolunteerButton = () => {
 };
 
 const ContactButton = () => {
-  const { targetElRef } = useInPageNav({ href: '/#contact' });
-
   return (
     <RegularBtn
-      linkProps={{ href: '#', preventdefault: 'true' }}
-      onClick={() => {
-        setTimeout(() => {
-          if (targetElRef.current) {
-            targetElRef.current.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 200);
-      }}
+      linkProps={{ href: '/#contact' }}
       variant="outline"
       className="border-white text-white hover:bg-white hover:text-primary hover:scale-105"
       text="Contact us"
@@ -95,18 +76,8 @@ const ContactButton = () => {
 };
 
 const ScrollIndicatorButton = () => {
-  const { targetElRef } = useInPageNav({ href: '/#about' });
-
   return (
-    <GhostBtn
-      linkProps={{ href: '#', preventdefault: 'true' }}
-      onClick={() => {
-        setTimeout(() => {
-          if (targetElRef.current) {
-            targetElRef.current.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 200);
-      }}>
+    <GhostBtn linkProps={{ href: '/#about' }} aria-label="Scroll to About Us">
       <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
         <div className="w-1 h-3 bg-white rounded-full mt-2"></div>
       </div>

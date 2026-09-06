@@ -1,6 +1,6 @@
 'use client';
 
-import { ComponentProps, useEffect, useState } from 'react';
+import { ComponentProps, useCallback, useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { LogoFull } from '../icons';
 import { RegularBtn } from '../atoms/RegularBtn';
@@ -15,6 +15,23 @@ export type HeaderProps = ComponentProps<'header'> & {
 export const Header = ({ className, solidBackground, ...props }: HeaderProps) => {
   const [hasSolidBg, setHasSolidBg] = useState(!!solidBackground);
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+    menuButtonRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeMenu();
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [closeMenu, menuOpen]);
 
   useEffect(() => {
     const handlePageOffset = () => {
@@ -42,6 +59,8 @@ export const Header = ({ className, solidBackground, ...props }: HeaderProps) =>
               Icon={LogoFull}
               iconClass={`${hasSolidBg ? 'text-[3rem]' : 'text-[4rem]'} transition-all duration-300 ease-in`}
               linkProps={{ href: '/' }}
+              aria-label="The SHE Initiative home"
+              onClick={() => menuOpen && closeMenu()}
             />
           </div>
 
@@ -57,8 +76,13 @@ export const Header = ({ className, solidBackground, ...props }: HeaderProps) =>
 
           {/* Mobile Menu Button */}
           <button
+            ref={menuButtonRef}
+            type="button"
+            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
             className="lg:hidden p-2 rounded-md text-dark hover:text-primary transition-colors"
-            onClick={() => setMenuOpen(!menuOpen)}>
+            onClick={() => (menuOpen ? closeMenu() : setMenuOpen(true))}>
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -66,14 +90,17 @@ export const Header = ({ className, solidBackground, ...props }: HeaderProps) =>
 
       {/* Mobile Navigation */}
       {menuOpen && (
-        <nav className="lg:hidden bg-white border-t border-border py-6">
+        <nav
+          id="mobile-navigation"
+          aria-label="Mobile navigation"
+          className="lg:hidden bg-white border-t border-border py-6">
           <ul className="list-none grid px-6 pb-6 space-y-0">
             {NAV_LINKS.map((item, idx) => (
-              <HeaderLink key={idx} {...item} afterClick={() => setMenuOpen(false)} />
+              <HeaderLink key={idx} {...item} afterClick={closeMenu} />
             ))}
           </ul>
           <div className="w-full px-6">
-            <CTAButton setMenuOpen={setMenuOpen} />
+            <CTAButton closeMenu={closeMenu} />
           </div>
         </nav>
       )}
@@ -89,7 +116,7 @@ export interface HeaderLinkProps {
 }
 
 const HeaderLink = ({ text, href, afterClick }: HeaderLinkProps) => {
-  const { elementExists, targetElRef, inHomePage, isActive } = useInPageNav({
+  const { inHomePage, isActive } = useInPageNav({
     href,
     trackElement: true,
   });
@@ -99,16 +126,8 @@ const HeaderLink = ({ text, href, afterClick }: HeaderLinkProps) => {
       <GhostBtn
         className={`w-full lg:w-fit py-3 lg:py-0 ${isActive ? 'bg-primary-soft lg:bg-transparent' : 'hover:bg-primary-soft lg:hover:bg-transparent'}`}
         wrapClassName={`w-full lg:w-fit`}
-        linkProps={{ href: elementExists ? '#' : href, preventdefault: 'true' }}
-        onClick={() => {
-          setTimeout(() => {
-            if (targetElRef.current) {
-              targetElRef.current.scrollIntoView({ behavior: 'smooth' });
-            }
-          }, 200);
-
-          afterClick?.();
-        }}>
+        linkProps={{ href }}
+        onClick={() => afterClick?.()}>
         <div className="w-full lg:w-fit px-0 relative">
           <p
             className={`font-roboto text-[0.875rem] transition-colors duration-200 
@@ -122,39 +141,19 @@ const HeaderLink = ({ text, href, afterClick }: HeaderLinkProps) => {
   );
 };
 
-const CTAButton = ({ setMenuOpen }: { setMenuOpen?: (val: boolean) => void }) => {
-  const { targetElRef } = useInPageNav({ href: '/#volunteer-with-us' });
-
+const CTAButton = ({ closeMenu }: { closeMenu?: () => void }) => {
   return (
     <>
       <div className="w-full lg:hidden">
         <RegularBtn
-          linkProps={{ href: '#', preventdefault: 'true' }}
-          onClick={() => {
-            setTimeout(() => {
-              if (targetElRef.current) {
-                targetElRef.current.scrollIntoView({ behavior: 'smooth' });
-              }
-            }, 200);
-
-            setMenuOpen?.(false);
-          }}
+          linkProps={{ href: '/#volunteer-with-us' }}
+          onClick={() => closeMenu?.()}
           size="full"
           text="Get Involved"
         />
       </div>
       <div className="w-fit hidden lg:block">
-        <RegularBtn
-          linkProps={{ href: '#', preventdefault: 'true' }}
-          onClick={() => {
-            setTimeout(() => {
-              if (targetElRef.current) {
-                targetElRef.current.scrollIntoView({ behavior: 'smooth' });
-              }
-            }, 200);
-          }}
-          text="Get Involved"
-        />
+        <RegularBtn linkProps={{ href: '/#volunteer-with-us' }} text="Get Involved" />
       </div>
     </>
   );

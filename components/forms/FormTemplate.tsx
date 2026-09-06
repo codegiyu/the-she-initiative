@@ -8,7 +8,7 @@ import { RegularSelect, RegularSelectProps } from '@/components/atoms/RegularSel
 import { useForm } from '@/lib/hooks/use-form';
 import type { FormType } from '@/lib/forms/contracts';
 import { cn } from '@/lib/utils';
-import { ChangeEvent, memo, useMemo } from 'react';
+import { ChangeEvent, memo, useState } from 'react';
 import { z, ZodArray, ZodEmail, ZodObject, ZodString } from 'zod';
 import { CheckCheck } from 'lucide-react';
 
@@ -80,7 +80,6 @@ export const RequestForm = memo(
       formValues,
       formErrors,
       loading,
-      isValid,
       errorsVisible,
       submitted,
       resetForm,
@@ -96,12 +95,13 @@ export const RequestForm = memo(
       validateOnChange: true,
     });
 
-    const formValid = useMemo(() => isValid, [isValid]);
+    const [submissionStatus, setSubmissionStatus] = useState('');
 
     const generalValidation = () => validateForm();
 
     async function onSubmit(values: z.infer<TSchema>): Promise<boolean> {
       if (!generalValidation()) return false;
+      setSubmissionStatus('');
 
       try {
         const controller = new AbortController();
@@ -130,6 +130,9 @@ export const RequestForm = memo(
             ...parsedRes.fieldErrors,
             root: [parsedRes.message || 'Please check the form and try again.'],
           } as Partial<Record<keyof z.infer<TSchema> | 'root', string[] | undefined>>);
+          window.setTimeout(() => {
+            document.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+          }, 0);
         } else if (!parsedRes.success) {
           setFormErrors({
             root: [parsedRes.message || 'We could not send your message. Please try again.'],
@@ -140,6 +143,7 @@ export const RequestForm = memo(
           title: parsedRes.message || 'We could not send your message. Please try again.',
           variant: parsedRes.success ? 'success' : 'error',
         });
+        setSubmissionStatus(parsedRes.message || 'Your submission could not be sent.');
 
         if (parsedRes.success) {
           resetForm();
@@ -156,6 +160,7 @@ export const RequestForm = memo(
           Record<keyof z.infer<TSchema> | 'root', string[] | undefined>
         >);
         toast({ title: message, variant: 'error' });
+        setSubmissionStatus(message);
         return false;
       }
     }
@@ -206,6 +211,10 @@ export const RequestForm = memo(
             help, use the emergency phone or WhatsApp options.
           </p>
 
+          <p className="sr-only" role="status" aria-live="polite">
+            {submissionStatus}
+          </p>
+
           {formErrors.root && (
             <p className={cn('text-xs md:text-sm text-red-500 mt-1')}>{formErrors.root[0]}</p>
           )}
@@ -215,8 +224,7 @@ export const RequestForm = memo(
               size="full"
               text={btnText || 'Submit'}
               loading={loading}
-              disabled={!formValid}
-              onDisabledClick={generalValidation}
+              disabled={loading}
               RightIcon={submitted ? CheckCheck : undefined}
               rightIconProps={{ className: 'size-4 text-white' }}
             />
@@ -284,6 +292,7 @@ const FormInputItem = <TSchema extends ZodObject<Record<string, StringOrStringAr
     return (
       <RegularSelect
         value={formValues[name] as string}
+        id={name as string}
         onSelectChange={value => onChange(name, value)}
         errors={errorsVisible ? formErrors[name] : undefined}
         {...selectProps}

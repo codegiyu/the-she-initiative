@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { SEO_DETAILS } from '@/lib/constants/texts';
 import { Providers } from '@/components/Providers';
-import { ScrollRestorationHandler } from '@/components/general/ScrollRestorationHandler';
 
 export const metadata: Metadata = {
   ...SEO_DETAILS,
@@ -37,7 +36,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased`}>
-        <ScrollRestorationHandler />
         <Providers>{children}</Providers>
       </body>
     </html>

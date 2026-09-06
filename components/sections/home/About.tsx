@@ -1,6 +1,7 @@
 import { AnimatedCounter } from '@/components/general/AnimatedCounter';
 import { SectionHeading } from '@/components/general/SectionHeading';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 export const About = () => {
   return (
@@ -15,9 +16,15 @@ export const About = () => {
               <div
                 className="w-full aspect-auto md:h-full min-h-[30rem] xs:min-h-[32rem] 600:min-h-[40rem] 
                 md:min-h-[30rem] lg:min-h-[20rem] flex-none bg-cover bg-[top_center] rounded-2xl overflow-hidden
-                bg-[url('https://static.thesolaceinitiative.org/images/founder-maryam-a-gimba-esq.webp')] 
-                "
-              />
+                relative">
+                <Image
+                  src="https://static.thesolaceinitiative.org/images/founder-maryam-a-gimba-esq.webp"
+                  alt="Maryam A. Gimba, Esq., founder of The SHE Initiative"
+                  fill
+                  sizes="(max-width: 767px) 100vw, (max-width: 1023px) 20rem, 40vw"
+                  className="object-cover object-top"
+                />
+              </div>
               <div className="w-full grid gap-4 px-5 md:pl-0 md:pr-10 pb-5 pt-0 md:pt-5">
                 <h3 className="text-2xl font-semibold">Founder&apos;s Note</h3>
                 <blockquote className="font-montserrat text-sm leading-relaxed mb-4 grid gap-5">

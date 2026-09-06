@@ -19,12 +19,17 @@ export const RegularTextarea = ({
   wrapClassName,
   placeholder,
   ref,
+  id,
+  name,
   required,
   onFocus,
   onBlur,
   errors = [],
   ...props
 }: RegularTextareaProps) => {
+  const inputId = id || name;
+  const errorId = inputId ? `${inputId}-error` : undefined;
+
   return (
     <InputWrapper
       wrapClassName={wrapClassName}
@@ -32,12 +37,18 @@ export const RegularTextarea = ({
       subtext={subtext}
       labelTextClassName={labelClassName}
       required={required}
-      errors={errors}>
+      errors={errors}
+      inputId={inputId}
+      errorId={errorId}>
       <Textarea
+        id={inputId}
+        name={name}
         placeholder={placeholder}
         className={cn('', className)}
         ref={ref}
         {...props}
+        aria-invalid={errors.length > 0 ? true : undefined}
+        aria-describedby={errors.length > 0 ? errorId : undefined}
         onFocus={(e: FocusEvent<HTMLTextAreaElement>) => {
           if (onFocus) onFocus(e);
         }}

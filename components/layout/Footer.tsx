@@ -17,7 +17,12 @@ export const Footer = () => {
           {/* Logo and Mission */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
-              <GhostBtn Icon={LogoFull} iconClass="text-[4rem] text-white" />
+              <GhostBtn
+                Icon={LogoFull}
+                iconClass="text-[4rem] text-white"
+                linkProps={{ href: '/' }}
+                aria-label="The SHE Initiative home"
+              />
             </div>
             <p className="font-montserrat text-white/90 leading-relaxed mb-6 max-w-md">
               Empowering her today, transforming tomorrow. We provide holistic support, protection
@@ -129,22 +134,11 @@ const FooterContactRow = ({ LucideIcon, Icon, texts }: Omit<ContactInfoRowProps,
 };
 
 const FooterLink = ({ text, footerOnlySuffix, href, afterClick }: HeaderLinkProps) => {
-  const { elementExists, targetElRef, inHomePage } = useInPageNav({ href });
+  const { inHomePage } = useInPageNav({ href });
 
   return (
     <li className={`${href === '/' && inHomePage ? 'hidden' : ''}`}>
-      <GhostBtn
-        className={``}
-        linkProps={{ href: elementExists ? '#' : href, preventdefault: 'true' }}
-        onClick={() => {
-          setTimeout(() => {
-            if (targetElRef.current) {
-              targetElRef.current.scrollIntoView({ behavior: 'smooth' });
-            }
-          }, 200);
-
-          afterClick?.();
-        }}>
+      <GhostBtn className={``} linkProps={{ href }} onClick={() => afterClick?.()}>
         <div className="w-fit px-0 relative">
           <p className="font-montserrat text-white/80 hover:text-primary transition-colors duration-200">
             {text}
