@@ -221,6 +221,7 @@ export const RequestForm = memo(
 
           <div className="w-full flex items-center">
             <RegularBtn
+              type="submit"
               size="full"
               text={btnText || 'Submit'}
               loading={loading}

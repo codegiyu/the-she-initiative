@@ -24,12 +24,15 @@ The contact and volunteer forms send through SMTP. The route validates the JSON 
 ```bash
 npm run typecheck
 npm run test:unit
+npm run test:e2e
 npm run lint
 npm run format:check
 npm run build
 ```
 
 `npm run checks` runs the non-rewriting lint, formatting, and production-build pipeline. Automated tests use a test SMTP transport and never send real email.
+
+The browser smoke suite starts an isolated development server on port `3100` and intercepts form delivery, so it does not send email. Install a Playwright browser with `npx playwright install chromium` for a local run; this repository’s existing Chrome installation can also be selected with `PLAYWRIGHT_CHANNEL=chrome`.
 
 ## Docker and Coolify
 
