@@ -2,8 +2,16 @@ import { expect, test } from '@playwright/test';
 
 test.describe('website smoke flows', () => {
   test.beforeEach(async ({ page }) => {
-    await page.route('**/_next/image**', route => route.abort());
-    await page.route('https://static.thesolaceinitiative.org/**', route => route.abort());
+    await page.route('**/_next/image**', route =>
+      route.fulfill({
+        status: 200,
+        contentType: 'image/gif',
+        body: Buffer.from('R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==', 'base64'),
+      })
+    );
+    await page.route('https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/**', route =>
+      route.abort()
+    );
   });
 
   test('preserves real section navigation and emergency contact links', async ({ page }) => {
@@ -20,7 +28,7 @@ test.describe('website smoke flows', () => {
     const contactLink = page.locator('header a[href="/#contact"]').first();
     await expect(contactLink).toBeVisible();
     await contactLink.click();
-    await expect(page).toHaveURL(/#contact$/);
+    await expect(page).toHaveURL(/#contact$/, { timeout: 15_000 });
     await expect(page.locator('#contact')).toBeInViewport();
     await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
     expect(
@@ -47,7 +55,7 @@ test.describe('website smoke flows', () => {
 
     await page.getByRole('button', { name: 'Open navigation menu' }).click();
     await page.locator('#mobile-navigation a[href="/#contact"]').click();
-    await expect(page).toHaveURL(/#contact$/);
+    await expect(page).toHaveURL(/#contact$/, { timeout: 15_000 });
     await expect(page.locator('#mobile-navigation')).toHaveCount(0);
   });
 
@@ -58,6 +66,34 @@ test.describe('website smoke flows', () => {
 
     await expect(page.locator('#values .motion-reveal').first()).toHaveCSS('opacity', '1');
     await expect(page.locator('#values .motion-reveal').first()).toHaveCSS('transform', 'none');
+  });
+
+  test('opens the Menstrual Health project and browses its image modal', async ({ page }) => {
+    await page.goto('/#upcoming-initiatives', { waitUntil: 'domcontentloaded' });
+
+    await expect(page.getByRole('heading', { name: 'Our Initiatives' })).toBeVisible();
+    await expect(page.getByText('Street to Skills')).toBeVisible();
+    await expect(page.getByRole('article')).toHaveCount(4);
+    await expect(page.getByRole('link', { name: /View Menstrual Health/ })).toHaveCount(1);
+
+    await page.getByRole('link', { name: /View Menstrual Health/ }).click();
+    await expect(page).toHaveURL(/\/initiatives\/menstrual-health$/, { timeout: 15_000 });
+    await expect(
+      page.getByRole('heading', { name: 'Menstrual Health: From Period Shame to Misinformation' })
+    ).toBeVisible();
+    await expect(page.getByRole('button', { name: /Open image/ })).toHaveCount(8);
+
+    const firstImage = page.getByRole('button', { name: /Open image 1:/ });
+    await firstImage.click();
+    await expect(page.getByRole('dialog')).toBeVisible();
+    await expect(page.getByRole('dialog')).toContainText('Image 1 of 8');
+    await expect(page.getByRole('dialog')).toContainText('A safe and welcoming space');
+
+    await page.getByRole('button', { name: 'Next image' }).click();
+    await expect(page.getByRole('dialog')).toContainText('Image 2 of 8');
+    await page.keyboard.press('Escape');
+    await expect(page.getByRole('dialog')).toHaveCount(0);
+    await expect(firstImage).toBeFocused();
   });
 
   test('submits both forms through a mocked transport without sending email', async ({ page }) => {

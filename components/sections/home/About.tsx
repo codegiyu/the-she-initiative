@@ -18,7 +18,7 @@ export const About = () => {
                 md:min-h-[30rem] lg:min-h-[20rem] flex-none bg-cover bg-[top_center] rounded-2xl overflow-hidden
                 relative">
                   <Image
-                    src="https://static.thesolaceinitiative.org/images/founder-maryam-a-gimba-esq.webp"
+                    src="https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/founder-maryam-a-gimba-esq.webp"
                     alt="Maryam A. Gimba, Esq., founder of The SHE Initiative"
                     fill
                     sizes="(max-width: 767px) 100vw, (max-width: 1023px) 20rem, 40vw"

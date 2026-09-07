@@ -2,9 +2,9 @@ import { Instagram, Whatsapp } from '@/components/icons';
 import { HeaderLinkProps } from '@/components/layout/Header';
 import { ContactInfoRowProps } from '@/components/sections/home/Contact';
 import { ServiceCardProps } from '@/components/sections/home/Services';
-import { InitiativeCardProps } from '@/components/sections/home/UpcomingInitiatives';
 import { ValuesCardProps } from '@/components/sections/home/Values';
 import { ORGANIZATION_INFORMATION } from '@/lib/constants/organization';
+import type { Initiative } from '@/lib/types/initiatives';
 import {
   CheckCircle,
   Clock,
@@ -22,7 +22,7 @@ export const NAV_LINKS: HeaderLinkProps[] = [
   { text: 'About Us', href: '/#about' },
   { text: 'Services', href: '/#what-we-do' },
   { text: 'Values', href: '/#values' },
-  { text: 'Upcoming', href: '/#upcoming-initiatives', footerOnlySuffix: ' Initiatives' },
+  { text: 'Initiatives', href: '/#upcoming-initiatives' },
   { text: 'Volunteer', href: '/#volunteer-with-us' },
   { text: 'Contact', href: '/#contact' },
 ];
@@ -140,22 +140,138 @@ export const OUR_VALUES: ValuesCardProps[] = [
   },
 ];
 
-export const UPCOMING_INITIATIVES: InitiativeCardProps[] = [
+const SAMPLE_GALLERY_IMAGES = [
   {
+    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-1.jpg',
+    alt: 'Young women taking part in a community learning activity',
+    caption: 'A safe and welcoming space for menstrual health conversations.',
+  },
+  {
+    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-2.jpg',
+    alt: 'A group of women gathered together for a community programme',
+  },
+  {
+    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-3.jpg',
+    alt: 'Volunteers working together during a community initiative',
+    caption: 'Community-led action helps girls access reliable information and support.',
+  },
+  {
+    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-4.jpg',
+    alt: 'A young woman smiling during a learning session',
+  },
+  {
+    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-5.jpg',
+    alt: 'Community members listening during an educational discussion',
+  },
+  {
+    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-6.jpg',
+    alt: 'A participant engaged in a supportive group conversation',
+    caption: 'Open conversations can replace shame and misinformation with confidence.',
+  },
+  {
+    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-7.jpg',
+    alt: 'Children and young people participating in a community programme',
+  },
+  {
+    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-8.jpg',
+    alt: 'Volunteers supporting a community outreach activity',
+  },
+  {
+    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-9.jpg',
+    alt: 'Participants connecting during a menstrual health outreach activity',
+  },
+  {
+    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-10.jpg',
+    alt: 'A menstrual health literacy activity taking place in the community',
+  },
+] as const;
+
+export const INITIATIVES: Initiative[] = [
+  {
+    slug: 'launch-event',
     title: 'Launch Event',
     desc: 'Launching Q4 2025',
     text: 'Join us for the official launch of The SHE Initiative. The launch will feature keynote speakers, and a first look at our upcoming programs and partnerships.',
     suffix: 'Be a part of the beginning. Be a part of the change.',
+    status: 'Completed',
+    bannerImage:
+      'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/home/launch-event-card.jpg',
+    bannerAlt: 'A group gathered together for a community event',
   },
   {
+    slug: 'menstrual-health',
     title: 'Menstrual Health: From Period Shame to Misinformation',
     desc: 'At the Q4 Launch Event',
     text: "This initiative aims to disseminate Nigeria's first menstrual health policy from the Ministry of Women Affairs, the Menstrual Health and Hygiene Management (MHHM) Policy, officially adopted in August 2025",
+    status: 'Ongoing',
+    bannerImage:
+      'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/home/mental-health-initiative-card.jpg',
+    bannerAlt: 'A woman participating in a learning and support session',
+    seoKeywords: [
+      'menstrual health literacy',
+      'menstrual health education Nigeria',
+      'menstrual hygiene management',
+      'period education for girls',
+      'period shame',
+      'menstrual misinformation',
+      'school menstrual health programme',
+      'Maitama Junior Model Secondary School Abuja',
+      'Nigeria Menstrual Health and Hygiene Management Policy',
+      'The SHE Initiative',
+    ],
+    detail: {
+      overview: [
+        'The Menstrual Health Literacy Initiative is a school-based programme by The SHE Initiative that helps girls understand menstruation, question harmful myths, and manage their menstrual health with dignity and confidence.',
+        'It combines age-appropriate education with open conversations, practical demonstrations, medical guidance, and sanitary products. The goal is to make reliable information and trusted support easier to access, while building self-awareness and confidence to seek help when needed.',
+      ],
+      facts: [
+        { label: 'Start date', value: '11 June 2026' },
+        { label: 'Venue', value: 'Maitama Junior Model Secondary School, Abuja' },
+        { label: 'Participants', value: '30 female students' },
+      ],
+      sections: [
+        {
+          paragraphs: [
+            'The programme uses interactive, age-appropriate learning to explore menstrual biology, hygiene, physical and emotional changes, period shame, misinformation, and cultural or religious misconceptions. Students are encouraged to ask questions, discuss concerns, and connect what they learn to everyday life.',
+          ],
+        },
+        {
+          paragraphs: [
+            'Practical demonstrations cover the use, changing, and disposal of sanitary pads. Medical guidance helps participants understand normal variations, recognise warning signs such as severe pain or unusually heavy bleeding, and know when to involve a trusted adult or healthcare professional.',
+          ],
+        },
+        {
+          paragraphs: [
+            'Through continued dialogue and confidence-building activities, the initiative helps girls talk about menstrual health without shame, notice changes in their bodies, and manage menstruation with knowledge, support, and dignity.',
+          ],
+        },
+      ],
+      gallery: [...SAMPLE_GALLERY_IMAGES],
+    },
   },
   {
+    slug: 'mentorship-circle',
     title: 'Mentorship Circle',
     desc: 'Coming Soon',
     text: 'Connecting girls with professional female mentors in their fields of \
     interest, fostering career development and personal growth.',
+    status: 'Upcoming',
+    bannerImage: '/images/initiatives/mentorship-circle/mentorship-circle-placeholder.png',
+    bannerAlt: 'Abstract magenta and cream forms arranged in a connected circle',
+  },
+  {
+    slug: 'street-to-skills',
+    title: 'Street to Skills',
+    desc: 'Skills, Mentorship & Livelihoods',
+    text: 'Empowering vulnerable young women through skills, mentorship, and sustainable livelihood opportunities.',
+    status: 'Upcoming',
+    bannerImage: '/images/initiatives/street-to-skills/street-to-skills-flyer.jpg',
+    bannerAlt: 'Project Street to Skills event flyer',
   },
 ];
+
+export const UPCOMING_INITIATIVES = INITIATIVES;
+
+export function getInitiativeBySlug(slug: string): Initiative | undefined {
+  return INITIATIVES.find(initiative => initiative.slug === slug);
+}

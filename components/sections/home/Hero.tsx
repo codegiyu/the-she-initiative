@@ -1,6 +1,6 @@
 'use client';
 
-import { GhostBtn } from '@/components/atoms/GhostBtn';
+// import { GhostBtn } from '@/components/atoms/GhostBtn';
 import { RegularBtn } from '@/components/atoms/RegularBtn';
 import Image from 'next/image';
 
@@ -10,7 +10,7 @@ export const Hero = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://static.thesolaceinitiative.org/images/home/hero-1.webp"
+          src="https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/home/hero-new.webp"
           alt="Empowered young women standing together"
           fill
           priority
@@ -49,9 +49,9 @@ export const Hero = () => {
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-        <div className="animate-bounce">
+        {/* <div className="animate-bounce">
           <ScrollIndicatorButton />
-        </div>
+        </div> */}
       </div>
     </section>
   );
@@ -78,12 +78,12 @@ const ContactButton = () => {
   );
 };
 
-const ScrollIndicatorButton = () => {
-  return (
-    <GhostBtn linkProps={{ href: '/#about' }} aria-label="Scroll to About Us">
-      <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-        <div className="w-1 h-3 bg-white rounded-full mt-2"></div>
-      </div>
-    </GhostBtn>
-  );
-};
+// const ScrollIndicatorButton = () => {
+//   return (
+//     <GhostBtn linkProps={{ href: '/#about' }} aria-label="Scroll to About Us">
+//       <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+//         <div className="w-1 h-3 bg-white rounded-full mt-2"></div>
+//       </div>
+//     </GhostBtn>
+//   );
+// };

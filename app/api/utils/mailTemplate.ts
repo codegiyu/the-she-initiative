@@ -288,7 +288,7 @@ export const mailTemplate = ({ title, top, data, end }: MailTemplateProps) => {
                           <div class="logo-container" style="padding: 40px 20px 0px; width: fit-content;">
                             <!-- Light mode logo (default) -->
                             <img 
-                              src="https://static.thesolaceinitiative.org/images/shei-logo.png"
+                              src="https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/shei-logo.png"
                               alt="The Solace Healing and Empowerment Initiative"
                               class="logo-light"
                               style="height: 56px; margin: 0; display: block;"
@@ -296,7 +296,7 @@ export const mailTemplate = ({ title, top, data, end }: MailTemplateProps) => {
 
                             <!-- Dark mode logo (hidden by default, shown in dark mode) -->
                             <img 
-                              src="https://static.thesolaceinitiative.org/images/shei-logo-dark.png"
+                              src="https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/shei-logo-dark.png"
                               alt="The Solace Healing and Empowerment Initiative"
                               class="logo-dark"
                               style="height: 56px; margin: 0; display: none;"

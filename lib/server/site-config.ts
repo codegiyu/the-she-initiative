@@ -34,11 +34,15 @@ export const SEO_DETAILS: Metadata = {
     type: 'website',
     url: SITE_URL,
     siteName: ORGANIZATION_INFORMATION.name,
-    images: [{ url: 'https://static.thesolaceinitiative.org/images/site-preview.webp' }],
+    images: [
+      {
+        url: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/site-preview.webp',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['https://static.thesolaceinitiative.org/images/site-preview.webp'],
+    images: ['https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/site-preview.webp'],
   },
   icons: '/favicon.png',
   robots: {
