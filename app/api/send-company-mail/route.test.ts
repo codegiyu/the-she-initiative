@@ -2,12 +2,12 @@ import { NextRequest } from 'next/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { resetFormRateLimitForTests } from '@/lib/server/form-rate-limit';
 
-const { createTransport, sendMail } = vi.hoisted(() => ({
-  createTransport: vi.fn(),
-  sendMail: vi.fn(),
+const { Resend, send } = vi.hoisted(() => ({
+  Resend: vi.fn(),
+  send: vi.fn(),
 }));
 
-vi.mock('nodemailer', () => ({ default: { createTransport } }));
+vi.mock('resend', () => ({ Resend }));
 
 import { POST } from './route';
 
@@ -55,16 +55,13 @@ async function jsonResponse(response: Response) {
 }
 
 beforeEach(() => {
-  process.env.fromEmail = 'sender@example.com';
-  process.env.password = 'password';
-  process.env.emailHost = 'smtp.example.com';
-  process.env.emailPort = '587';
+  process.env.RESEND_API_KEY = 're_test_key';
+  process.env.fromEmail = 'no-reply@thesolaceinitiative.org';
   process.env.toEmail = 'recipient@example.com';
-  process.env.secureMail = 'false';
   process.env.SITE_URL = 'https://thesolaceinitiative.org';
   resetFormRateLimitForTests();
-  sendMail.mockReset().mockResolvedValue({ messageId: 'private-message-id' });
-  createTransport.mockReset().mockReturnValue({ sendMail });
+  send.mockReset().mockResolvedValue({ data: { id: 'private-message-id' }, error: null });
+  Resend.mockReset().mockImplementation(() => ({ emails: { send } }));
 });
 
 afterEach(() => vi.restoreAllMocks());
@@ -78,10 +75,11 @@ describe('POST /api/send-company-mail', () => {
       status: 200,
       body: { success: true, message: 'Mail sent successfully' },
     });
-    expect(sendMail).toHaveBeenCalledWith(
+    expect(Resend).toHaveBeenCalledWith('re_test_key');
+    expect(send).toHaveBeenCalledWith(
       expect.objectContaining({
-        from: 'The SHE Initiative Website <sender@example.com>',
-        to: 'The SHE Initiative <recipient@example.com>',
+        from: 'The SHE Initiative Website <no-reply@thesolaceinitiative.org>',
+        to: ['The SHE Initiative <recipient@example.com>'],
         replyTo: 'Ada Lovelace <ada@example.com>',
         text: expect.stringContaining('Ada Lovelace'),
       })
@@ -96,7 +94,7 @@ describe('POST /api/send-company-mail', () => {
     );
 
     expect(result.status).toBe(200);
-    expect(sendMail).toHaveBeenCalledWith(
+    expect(send).toHaveBeenCalledWith(
       expect.objectContaining({
         subject: 'Volunteer Form Submission',
         replyTo: 'Grace Hopper <grace@example.com>',
@@ -141,7 +139,7 @@ describe('POST /api/send-company-mail', () => {
     expect(honeypot.status).toBe(400);
     expect(unknownField.status).toBe(400);
     expect(unknownField.body).not.toHaveProperty('extra');
-    expect(sendMail).not.toHaveBeenCalled();
+    expect(send).not.toHaveBeenCalled();
   });
 
   it('rejects payloads over 32 KiB before parsing', async () => {
@@ -176,12 +174,15 @@ describe('POST /api/send-company-mail', () => {
     });
   });
 
-  it('hides SMTP misconfiguration and delivery failures', async () => {
-    process.env.password = '';
+  it('hides Resend misconfiguration and delivery failures', async () => {
+    process.env.RESEND_API_KEY = '';
     const unavailable = await jsonResponse(await POST(requestFor(validContact)));
 
-    process.env.password = 'password';
-    sendMail.mockRejectedValueOnce(new Error('private SMTP failure'));
+    process.env.RESEND_API_KEY = 're_test_key';
+    send.mockResolvedValueOnce({
+      data: null,
+      error: { name: 'api_error', message: 'private Resend failure' },
+    });
     const failed = await jsonResponse(
       await POST(requestFor(validContact, { 'x-forwarded-for': '203.0.113.21' }))
     );
@@ -194,6 +195,6 @@ describe('POST /api/send-company-mail', () => {
     expect(failed.body).toEqual(
       expect.objectContaining({ success: false, code: 'MAIL_DELIVERY_FAILED' })
     );
-    expect(JSON.stringify(failed.body)).not.toContain('private SMTP failure');
+    expect(JSON.stringify(failed.body)).not.toContain('private Resend failure');
   });
 });

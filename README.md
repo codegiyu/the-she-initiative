@@ -13,11 +13,11 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000). The development server uses the same-origin form endpoint at `/api/send-company-mail`.
 
-## Environment and SMTP
+## Environment and Resend
 
-Copy `.env.example` to `.env.local` when configuring local SMTP delivery. `SITE_URL` is optional and server-only; it controls canonical metadata, the sitemap, and organization structured data, and falls back to `https://thesolaceinitiative.org` when unset or invalid. `secureMail` is also optional and defaults to `true`. Never commit `.env.local` or SMTP credentials.
+Copy `.env.example` to `.env.local` and set `RESEND_API_KEY`. `fromEmail` defaults to `no-reply@thesolaceinitiative.org`, while `toEmail` defaults to the contact email displayed on the site (`thesheinitiative0@gmail.com`). Override both only with appropriate addresses, and use a verified sending domain for `fromEmail`. `SITE_URL` is optional and server-only; it controls canonical metadata, the sitemap, and organization structured data, and falls back to `https://thesolaceinitiative.org` when unset or invalid. Never commit `.env.local` or Resend credentials.
 
-The contact and volunteer forms send through SMTP. The route validates the JSON contract, rejects cross-site browser requests and honeypot submissions, limits request size and rate, and returns sanitized typed errors. User values are escaped in HTML mail and are also sent as plain text. The in-memory limiter is suitable for the single-replica deployment; use a shared Redis-backed adapter before scaling horizontally.
+The contact and volunteer forms send through the Resend API. The route validates the JSON contract, rejects cross-site browser requests and honeypot submissions, limits request size and rate, and returns sanitized typed errors. User values are escaped in HTML mail and are also sent as plain text. The in-memory limiter is suitable for the single-replica deployment; use a shared Redis-backed adapter before scaling horizontally.
 
 ## Quality checks
 
@@ -30,7 +30,7 @@ npm run format:check
 npm run build
 ```
 
-`npm run checks` runs the non-rewriting lint, formatting, and production-build pipeline. Automated tests use a test SMTP transport and never send real email.
+`npm run checks` runs the non-rewriting lint, formatting, and production-build pipeline. Automated tests mock Resend and never send real email.
 
 The browser smoke suite starts an isolated development server on port `3100` and intercepts form delivery, so it does not send email. Install a Playwright browser with `npx playwright install chromium` for a local run; this repository’s existing Chrome installation can also be selected with `PLAYWRIGHT_CHANNEL=chrome`.
 
@@ -38,7 +38,7 @@ The browser smoke suite starts an isolated development server on port `3100` and
 
 The Dockerfile builds Next.js in standalone mode and copies only `.next/standalone`, `.next/static`, and `public` into the runtime image. The runtime runs as the non-root `nextjs` user, listens on `0.0.0.0:3003`, and does not install packages at startup.
 
-In Coolify, configure the application to build from this directory and expose port `3003`. Set the SMTP variables as runtime environment variables; `SITE_URL` may be omitted when deploying the canonical site because the app has a production fallback. Configure the health check as:
+In Coolify, configure the application to build from this directory and expose port `3003`. Set `RESEND_API_KEY` as a runtime environment variable; `fromEmail` and `toEmail` have safe application defaults, but may be overridden when needed. `SITE_URL` may be omitted when deploying the canonical site because the app has a production fallback. Configure the health check as:
 
 ```text
 /api/health

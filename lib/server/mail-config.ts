@@ -1,23 +1,14 @@
 import { z } from 'zod';
+import { ORGANIZATION_INFORMATION } from '@/lib/constants/organization';
 
-const booleanEnvironmentValue = z.preprocess(value => {
-  if (value === undefined || (typeof value === 'string' && value.trim() === '')) return true;
-  if (value === 'true') return true;
-  if (value === 'false') return false;
-  return value;
-}, z.boolean());
+export const DEFAULT_FROM_EMAIL = 'no-reply@thesolaceinitiative.org';
+export const DEFAULT_TO_EMAIL = ORGANIZATION_INFORMATION.email;
 
 const mailConfigSchema = z
   .object({
+    resendApiKey: z.string().trim().min(1),
     fromEmail: z.string().trim().email(),
-    password: z.string().min(1),
-    emailHost: z.string().trim().min(1),
-    emailPort: z.preprocess(value => {
-      if (typeof value === 'string' && value.trim() !== '') return Number(value);
-      return value;
-    }, z.number().int().min(1).max(65_535)),
     toEmail: z.string().trim().email(),
-    secureMail: booleanEnvironmentValue,
   })
   .strict();
 
@@ -25,12 +16,9 @@ export type MailConfig = z.infer<typeof mailConfigSchema>;
 
 export function getMailConfig(): MailConfig | null {
   const result = mailConfigSchema.safeParse({
-    fromEmail: process.env.fromEmail,
-    password: process.env.password,
-    emailHost: process.env.emailHost,
-    emailPort: process.env.emailPort,
-    toEmail: process.env.toEmail,
-    secureMail: process.env.secureMail,
+    resendApiKey: process.env.RESEND_API_KEY,
+    fromEmail: process.env.fromEmail?.trim() || DEFAULT_FROM_EMAIL,
+    toEmail: process.env.toEmail?.trim() || DEFAULT_TO_EMAIL,
   });
 
   return result.success ? result.data : null;

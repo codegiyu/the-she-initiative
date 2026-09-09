@@ -142,46 +142,46 @@ export const OUR_VALUES: ValuesCardProps[] = [
 
 const SAMPLE_GALLERY_IMAGES = [
   {
-    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-1.jpg',
+    src: '/images/initiatives/menstrual-health-initiative-1.jpg',
     alt: 'Young women taking part in a community learning activity',
     caption: 'A safe and welcoming space for menstrual health conversations.',
   },
   {
-    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-2.jpg',
+    src: '/images/initiatives/menstrual-health-initiative-2.jpg',
     alt: 'A group of women gathered together for a community programme',
   },
   {
-    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-3.jpg',
+    src: '/images/initiatives/menstrual-health-initiative-3.jpg',
     alt: 'Volunteers working together during a community initiative',
     caption: 'Community-led action helps girls access reliable information and support.',
   },
   {
-    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-4.jpg',
+    src: '/images/initiatives/menstrual-health-initiative-4.jpg',
     alt: 'A young woman smiling during a learning session',
   },
   {
-    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-5.jpg',
+    src: '/images/initiatives/menstrual-health-initiative-5.jpg',
     alt: 'Community members listening during an educational discussion',
   },
   {
-    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-6.jpg',
+    src: '/images/initiatives/menstrual-health-initiative-6.jpg',
     alt: 'A participant engaged in a supportive group conversation',
     caption: 'Open conversations can replace shame and misinformation with confidence.',
   },
   {
-    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-7.jpg',
+    src: '/images/initiatives/menstrual-health-initiative-7.jpg',
     alt: 'Children and young people participating in a community programme',
   },
   {
-    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-8.jpg',
+    src: '/images/initiatives/menstrual-health-initiative-8.jpg',
     alt: 'Volunteers supporting a community outreach activity',
   },
   {
-    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-9.jpg',
+    src: '/images/initiatives/menstrual-health-initiative-9.jpg',
     alt: 'Participants connecting during a menstrual health outreach activity',
   },
   {
-    src: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/initiatives/menstrual-health-initiative-10.jpg',
+    src: '/images/initiatives/menstrual-health-initiative-10.jpg',
     alt: 'A menstrual health literacy activity taking place in the community',
   },
 ] as const;
@@ -194,8 +194,7 @@ export const INITIATIVES: Initiative[] = [
     text: 'Join us for the official launch of The SHE Initiative. The launch will feature keynote speakers, and a first look at our upcoming programs and partnerships.',
     suffix: 'Be a part of the beginning. Be a part of the change.',
     status: 'Completed',
-    bannerImage:
-      'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/home/launch-event-card.jpg',
+    bannerImage: '/images/home/launch-event-card.jpg',
     bannerAlt: 'A group gathered together for a community event',
   },
   {
@@ -204,8 +203,7 @@ export const INITIATIVES: Initiative[] = [
     desc: 'At the Q4 Launch Event',
     text: "This initiative aims to disseminate Nigeria's first menstrual health policy from the Ministry of Women Affairs, the Menstrual Health and Hygiene Management (MHHM) Policy, officially adopted in August 2025",
     status: 'Ongoing',
-    bannerImage:
-      'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/home/mental-health-initiative-card.jpg',
+    bannerImage: '/images/home/mental-health-initiative-card.jpg',
     bannerAlt: 'A woman participating in a learning and support session',
     seoKeywords: [
       'menstrual health literacy',

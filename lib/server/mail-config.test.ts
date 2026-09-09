@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { getMailConfig } from './mail-config';
+import { DEFAULT_FROM_EMAIL, DEFAULT_TO_EMAIL, getMailConfig } from './mail-config';
 
 const originalEnvironment = { ...process.env };
 
@@ -8,46 +8,40 @@ afterEach(() => {
 });
 
 describe('mail configuration', () => {
-  it('parses secureMail false as false', () => {
+  it('parses a valid Resend configuration', () => {
+    process.env.RESEND_API_KEY = 're_test_key';
     process.env.fromEmail = 'sender@example.com';
-    process.env.password = 'password';
-    process.env.emailHost = 'smtp.example.com';
-    process.env.emailPort = '587';
     process.env.toEmail = 'recipient@example.com';
-    process.env.secureMail = 'false';
 
-    expect(getMailConfig()).toMatchObject({ emailPort: 587, secureMail: false });
+    expect(getMailConfig()).toMatchObject({
+      resendApiKey: 're_test_key',
+      fromEmail: 'sender@example.com',
+      toEmail: 'recipient@example.com',
+    });
   });
 
-  it('defaults secureMail to true when it is not configured', () => {
-    process.env.fromEmail = 'sender@example.com';
-    process.env.password = 'password';
-    process.env.emailHost = 'smtp.example.com';
-    process.env.emailPort = '465';
-    process.env.toEmail = 'recipient@example.com';
-    delete process.env.secureMail;
+  it('uses the site sender and contact email when address overrides are omitted', () => {
+    process.env.RESEND_API_KEY = 're_test_key';
+    delete process.env.fromEmail;
+    delete process.env.toEmail;
 
-    expect(getMailConfig()).toMatchObject({ emailPort: 465, secureMail: true });
+    expect(getMailConfig()).toMatchObject({
+      resendApiKey: 're_test_key',
+      fromEmail: DEFAULT_FROM_EMAIL,
+      toEmail: DEFAULT_TO_EMAIL,
+    });
   });
 
-  it('treats an empty secureMail value as unset', () => {
+  it('rejects incomplete or invalid Resend configuration', () => {
+    process.env.RESEND_API_KEY = '';
     process.env.fromEmail = 'sender@example.com';
-    process.env.password = 'password';
-    process.env.emailHost = 'smtp.example.com';
-    process.env.emailPort = '465';
     process.env.toEmail = 'recipient@example.com';
-    process.env.secureMail = '  ';
 
-    expect(getMailConfig()).toMatchObject({ emailPort: 465, secureMail: true });
-  });
+    expect(getMailConfig()).toBeNull();
 
-  it('rejects incomplete or invalid SMTP configuration', () => {
+    process.env.RESEND_API_KEY = 're_test_key';
     process.env.fromEmail = 'not-an-email';
-    process.env.password = '';
-    process.env.emailHost = 'smtp.example.com';
-    process.env.emailPort = 'not-a-port';
     process.env.toEmail = 'recipient@example.com';
-    process.env.secureMail = 'not-a-boolean';
 
     expect(getMailConfig()).toBeNull();
   });

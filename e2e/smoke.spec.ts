@@ -9,9 +9,6 @@ test.describe('website smoke flows', () => {
         body: Buffer.from('R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==', 'base64'),
       })
     );
-    await page.route('https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/**', route =>
-      route.abort()
-    );
   });
 
   test('preserves real section navigation and emergency contact links', async ({ page }) => {

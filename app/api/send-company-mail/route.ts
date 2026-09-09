@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
 import { formSubmissionSchema, MAX_FORM_PAYLOAD_BYTES, type FormType } from '@/lib/forms/contracts';
 import { checkFormRateLimit, normalizeClientIp } from '@/lib/server/form-rate-limit';
@@ -186,21 +186,17 @@ export async function POST(request: NextRequest) {
   const text = mailText({ title, top, data, end });
 
   try {
-    const transporter = nodemailer.createTransport({
-      port: config.emailPort,
-      host: config.emailHost,
-      auth: { user: config.fromEmail, pass: config.password },
-      secure: config.secureMail,
-    });
-
-    await transporter.sendMail({
+    const resend = new Resend(config.resendApiKey);
+    const { error } = await resend.emails.send({
       from: `The SHE Initiative Website <${config.fromEmail}>`,
-      to: `The SHE Initiative <${config.toEmail}>`,
+      to: [`The SHE Initiative <${config.toEmail}>`],
       replyTo: `${parsed.data.fields.fullName} <${parsed.data.fields.email}>`,
       subject: title,
       html,
       text,
     });
+
+    if (error) throw new Error('Resend delivery failed');
   } catch (error) {
     void error;
     logEvent({ requestId, formType, status: 'failure', failureCode: 'MAIL_DELIVERY_FAILED' });

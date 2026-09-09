@@ -36,13 +36,13 @@ export const SEO_DETAILS: Metadata = {
     siteName: ORGANIZATION_INFORMATION.name,
     images: [
       {
-        url: 'https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/site-preview.webp',
+        url: '/images/site-preview.webp',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/site-preview.webp'],
+    images: ['/images/site-preview.webp'],
   },
   icons: '/favicon.png',
   robots: {

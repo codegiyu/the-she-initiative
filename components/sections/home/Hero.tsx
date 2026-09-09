@@ -10,7 +10,7 @@ export const Hero = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://pub-9a70d77786454bfa9e5d93bfdeb5548c.r2.dev/images/home/hero-new.webp"
+          src="/images/home/hero-new.webp"
           alt="Empowered young women standing together"
           fill
           priority
