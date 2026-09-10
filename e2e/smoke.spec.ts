@@ -21,6 +21,8 @@ test.describe('website smoke flows', () => {
     await expect(
       page.getByText(/Please avoid sharing highly sensitive or graphic details here/)
     ).toHaveCount(2);
+    await expect(page.getByRole('heading', { name: 'Meet The Team' })).toBeVisible();
+    await expect(page.locator('#team').getByRole('article')).toHaveCount(5);
 
     const contactLink = page.locator('header a[href="/#contact"]').first();
     await expect(contactLink).toBeVisible();
@@ -70,27 +72,40 @@ test.describe('website smoke flows', () => {
 
     await expect(page.getByRole('heading', { name: 'Our Initiatives' })).toBeVisible();
     await expect(page.getByText('Street to Skills')).toBeVisible();
-    await expect(page.getByRole('article')).toHaveCount(4);
-    await expect(page.getByRole('link', { name: /View Menstrual Health/ })).toHaveCount(1);
+    await expect(page.locator('#upcoming-initiatives').getByRole('article')).toHaveCount(4);
+    const menstrualHealthLink = page
+      .locator('#upcoming-initiatives')
+      .getByRole('link', { name: /View Menstrual Health/ });
+    await expect(menstrualHealthLink).toHaveCount(1);
+    await expect(menstrualHealthLink).toHaveAttribute('href', '/initiatives/menstrual-health');
 
-    await page.getByRole('link', { name: /View Menstrual Health/ }).click();
+    await menstrualHealthLink.click();
     await expect(page).toHaveURL(/\/initiatives\/menstrual-health$/, { timeout: 15_000 });
     await expect(
       page.getByRole('heading', { name: 'Menstrual Health: From Period Shame to Misinformation' })
     ).toBeVisible();
-    await expect(page.getByRole('button', { name: /Open image/ })).toHaveCount(8);
+    await expect(page.getByRole('button', { name: /Open image/ })).toHaveCount(10);
 
     const firstImage = page.getByRole('button', { name: /Open image 1:/ });
     await firstImage.click();
     await expect(page.getByRole('dialog')).toBeVisible();
-    await expect(page.getByRole('dialog')).toContainText('Image 1 of 8');
+    await expect(page.getByRole('dialog')).toContainText('Image 1 of 10');
     await expect(page.getByRole('dialog')).toContainText('A safe and welcoming space');
 
     await page.getByRole('button', { name: 'Next image' }).click();
-    await expect(page.getByRole('dialog')).toContainText('Image 2 of 8');
+    await expect(page.getByRole('dialog')).toContainText('Image 2 of 10');
     await page.keyboard.press('Escape');
     await expect(page.getByRole('dialog')).toHaveCount(0);
     await expect(firstImage).toBeFocused();
+  });
+
+  test('opens the launch event details page with its gallery', async ({ page }) => {
+    await page.goto('/initiatives/launch-event', { waitUntil: 'domcontentloaded' });
+
+    await expect(page.getByRole('heading', { name: 'Launch Event' })).toBeVisible();
+    await expect(page.getByText('Gallery gathering and launch reception')).toBeVisible();
+    await expect(page.getByRole('button', { name: /Open image/ })).toHaveCount(10);
+    await expect(page.getByText(/every girl and young woman deserves/)).toBeVisible();
   });
 
   test('submits both forms through a mocked transport without sending email', async ({ page }) => {

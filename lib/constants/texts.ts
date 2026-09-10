@@ -23,6 +23,7 @@ export const NAV_LINKS: HeaderLinkProps[] = [
   { text: 'Services', href: '/#what-we-do' },
   { text: 'Values', href: '/#values' },
   { text: 'Initiatives', href: '/#upcoming-initiatives' },
+  { text: 'Team', href: '/#team' },
   { text: 'Volunteer', href: '/#volunteer-with-us' },
   { text: 'Contact', href: '/#contact' },
 ];
@@ -186,16 +187,103 @@ const SAMPLE_GALLERY_IMAGES = [
   },
 ] as const;
 
+const LAUNCH_EVENT_GALLERY_IMAGES = [
+  {
+    src: '/images/initiatives/launch-event-1.jpg',
+    alt: 'Guests gathering during The SHE Initiative launch event',
+    caption: 'An evening of connection, conversation, and shared purpose.',
+  },
+  {
+    src: '/images/initiatives/launch-event-2.jpg',
+    alt: 'Guests seated together during the launch event programme',
+  },
+  {
+    src: '/images/initiatives/launch-initiative-3.jpg',
+    alt: 'Guests listening during a launch event presentation',
+  },
+  {
+    src: '/images/initiatives/launch-initiative-4.jpg',
+    alt: 'A speaker addressing guests beside the event programme display',
+    caption:
+      'The launch brought together voices committed to the wellbeing of girls and young women.',
+  },
+  {
+    src: '/images/initiatives/launch-initiative-5.jpg',
+    alt: 'Launch event guests seated in the gallery space',
+  },
+  {
+    src: '/images/initiatives/launch-initiative-6.jpg',
+    alt: 'Guests enjoying refreshments and conversation at the launch event',
+  },
+  {
+    src: '/images/initiatives/launch-initiative-7.jpg',
+    alt: 'Guests connecting during the launch event reception',
+  },
+  {
+    src: '/images/initiatives/launch-initiative-8.jpg',
+    alt: 'A speaker presenting during the official launch event',
+  },
+  {
+    src: '/images/initiatives/launch-initiative-9.jpg',
+    alt: 'Guests gathered for a launch event conversation',
+  },
+  {
+    src: '/images/initiatives/launch-initiative-10.jpg',
+    alt: 'The SHE Initiative launch event stage and guests',
+    caption: 'A shared beginning for a future shaped by healing and empowerment.',
+  },
+] as const;
+
 export const INITIATIVES: Initiative[] = [
   {
     slug: 'launch-event',
     title: 'Launch Event',
-    desc: 'Launching Q4 2025',
-    text: 'Join us for the official launch of The SHE Initiative. The launch will feature keynote speakers, and a first look at our upcoming programs and partnerships.',
-    suffix: 'Be a part of the beginning. Be a part of the change.',
+    desc: 'Official launch event',
+    text: 'The SHE Initiative was introduced at a gathering of advocates, public officials, diplomatic representatives, family, friends, and community supporters committed to the safety, healing, and empowerment of girls and young women.',
+    suffix: 'A beginning rooted in community. A future shaped by collective action.',
     status: 'Completed',
     bannerImage: '/images/home/launch-event-card.jpg',
     bannerAlt: 'A group gathered together for a community event',
+    seoKeywords: [
+      'The SHE Initiative launch event',
+      'The Solace Healing and Empowerment Initiative launch',
+      'girls and young women empowerment Nigeria',
+      'gender-based violence advocacy Nigeria',
+      'women and girls support initiative',
+      'community empowerment event Abuja',
+      'The SHE Initiative programmes',
+    ],
+    detail: {
+      overview: [
+        'The official launch of The Solace Healing and Empowerment Initiative marked the beginning of a movement built around a simple belief: every girl and young woman deserves the knowledge, protection, support, and opportunity to thrive.',
+        'The gathering brought together speakers and guests from public service, diplomacy, civil society, family, and the wider community. Their presence reflected the shared responsibility required to create safer, more supportive pathways for girls and young women.',
+      ],
+      facts: [
+        { label: 'Timing', value: 'Q4 2025' },
+        { label: 'Setting', value: 'Gallery gathering and launch reception' },
+        { label: 'Audience', value: 'Public officials, partners, guests and supporters' },
+      ],
+      sections: [
+        {
+          paragraphs: [
+            'The programme created space for reflection and conversation around the realities girls and young women face, including violence, shame, limited access to trusted information, and barriers to education and economic opportunity.',
+            'The launch also offered a first look at the practical work ahead: programmes and partnerships designed to support healing, protection, education, and empowerment in the communities The SHE Initiative serves.',
+          ],
+        },
+        {
+          paragraphs: [
+            'The event’s speakers and guests represented different forms of support: leadership, advocacy, public service, diplomacy, and family. Together, they helped frame The SHE Initiative as a collaborative platform where institutions and individuals can contribute to lasting change.',
+          ],
+        },
+        {
+          paragraphs: [
+            'Alongside the formal presentations, the gathering made room for connection. Conversations, shared refreshments, photographs, and informal moments reflected the community the initiative hopes to grow around the women and girls it serves.',
+            'The launch was not an endpoint. It was an invitation to partners, volunteers, and supporters to help turn the initiative’s vision into practical programmes that reach girls and young women with care, dignity, and consistency.',
+          ],
+        },
+      ],
+      gallery: [...LAUNCH_EVENT_GALLERY_IMAGES],
+    },
   },
   {
     slug: 'menstrual-health',

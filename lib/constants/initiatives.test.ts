@@ -12,10 +12,10 @@ describe('initiative content', () => {
     });
   });
 
-  it('exposes only Menstrual Health as a detail project for now', () => {
+  it('exposes the launch event and Menstrual Health as detail projects', () => {
     expect(
       INITIATIVES.filter(initiative => initiative.detail).map(initiative => initiative.slug)
-    ).toEqual(['menstrual-health']);
+    ).toEqual(['launch-event', 'menstrual-health']);
   });
 
   it('uses the uploaded static card images for the launch and menstrual health initiatives', () => {
@@ -25,6 +25,23 @@ describe('initiative content', () => {
     expect(getInitiativeBySlug('menstrual-health')?.bannerImage).toBe(
       '/images/home/mental-health-initiative-card.jpg'
     );
+  });
+
+  it('includes the launch event gallery and supporting detail content', () => {
+    const initiative = getInitiativeBySlug('launch-event');
+
+    expect(initiative?.detail?.overview.length).toBeGreaterThan(0);
+    expect(initiative?.detail?.facts).toHaveLength(3);
+    expect(initiative?.detail?.gallery).toHaveLength(10);
+    expect(initiative?.detail?.gallery?.every(image => image.src && image.alt)).toBe(true);
+    expect(initiative?.detail?.gallery?.map(image => image.src)).toEqual([
+      '/images/initiatives/launch-event-1.jpg',
+      '/images/initiatives/launch-event-2.jpg',
+      ...Array.from(
+        { length: 8 },
+        (_, index) => `/images/initiatives/launch-initiative-${index + 3}.jpg`
+      ),
+    ]);
   });
 
   it('keeps the sample gallery within the supported maximum', () => {
