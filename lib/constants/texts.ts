@@ -238,9 +238,9 @@ export const INITIATIVES: Initiative[] = [
   {
     slug: 'launch-event',
     title: 'Launch Event',
-    desc: 'Official launch event',
-    text: 'The SHE Initiative was introduced at a gathering of advocates, public officials, diplomatic representatives, family, friends, and community supporters committed to the safety, healing, and empowerment of girls and young women.',
-    suffix: 'A beginning rooted in community. A future shaped by collective action.',
+    desc: '22 November 2025 | Abuja, Nigeria',
+    text: 'The SHE Initiative officially launched in Abuja under the theme “From Shadows to Strength: The Journey from Victimhood to Empowerment,” bringing together leaders, advocates, and community partners to advance the rights, dignity, and wellbeing of women and girls.',
+    suffix: 'The journey from shadows to strength has begun.',
     status: 'Completed',
     bannerImage: '/images/home/launch-event-card.jpg',
     bannerAlt: 'A group gathered together for a community event',
@@ -254,32 +254,95 @@ export const INITIATIVES: Initiative[] = [
       'The SHE Initiative programmes',
     ],
     detail: {
-      overview: [
-        'The official launch of The Solace Healing and Empowerment Initiative marked the beginning of a movement built around a simple belief: every girl and young woman deserves the knowledge, protection, support, and opportunity to thrive.',
-        'The gathering brought together speakers and guests from public service, diplomacy, civil society, family, and the wider community. Their presence reflected the shared responsibility required to create safer, more supportive pathways for girls and young women.',
-      ],
+      contentMarkdown: `## From Shadows to Strength: The SHE Initiative Officially Launches in Abuja
+
+**22 November 2025 | Abuja, Nigeria**
+
+On 22 November 2025, The Solace Healing and Empowerment Initiative (The SHE Initiative) officially launched its work in Abuja, Nigeria. The milestone reaffirmed its commitment to supporting women and girls affected by sexual and gender-based violence (SGBV), promoting menstrual health and dignity, and creating pathways towards healing, empowerment, and sustainable change.
+
+Held under the theme **“From Shadows to Strength - The Journey from Victimhood to Empowerment,”** the launch brought together distinguished professionals, government representatives, advocates, development actors, community stakeholders, and supporters united by a shared commitment to advancing the rights, dignity, and wellbeing of women and girls.
+
+The event introduced The SHE Initiative and its vision, and marked its long-term commitment to helping transform experiences of silence and vulnerability into agency, dignity, and empowerment.
+
+### Welcome and the Founder's Address
+
+The programme commenced with a welcome address by **Sakeena I.U. Bello, Esq.**, who welcomed guests and participants and set the tone for the day's conversations. Her address underscored the importance of collective action in confronting SGBV and creating systems that place survivors' dignity, safety, and wellbeing at the centre of intervention.
+
+**Maryam Gimba, Esq., Founder of The SHE Initiative**, shared the vision and motivation behind the organisation. Her address reflected on the challenges confronting women and girls, particularly those who have experienced violence, discrimination, stigma, or other forms of vulnerability.
+
+The Founder reinforced a central message of The SHE Initiative: **support should not end at survival.** The ultimate goal is to help women and girls move towards healing, confidence, independence, and empowerment.
+
+### Unveiling the Three-Step Response Approach
+
+One of the major highlights of the launch was the unveiling of The SHE Initiative's three-step response approach for victims and survivors of sexual and gender-based violence. The framework was presented by **Hafsah Garba Jibrin, Esq., Programme Director**, and represents the organisation's commitment to developing a structured, survivor-centred approach to responding to SGBV.
+
+The three-step approach recognises that effective intervention requires more than addressing an immediate crisis. It calls for a coordinated pathway that responds to a survivor's immediate needs while also supporting longer-term recovery and empowerment. The unveiling established an important part of the organisation's programme direction and a framework for developing and implementing its SGBV interventions.
+
+### Unveiling the Five-Year Plan
+
+Another significant moment was the presentation of The SHE Initiative's Five-Year Plan, also unveiled by **Programme Director Hafsah Garba Jibrin, Esq.**
+
+The plan sets out the organisation's strategic direction and long-term vision for its programmes and interventions. It reflects a commitment to building an organisation capable of delivering sustainable impact rather than short-term interventions. Its five-year vision centres on strengthening work in:
+
+- Survivor support
+- Women's and girls' empowerment
+- Advocacy and awareness
+- Menstrual health
+- Community engagement
+
+### A Powerful Panel Discussion on SGBV
+
+The launch featured a panel discussion bringing together experts from government, child development, and civil society:
+
+- **Mrs. Yewande Gbola-Awopetu, Esq.** - Head, SGBV Unit, Federal Ministry of Justice
+- **Dr. Idris Yahaya Attah** - Director, Child Development Department, FCT Women Affairs Secretariat (FWAS)
+- **Ms. Cynthia Ifueko Obazee** - Executive Director, The GESA Initiative
+
+Each panellist brought a perspective shaped by professional experience in justice, child development, gender advocacy, and civil society. The discussion explored the realities of SGBV response and prevention, the importance of institutional collaboration, and the need for stronger systems that protect vulnerable people and ensure survivors are not left to navigate the aftermath of violence alone.
+
+Their contributions reinforced the value of partnerships between government institutions, civil society organisations, legal professionals, and communities in building effective and sustainable responses to SGBV.
+
+### Giving Survivors a Voice Through Art
+
+The serious conversations were complemented by a spoken-word performance by **Justice Alili**. The performance added an emotional and artistic dimension to the event, giving expression to the pain, resilience, hope, and transformation central to the day's theme.
+
+Through spoken word, the audience was reminded that behind every statistic and discussion about SGBV is a human story - one involving real experiences, emotions, struggles, and hopes for a better future.
+
+### Goodwill Messages
+
+The launch also received goodwill messages from distinguished individuals whose support and encouragement added significance to the occasion:
+
+- **Distinguished Senator Zaynab Kure**
+- **Mr. Pieter Leenknegt** - Ambassador of the Kingdom of Belgium to Nigeria
+- **Ms. Kehinde Charity Awujoola** - Senior Special Assistant to the Minister of Youth on Gender Matters
+
+Their messages reflected the importance of initiatives such as The SHE Initiative and the need for continued collaboration and commitment to addressing issues affecting women and girls. Their presence further demonstrated the importance of multi-sectoral engagement in advancing the organisation's vision.
+
+### A Commitment to Collaboration
+
+Beyond the formal programme, the launch created a platform for connection and collaboration among people and organisations working in gender, justice, child protection, development, and social impact.
+
+The SHE Initiative recognises that the challenges faced by women and girls cannot be addressed by one organisation or sector alone. Meaningful and sustainable change requires collaboration across government, civil society, communities, professional institutions, development partners, and individuals. The launch was an invitation to stakeholders to join a movement committed to moving women and girls from vulnerability towards strength and empowerment.
+
+### Closing Remarks
+
+The event concluded with closing remarks by **Mrs. Aminat Jummai Gimba**, who expressed appreciation to the distinguished guests, speakers, panellists, supporters, and everyone who contributed to making the launch possible. Her remarks brought the day's conversations together and reaffirmed the importance of sustaining the momentum generated by the event.
+
+### From a Launch to a Movement
+
+The 22 November 2025 launch was more than an event; it was the formal beginning of a journey. For The SHE Initiative, **“From Shadows to Strength”** represents both a theme and a philosophy: women and girls who have experienced violence, vulnerability, or marginalisation deserve more than sympathy. They deserve safety, dignity, justice, support, and meaningful opportunities to rebuild their lives.
+
+With the unveiling of its three-step SGBV response approach and five-year strategic plan, The SHE Initiative took its first major public step towards translating this philosophy into structured action. The organisation looks forward to building partnerships, expanding its programmes, and working alongside communities and stakeholders to create lasting change.
+
+> **The journey from shadows to strength has begun.**
+>
+> The SHE Initiative. Healing. Empowerment. Transformation.`,
       facts: [
-        { label: 'Timing', value: 'Q4 2025' },
-        { label: 'Setting', value: 'Gallery gathering and launch reception' },
-        { label: 'Audience', value: 'Public officials, partners, guests and supporters' },
-      ],
-      sections: [
+        { label: 'Date', value: '22 November 2025' },
+        { label: 'Location', value: 'Abuja, Nigeria' },
         {
-          paragraphs: [
-            'The programme created space for reflection and conversation around the realities girls and young women face, including violence, shame, limited access to trusted information, and barriers to education and economic opportunity.',
-            'The launch also offered a first look at the practical work ahead: programmes and partnerships designed to support healing, protection, education, and empowerment in the communities The SHE Initiative serves.',
-          ],
-        },
-        {
-          paragraphs: [
-            'The event’s speakers and guests represented different forms of support: leadership, advocacy, public service, diplomacy, and family. Together, they helped frame The SHE Initiative as a collaborative platform where institutions and individuals can contribute to lasting change.',
-          ],
-        },
-        {
-          paragraphs: [
-            'Alongside the formal presentations, the gathering made room for connection. Conversations, shared refreshments, photographs, and informal moments reflected the community the initiative hopes to grow around the women and girls it serves.',
-            'The launch was not an endpoint. It was an invitation to partners, volunteers, and supporters to help turn the initiative’s vision into practical programmes that reach girls and young women with care, dignity, and consistency.',
-          ],
+          label: 'Theme',
+          value: 'From Shadows to Strength - The Journey from Victimhood to Empowerment',
         },
       ],
       gallery: [...LAUNCH_EVENT_GALLERY_IMAGES],

@@ -12,9 +12,10 @@ export interface InitiativeFact {
 }
 
 export interface InitiativeDetail {
-  overview: string[];
+  contentMarkdown?: string;
+  overview?: string[];
   facts: InitiativeFact[];
-  sections: Array<{
+  sections?: Array<{
     paragraphs: string[];
   }>;
   gallery: InitiativeGalleryImage[];

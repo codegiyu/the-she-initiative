@@ -24,7 +24,7 @@ export const MeetTheTeam = () => {
 const TeamMemberCard = ({ member, index }: { member: TeamMember; index: number }) => {
   return (
     <ScrollReveal delay={index * 0.1} className="h-full">
-      <article className="group relative aspect-[4/3] h-full overflow-hidden rounded-xl border border-border bg-dark shadow-soft shadow-primary/15 transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant hover:shadow-primary/20">
+      <article className="group relative aspect-[3/4] h-full overflow-hidden rounded-xl border border-border bg-dark shadow-soft shadow-primary/15 transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant hover:shadow-primary/20">
         <Image
           src={member.image}
           alt={member.alt}

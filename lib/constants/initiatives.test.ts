@@ -29,8 +29,13 @@ describe('initiative content', () => {
 
   it('includes the launch event gallery and supporting detail content', () => {
     const initiative = getInitiativeBySlug('launch-event');
+    const markdown = initiative?.detail?.contentMarkdown;
 
-    expect(initiative?.detail?.overview.length).toBeGreaterThan(0);
+    expect(markdown).toContain(
+      '## From Shadows to Strength: The SHE Initiative Officially Launches in Abuja'
+    );
+    expect(markdown).toContain('**Maryam Gimba, Esq., Founder of The SHE Initiative**');
+    expect(markdown).toContain('- **Mrs. Yewande Gbola-Awopetu, Esq.**');
     expect(initiative?.detail?.facts).toHaveLength(3);
     expect(initiative?.detail?.gallery).toHaveLength(10);
     expect(initiative?.detail?.gallery?.every(image => image.src && image.alt)).toBe(true);

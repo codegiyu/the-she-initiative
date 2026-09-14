@@ -22,7 +22,8 @@ test.describe('website smoke flows', () => {
       page.getByText(/Please avoid sharing highly sensitive or graphic details here/)
     ).toHaveCount(2);
     await expect(page.getByRole('heading', { name: 'Meet The Team' })).toBeVisible();
-    await expect(page.locator('#team').getByRole('article')).toHaveCount(5);
+    await expect(page.locator('#team').getByRole('article')).toHaveCount(3);
+    await expect(page.locator('#team').getByText('Joan Titami Ibrahim, Esq.')).toBeVisible();
 
     const contactLink = page.locator('header a[href="/#contact"]').first();
     await expect(contactLink).toBeVisible();
@@ -103,9 +104,27 @@ test.describe('website smoke flows', () => {
     await page.goto('/initiatives/launch-event', { waitUntil: 'domcontentloaded' });
 
     await expect(page.getByRole('heading', { name: 'Launch Event' })).toBeVisible();
-    await expect(page.getByText('Gallery gathering and launch reception')).toBeVisible();
+    await expect(
+      page.getByRole('heading', {
+        name: 'From Shadows to Strength: The SHE Initiative Officially Launches in Abuja',
+      })
+    ).toBeVisible();
+    const overviewHeading = page.getByRole('heading', {
+      name: 'From Shadows to Strength: The SHE Initiative Officially Launches in Abuja',
+    });
+    await overviewHeading.scrollIntoViewIfNeeded();
+    await expect(
+      page.locator('article[aria-label="Launch Event overview"]').locator('xpath=..')
+    ).toHaveAttribute('data-reveal-visible', 'true');
+    await expect(
+      page.getByRole('heading', { name: 'A Powerful Panel Discussion on SGBV' })
+    ).toBeVisible();
+    const launchArticle = page.locator('article[aria-label="Launch Event overview"]');
+    await expect(launchArticle.getByRole('listitem')).toHaveCount(11);
+    await expect(
+      launchArticle.getByText('support should not end at survival.', { exact: true })
+    ).toBeVisible();
     await expect(page.getByRole('button', { name: /Open image/ })).toHaveCount(10);
-    await expect(page.getByText(/every girl and young woman deserves/)).toBeVisible();
   });
 
   test('submits both forms through a mocked transport without sending email', async ({ page }) => {

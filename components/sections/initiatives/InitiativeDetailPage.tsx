@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { CalendarDays, MapPin, Users } from 'lucide-react';
+import ReactMarkdown, { type Components } from 'react-markdown';
 import { ScrollReveal } from '@/components/general/ScrollReveal';
 import { InitiativeGallery } from './InitiativeGallery';
 import type { Initiative } from '@/lib/types/initiatives';
@@ -11,12 +12,47 @@ interface InitiativeDetailPageProps {
 
 const FACT_ICONS = [CalendarDays, MapPin, Users] as const;
 
+const MARKDOWN_COMPONENTS: Components = {
+  h1: ({ children }) => (
+    <h2 className="mb-5 mt-0 font-montserrat text-2xl font-bold leading-tight text-dark sm:text-3xl">
+      {children}
+    </h2>
+  ),
+  h2: ({ children }) => (
+    <h2 className="mb-5 mt-12 font-montserrat text-2xl font-bold leading-tight text-dark first:mt-0 sm:text-3xl">
+      {children}
+    </h2>
+  ),
+  h3: ({ children }) => (
+    <h3 className="mb-4 mt-9 font-montserrat text-xl font-bold leading-tight text-dark sm:text-2xl">
+      {children}
+    </h3>
+  ),
+  p: ({ children }) => <p className="mb-5 leading-relaxed last:mb-0">{children}</p>,
+  ul: ({ children }) => (
+    <ul className="mb-6 ml-5 list-disc space-y-2 pl-2 marker:text-primary">{children}</ul>
+  ),
+  ol: ({ children }) => (
+    <ol className="mb-6 ml-5 list-decimal space-y-2 pl-2 marker:font-semibold marker:text-primary">
+      {children}
+    </ol>
+  ),
+  li: ({ children }) => <li className="pl-1 leading-relaxed">{children}</li>,
+  strong: ({ children }) => <strong className="font-bold text-dark">{children}</strong>,
+  em: ({ children }) => <em className="italic">{children}</em>,
+  blockquote: ({ children }) => (
+    <blockquote className="mb-6 border-l-4 border-primary bg-primary-soft/60 px-5 py-4 font-montserrat text-dark">
+      {children}
+    </blockquote>
+  ),
+};
+
 export const InitiativeDetailPage = ({ initiative }: InitiativeDetailPageProps) => {
   if (!initiative.detail) return null;
 
   const articleParagraphs = [
-    ...initiative.detail.overview,
-    ...initiative.detail.sections.flatMap(section => section.paragraphs),
+    ...(initiative.detail.overview ?? []),
+    ...(initiative.detail.sections ?? []).flatMap(section => section.paragraphs),
   ];
 
   return (
@@ -59,13 +95,21 @@ export const InitiativeDetailPage = ({ initiative }: InitiativeDetailPageProps) 
 
         <div className="mt-16 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.42fr)] lg:items-start lg:gap-16">
           <div className="space-y-12">
-            <ScrollReveal>
+            <ScrollReveal amount={0.05}>
               <article
                 aria-label={`${initiative.title} overview`}
-                className="space-y-4 font-montserrat text-sm leading-relaxed text-dark/75 sm:text-base">
-                {articleParagraphs.map(paragraph => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
+                className="font-montserrat text-sm leading-relaxed text-dark/75 sm:text-base">
+                {initiative.detail.contentMarkdown ? (
+                  <ReactMarkdown components={MARKDOWN_COMPONENTS}>
+                    {initiative.detail.contentMarkdown}
+                  </ReactMarkdown>
+                ) : (
+                  articleParagraphs.map(paragraph => (
+                    <p className="mb-5 last:mb-0" key={paragraph}>
+                      {paragraph}
+                    </p>
+                  ))
+                )}
               </article>
             </ScrollReveal>
           </div>
