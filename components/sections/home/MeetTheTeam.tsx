@@ -11,7 +11,7 @@ export const MeetTheTeam = () => {
       <div className="regular-container">
         <SectionHeading title="Meet The Team" className="text-center mb-16" />
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid justify-start gap-8 md:grid-cols-2 lg:grid-cols-3">
           {TEAM_MEMBERS.map((member, index) => (
             <TeamMemberCard key={member.id} member={member} index={index} />
           ))}

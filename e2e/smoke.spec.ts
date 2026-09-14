@@ -22,8 +22,9 @@ test.describe('website smoke flows', () => {
       page.getByText(/Please avoid sharing highly sensitive or graphic details here/)
     ).toHaveCount(2);
     await expect(page.getByRole('heading', { name: 'Meet The Team' })).toBeVisible();
-    await expect(page.locator('#team').getByRole('article')).toHaveCount(3);
+    await expect(page.locator('#team').getByRole('article')).toHaveCount(4);
     await expect(page.locator('#team').getByText('Joan Titami Ibrahim, Esq.')).toBeVisible();
+    await expect(page.locator('#team').getByText('Hafsah Garba Jibrin')).toBeVisible();
 
     const contactLink = page.locator('header a[href="/#contact"]').first();
     await expect(contactLink).toBeVisible();

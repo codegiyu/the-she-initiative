@@ -28,4 +28,11 @@ export const TEAM_MEMBERS: TeamMember[] = [
     image: '/images/home/team/sakeena-iu-bello-esq.jpeg',
     alt: 'Sakeena I.U. Bello, Co-Founder and Secretary of The SHE Initiative',
   },
+  {
+    id: 'member-4',
+    name: 'Hafsah Garba Jibrin',
+    title: 'Program Director',
+    image: '/images/home/team/hafsah-garba-jibrin-esq.jpeg',
+    alt: 'Hafsah Garba Jibrin, Program Director of The SHE Initiative',
+  },
 ];
