@@ -10,11 +10,24 @@ export interface MailTemplateProps {
   end: string;
 }
 
+export const escapeHtml = (value: string) =>
+  value.replace(
+    /[&<>"']/g,
+    character =>
+      ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+      })[character] ?? character
+  );
+
 export const mailTemplate = ({ title, top, data, end }: MailTemplateProps) => {
   const titleEl = `
     <tr>
       <td width="100%" class="mobile" align="center" valign="middle" style="padding: 0px 40px;">
-        <h1>${title}</h1>
+        <h1>${escapeHtml(title)}</h1>
       </td>
     </tr>
     <!--== Start Separator ==-->
@@ -28,7 +41,7 @@ export const mailTemplate = ({ title, top, data, end }: MailTemplateProps) => {
     let itemEl = `
       <tr>
         <td width="100%" class="mobile" align="left" valign="middle">
-          ${curr.map(str => `<p>${str}</p>`).join('')}
+          ${curr.map(str => `<p>${escapeHtml(str)}</p>`).join('')}
         </td>
       </tr>
     `;
@@ -53,9 +66,9 @@ export const mailTemplate = ({ title, top, data, end }: MailTemplateProps) => {
       <!--== Start ${curr.property} Field Item ==-->
       <tr>
         <td width="100%" class="mobile" align="left" valign="middle">
-          <h3>${curr.property}: </h3>
+          <h3>${escapeHtml(curr.property)}: </h3>
           <hr />
-          <p>${curr.value}</p>
+          <p>${escapeHtml(curr.value)}</p>
         </td>
       </tr>
       <!--== End ${curr.property} Field Item ==-->
@@ -79,7 +92,7 @@ export const mailTemplate = ({ title, top, data, end }: MailTemplateProps) => {
   const endEl = `
     <tr>
       <td width="100%" class="mobile" align="left" valign="middle" style="padding: 0px 40px 30px;">
-        <i style="padding: 0px 0px;">${end}</i>
+        <i style="padding: 0px 0px;">${escapeHtml(end)}</i>
       </td>
     </tr>
   `;
@@ -275,7 +288,7 @@ export const mailTemplate = ({ title, top, data, end }: MailTemplateProps) => {
                           <div class="logo-container" style="padding: 40px 20px 0px; width: fit-content;">
                             <!-- Light mode logo (default) -->
                             <img 
-                              src="https://static.thesolaceinitiative.org/images/shei-logo.png"
+                              src="/images/shei-logo.png"
                               alt="The Solace Healing and Empowerment Initiative"
                               class="logo-light"
                               style="height: 56px; margin: 0; display: block;"
@@ -283,7 +296,7 @@ export const mailTemplate = ({ title, top, data, end }: MailTemplateProps) => {
 
                             <!-- Dark mode logo (hidden by default, shown in dark mode) -->
                             <img 
-                              src="https://static.thesolaceinitiative.org/images/shei-logo-dark.png"
+                              src="/images/shei-logo-dark.png"
                               alt="The Solace Healing and Empowerment Initiative"
                               class="logo-dark"
                               style="height: 56px; margin: 0; display: none;"

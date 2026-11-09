@@ -36,6 +36,7 @@ export const RegularSelect = ({
   subtext,
   labelClassName = '',
   value,
+  id,
   placeholder = '',
   className = '',
   onSelectChange,
@@ -52,6 +53,9 @@ export const RegularSelect = ({
   errors = [],
   ...props
 }: RegularSelectProps) => {
+  const selectId = id || label.toLowerCase().replace(/\s+/g, '-');
+  const errorId = `${selectId}-error`;
+
   return (
     <InputWrapper
       wrapClassName={wrapClassName}
@@ -59,7 +63,9 @@ export const RegularSelect = ({
       subtext={subtext}
       labelTextClassName={labelClassName}
       required={required}
-      errors={errors}>
+      errors={errors}
+      inputId={selectId}
+      errorId={errorId}>
       <SelectGroup
         onFocus={(e: FocusEvent<HTMLDivElement>) => {
           if (onFocus) onFocus(e);
@@ -71,9 +77,12 @@ export const RegularSelect = ({
         {...props}>
         <Select value={value} onValueChange={value => onSelectChange(value)}>
           <SelectTrigger
+            id={selectId}
             disabled={disabled}
             hidecaretifdisabled={hideCaretIfDisabled}
-            className={cn(``, triggerClassName)}>
+            className={cn(``, triggerClassName)}
+            aria-invalid={errors.length > 0 ? true : undefined}
+            aria-describedby={errors.length > 0 ? errorId : undefined}>
             <SelectValue
               className={cn('', valueClassName)}
               placeholder={

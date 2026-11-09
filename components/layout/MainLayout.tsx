@@ -13,7 +13,7 @@ export const MainLayout = ({ children, className }: MainLayoutProps) => {
   return (
     <>
       <Header />
-      <main className={cn('min-h-screen', className)}>
+      <main id="main-content" tabIndex={-1} className={cn('min-h-screen', className)}>
         {/* <LoadAnimationScreen name={pageName} /> */}
         {children}
         <ScrollToTop />

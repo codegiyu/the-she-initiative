@@ -2,6 +2,7 @@ import { MainLayout } from '@/components/layout/MainLayout';
 import { About } from '@/components/sections/home/About';
 import { Contact } from '@/components/sections/home/Contact';
 import { Hero } from '@/components/sections/home/Hero';
+import { MeetTheTeam } from '@/components/sections/home/MeetTheTeam';
 import { Services } from '@/components/sections/home/Services';
 import { UpcomingInitiatives } from '@/components/sections/home/UpcomingInitiatives';
 import { Values } from '@/components/sections/home/Values';
@@ -15,6 +16,7 @@ export default function Home() {
       <Services />
       <Values />
       <UpcomingInitiatives />
+      <MeetTheTeam />
       <VolunteerWithUs />
       <Contact />
     </MainLayout>

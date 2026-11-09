@@ -8,7 +8,9 @@ export type InputWrapperProps = PropsWithChildren<{
   labelTextClassName?: string;
   required?: boolean;
   errors?: string[];
-  otherLabelProps?: Omit<ComponentPropsWithRef<'label'>, 'className'>;
+  inputId?: string;
+  errorId?: string;
+  otherLabelProps?: Omit<ComponentPropsWithRef<'label'>, 'className' | 'htmlFor'>;
 }>;
 
 export const InputWrapper = ({
@@ -20,26 +22,32 @@ export const InputWrapper = ({
   otherLabelProps,
   required,
   errors = [],
+  inputId,
+  errorId,
 }: InputWrapperProps) => {
   return (
-    <label className={cn(`w-full`, wrapClassName)} {...otherLabelProps}>
-      <div className={`flex flex-col justify-center gap-2`}>
+    <div className={cn('w-full', wrapClassName)}>
+      <div className="flex flex-col justify-center gap-2">
         {label && (
-          <span
+          <label
+            htmlFor={inputId}
             className={cn(
               'text-[0.75rem] leading-[1.2] font-medium text-dark font-montserrat',
               labelTextClassName
-            )}>
+            )}
+            {...otherLabelProps}>
             {label}
             {required ? ' *' : ''}
             {subtext ? ` ${subtext}` : ''}
-          </span>
+          </label>
         )}
         <div className="relative w-full">{children}</div>
       </div>
       {errors.length > 0 && (
-        <p className={cn('text-xs md:text-sm text-red-500 mt-1')}>{errors[0]}</p>
+        <p id={errorId} role="alert" className={cn('text-xs md:text-sm text-red-500 mt-1')}>
+          {errors[0]}
+        </p>
       )}
-    </label>
+    </div>
   );
 };

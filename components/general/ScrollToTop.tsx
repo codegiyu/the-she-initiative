@@ -19,9 +19,12 @@ export const ScrollToTop = ({
 }: ScrollToTopProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleClick = (e?: MouseEvent<HTMLButtonElement>) => {
-    scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    if (e && onClick) onClick(e);
+  const handleClick = (e?: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLAnchorElement>) => {
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ? 'auto'
+      : 'smooth';
+    scrollTo({ top: 0, left: 0, behavior });
+    if (e && onClick) onClick(e as MouseEvent<HTMLButtonElement>);
   };
 
   useEffect(() => {
@@ -49,6 +52,7 @@ export const ScrollToTop = ({
         wrapClassName
       )}
       onClick={handleClick}
+      aria-label="Scroll to top"
       {...props}>
       <ChevronUp className="text-white size-6 md:size-8 group-hover:scale-125 transition-all duration-500 ease-in" />
     </RegularBtn>

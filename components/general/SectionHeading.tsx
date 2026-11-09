@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { ScrollReveal } from './ScrollReveal';
 
 export interface SectionHeadingProps {
   title: string;
@@ -8,7 +9,7 @@ export interface SectionHeadingProps {
 
 export const SectionHeading = ({ title, text, className }: SectionHeadingProps) => {
   return (
-    <div className={cn('space-y-4', className)}>
+    <ScrollReveal className={cn('space-y-4', className)}>
       <h2 className="font-montserrat font-bold text-3xl sm:text-4xl lg:text-5xl text-dark">
         {title}
       </h2>
@@ -20,6 +21,6 @@ export const SectionHeading = ({ title, text, className }: SectionHeadingProps) 
           {text}
         </p>
       )}
-    </div>
+    </ScrollReveal>
   );
 };
